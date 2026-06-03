@@ -53,6 +53,7 @@ export default function TimDroneCompanyPortfolio() {
   const [language, setLanguage] = useState("en");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
+  const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
 
   const copy = {
     en: {
@@ -101,6 +102,12 @@ export default function TimDroneCompanyPortfolio() {
       contact: "Contact",
       contactLine: "Available for commercials, film, television and international productions.",
       heroLine: "AMSTERDAM · AVAILABLE WORLDWIDE",
+      whatsappTitle: "Start a WhatsApp conversation",
+      whatsappText: "Send a message directly from here. WhatsApp will open with a short pre-filled note.",
+      whatsappMessage: "Hi T.I.M. Drone Company, I would like to discuss a drone shoot.",
+      whatsappButton: "Open WhatsApp",
+      callButton: "Call",
+      close: "Close",
     },
     nl: {
       aboutLabel: "Over ons",
@@ -148,10 +155,17 @@ export default function TimDroneCompanyPortfolio() {
       contact: "Contact",
       contactLine: "Beschikbaar voor commercials, film, televisie en internationale producties.",
       heroLine: "AMSTERDAM · WERELDWIJD BESCHIKBAAR",
+      whatsappTitle: "Start een WhatsApp-gesprek",
+      whatsappText: "Stuur direct vanaf hier een bericht. WhatsApp opent met een kort vooraf ingevuld bericht.",
+      whatsappMessage: "Hi T.I.M. Drone Company, ik wil graag een drone shoot bespreken.",
+      whatsappButton: "Open WhatsApp",
+      callButton: "Bel",
+      close: "Sluiten",
     },
   };
 
   const t = copy[language];
+  const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
   const categoryLabels = {
     en: {
       "Bioscoop films": "Feature films",
@@ -964,15 +978,36 @@ export default function TimDroneCompanyPortfolio() {
           <div className="contact-info">
             <p>T.I.M. Drone Company</p>
             <p>
-              <a href="https://wa.me/31625083448" target="_blank" rel="noreferrer">
+              <button type="button" className="contact-phone-button" onClick={() => setIsWhatsAppOpen(true)}>
                 +31 6 25083448
-              </a>
+              </button>
             </p>
             <p>timdronecompany@gmail.com</p>
             <p className="contact-subtext">{t.contactLine}</p>
           </div>
         </div>
       </section>
+
+      {isWhatsAppOpen && (
+        <div className="whatsapp-modal" onClick={() => setIsWhatsAppOpen(false)}>
+          <div className="whatsapp-modal-inner" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="whatsapp-modal-close" onClick={() => setIsWhatsAppOpen(false)} aria-label={t.close}>
+              ×
+            </button>
+            <div className="whatsapp-modal-mark">WA</div>
+            <h2 className="whatsapp-modal-title">{t.whatsappTitle}</h2>
+            <p className="whatsapp-modal-text">{t.whatsappText}</p>
+            <div className="whatsapp-modal-actions">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="whatsapp-modal-primary">
+                {t.whatsappButton}
+              </a>
+              <a href="tel:+31625083448" className="whatsapp-modal-secondary">
+                {t.callButton}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

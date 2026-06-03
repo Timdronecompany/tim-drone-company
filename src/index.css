@@ -895,6 +895,23 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 
+.contact-phone-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+
+.contact-phone-button:hover {
+  color: #ffffff;
+}
+
 .contact-subtext {
   margin-top: 1rem;
   font-size: 0.875rem;
@@ -905,6 +922,112 @@ body {
   .contact-title {
     font-size: 4.5rem;
   }
+}
+
+.whatsapp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.whatsapp-modal-inner {
+  position: relative;
+  width: min(100%, 28rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #080808;
+  padding: 2rem;
+  color: #ffffff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.whatsapp-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.whatsapp-modal-close:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.whatsapp-modal-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #03190b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.whatsapp-modal-title {
+  margin: 1.25rem 0 0;
+  color: #ffffff;
+  font-size: 1.65rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.whatsapp-modal-text {
+  margin-top: 0.9rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.6;
+}
+
+.whatsapp-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.whatsapp-modal-primary,
+.whatsapp-modal-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  border-radius: 999px;
+  padding: 0.8rem 1.25rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.whatsapp-modal-primary {
+  background: #25d366;
+  color: #03190b;
+}
+
+.whatsapp-modal-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.whatsapp-modal-secondary:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.34);
 }
 
 h1,
