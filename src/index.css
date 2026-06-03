@@ -92,7 +92,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0.75rem;
   max-width: 1120px;
   margin: 0 auto;
 }
@@ -101,6 +101,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .hero-header-title {
@@ -108,6 +109,7 @@ body {
   letter-spacing: 0.55em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
 }
 
 .hero-nav {
@@ -124,6 +126,27 @@ body {
 }
 
 .hero-nav-link:hover {
+  color: #ffffff;
+}
+
+.hero-mobile-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 0.55rem 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  backdrop-filter: blur(18px);
+}
+
+.hero-mobile-contact:hover {
   color: #ffffff;
 }
 
@@ -374,6 +397,10 @@ body {
     display: flex;
   }
 
+  .hero-mobile-contact {
+    display: none;
+  }
+
   .fleet-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
@@ -414,6 +441,32 @@ body {
 }
 
 @media (max-width: 520px) {
+  .hero-header {
+    padding: 1rem;
+  }
+
+  .hero-header-inner {
+    gap: 0.5rem;
+  }
+
+  .hero-header-title {
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+  }
+
+  .hero-language-button {
+    padding: 0.5rem 0.62rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-mobile-contact {
+    min-height: 2.1rem;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.14em;
+  }
+
   .hero-logo-frame {
     width: min(94%, 24rem);
     aspect-ratio: 2.55 / 1;
