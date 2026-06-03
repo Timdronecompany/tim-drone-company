@@ -446,12 +446,24 @@ body {
   }
 
   .hero-header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: 0.5rem;
+  }
+
+  .hero-header-brand {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
   }
 
   .hero-header-title {
     font-size: 0.58rem;
     letter-spacing: 0.28em;
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: clip;
   }
 
   .hero-language-button {
@@ -461,6 +473,7 @@ body {
   }
 
   .hero-mobile-contact {
+    justify-self: end;
     min-height: 2.1rem;
     padding: 0.5rem 0.65rem;
     font-size: 0.56rem;
