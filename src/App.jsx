@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function DroneVisual({ variant }) {
   const droneImages = {
@@ -49,11 +49,209 @@ function DroneVisual({ variant }) {
   );
 }
 
+function BookingMap({ copy, selectedLocation, onLocationChange }) {
+  const mapElementRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const markerRef = useRef(null);
+  const copyRef = useRef(copy);
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [status, setStatus] = useState(copy.mapLoading);
+
+  useEffect(() => {
+    copyRef.current = copy;
+  }, [copy]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    function loadLeaflet() {
+      if (window.L) return Promise.resolve(window.L);
+
+      return new Promise((resolve, reject) => {
+        const existingScript = document.querySelector("script[data-leaflet]");
+        const existingStylesheet = document.querySelector("link[data-leaflet]");
+
+        if (!existingStylesheet) {
+          const stylesheet = document.createElement("link");
+          stylesheet.rel = "stylesheet";
+          stylesheet.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+          stylesheet.integrity = "sha256-p4NxAoJBhIINfQAc9nOFJH8V4YGCxF5lvTmlpD4Q7sM=";
+          stylesheet.crossOrigin = "";
+          stylesheet.dataset.leaflet = "true";
+          document.head.appendChild(stylesheet);
+        }
+
+        if (existingScript) {
+          existingScript.addEventListener("load", () => resolve(window.L), { once: true });
+          existingScript.addEventListener("error", reject, { once: true });
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+        script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+        script.crossOrigin = "";
+        script.dataset.leaflet = "true";
+        script.addEventListener("load", () => resolve(window.L), { once: true });
+        script.addEventListener("error", reject, { once: true });
+        document.body.appendChild(script);
+      });
+    }
+
+    loadLeaflet()
+      .then((L) => {
+        if (!isMounted || !mapElementRef.current || mapInstanceRef.current) return;
+
+        const map = L.map(mapElementRef.current, {
+          center: [52.3676, 4.9041],
+          zoom: 11,
+          zoomControl: false,
+          doubleClickZoom: false,
+        });
+        mapInstanceRef.current = map;
+
+        L.control.zoom({ position: "bottomright" }).addTo(map);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "&copy; OpenStreetMap contributors",
+          maxZoom: 19,
+        }).addTo(map);
+
+        const selectLocation = async (latlng) => {
+          const currentCopy = copyRef.current;
+          const lat = Number(latlng.lat.toFixed(6));
+          const lng = Number(latlng.lng.toFixed(6));
+          let label = `${lat}, ${lng}`;
+
+          setStatus(currentCopy.mapResolving);
+
+          try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+            if (response.ok) {
+              const data = await response.json();
+              label = data.display_name || label;
+            }
+          } catch {
+            label = `${lat}, ${lng}`;
+          }
+
+          if (markerRef.current) {
+            markerRef.current.setLatLng([lat, lng]);
+          } else {
+            markerRef.current = L.marker([lat, lng]).addTo(map);
+          }
+
+          markerRef.current.bindPopup(currentCopy.mapSelected).openPopup();
+          onLocationChange({
+            label,
+            lat,
+            lng,
+            mapUrl: `https://www.google.com/maps?q=${lat},${lng}`,
+          });
+          setStatus(currentCopy.mapSelectedStatus);
+        };
+
+        map.on("dblclick", (event) => selectLocation(event.latlng));
+        map.on("click", (event) => selectLocation(event.latlng));
+        setStatus(copyRef.current.mapReady);
+
+        setTimeout(() => map.invalidateSize(), 150);
+      })
+      .catch(() => {
+        if (isMounted) setStatus(copyRef.current.mapError);
+      });
+
+    return () => {
+      isMounted = false;
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+        markerRef.current = null;
+      }
+    };
+  }, [onLocationChange]);
+
+  async function searchLocation(event) {
+    event.preventDefault();
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
+
+    setStatus(copy.mapSearching);
+    setSearchResults([]);
+
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&q=${encodeURIComponent(trimmedQuery)}`);
+      const results = response.ok ? await response.json() : [];
+      setSearchResults(results);
+      setStatus(results.length ? copy.mapChooseResult : copy.mapNoResults);
+    } catch {
+      setStatus(copy.mapSearchError);
+    }
+  }
+
+  function focusResult(result) {
+    const lat = Number.parseFloat(result.lat);
+    const lng = Number.parseFloat(result.lon);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || !mapInstanceRef.current) return;
+
+    mapInstanceRef.current.setView([lat, lng], 16);
+    setSearchResults([]);
+    setStatus(copy.mapAfterSearch);
+  }
+
+  return (
+    <div className="booking-map">
+      <div className="booking-map-panel">
+        <div className="booking-map-search">
+          <label className="booking-map-search-label">
+            <span>{copy.mapSearchLabel}</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") searchLocation(event);
+              }}
+              placeholder={copy.mapSearchPlaceholder}
+              autoComplete="off"
+            />
+          </label>
+          <button type="button" onClick={searchLocation}>{copy.mapSearchButton}</button>
+        </div>
+        {searchResults.length > 0 && (
+          <div className="booking-map-results">
+            {searchResults.map((result) => (
+              <button key={result.place_id} type="button" onClick={() => focusResult(result)}>
+                {result.display_name}
+              </button>
+            ))}
+          </div>
+        )}
+        <p className="booking-map-status">{status}</p>
+        <div className="booking-map-selected">
+          <span>{copy.mapSelectedLabel}</span>
+          <strong>{selectedLocation.label || copy.mapNoSelection}</strong>
+        </div>
+      </div>
+      <div className="booking-map-frame">
+        <div ref={mapElementRef} className="booking-map-canvas" aria-label={copy.mapAriaLabel} />
+      </div>
+    </div>
+  );
+}
+
 export default function TimDroneCompanyPortfolio() {
   const [language, setLanguage] = useState("en");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
+  const [isBookingLocationMissing, setIsBookingLocationMissing] = useState(false);
+  const [bookingLocation, setBookingLocation] = useState({
+    label: "",
+    lat: "",
+    lng: "",
+    mapUrl: "",
+  });
 
   const copy = {
     en: {
@@ -99,24 +297,40 @@ export default function TimDroneCompanyPortfolio() {
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
       portfolioFilters: ["All", "Aerial video", "Awards", "Commercials", "Events", "Feature films", "Fly-Through", "FPV", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
-      bookingNav: "Booking",
+      bookingNav: "Book",
       bookingLabel: "Booking",
       bookingTitle: "Plan a drone shoot.",
-      bookingIntro: "Share the date, time, location, preferred drone and shot requirements. The request is sent directly to T.I.M. Drone Company for review.",
+      bookingIntro: "Share the date, time, preferred drone and shot requirements. Search the map, then double click or tap the exact location to attach it to the request.",
       bookingName: "Name",
       bookingEmail: "Email",
       bookingPhone: "Phone",
       bookingDate: "Date",
       bookingStartTime: "Start time",
       bookingEndTime: "End time",
-      bookingLocation: "Google Maps location",
-      bookingLocationPlaceholder: "Paste a Google Maps link or exact address",
       bookingDroneType: "Drone type",
       bookingShotTypes: "Shot ideas",
       bookingShotSuggestions: "Suggestions: establishing shots, crane-style moves, fast FPV movement, slow cinematic movement, tracking shots, fly-through, top-down overview.",
       bookingDescription: "Short description",
       bookingDescriptionPlaceholder: "Describe the shots you need, timing, mood, movement, restrictions or any useful production details.",
       bookingSubmit: "Send booking request",
+      mapSearchLabel: "Shoot location",
+      mapSearchPlaceholder: "Search an address, venue or city",
+      mapSearchButton: "Search",
+      mapLoading: "Loading map...",
+      mapReady: "Search a location, then double click or tap the exact shoot point.",
+      mapSearching: "Searching location...",
+      mapChooseResult: "Choose a result, then double click or tap the exact point on the map.",
+      mapAfterSearch: "Map moved to your search. Double click or tap the exact shoot point.",
+      mapResolving: "Saving selected location...",
+      mapSelected: "Selected shoot location",
+      mapSelectedStatus: "Location selected and attached to the booking request.",
+      mapNoResults: "No result found. Try a more specific address or place.",
+      mapSearchError: "Location search failed. Try again in a moment.",
+      mapError: "Map could not load. Please refresh the page.",
+      mapSelectedLabel: "Selected location",
+      mapNoSelection: "No location selected yet",
+      mapRequired: "Please select a shoot location on the map before sending.",
+      mapAriaLabel: "Interactive booking location map",
       contact: "Contact",
       contactLine: "Available for commercials, film, television and international productions.",
       heroLine: "AMSTERDAM · AVAILABLE WORLDWIDE",
@@ -173,21 +387,37 @@ export default function TimDroneCompanyPortfolio() {
       bookingNav: "Boeken",
       bookingLabel: "Boeking",
       bookingTitle: "Plan een drone shoot.",
-      bookingIntro: "Deel datum, tijd, locatie, gewenste drone en shotwensen. De aanvraag wordt direct naar T.I.M. Drone Company gestuurd voor review.",
+      bookingIntro: "Deel datum, tijd, gewenste drone en shotwensen. Zoek op de kaart en dubbelklik of tap op de exacte draailocatie om die aan de aanvraag te koppelen.",
       bookingName: "Naam",
       bookingEmail: "E-mail",
       bookingPhone: "Telefoon",
       bookingDate: "Datum",
       bookingStartTime: "Starttijd",
       bookingEndTime: "Eindtijd",
-      bookingLocation: "Google Maps locatie",
-      bookingLocationPlaceholder: "Plak een Google Maps-link of exact adres",
       bookingDroneType: "Drone type",
       bookingShotTypes: "Shot ideeën",
       bookingShotSuggestions: "Suggesties: establishing shots, crane shots, snelle FPV-beweging, langzame cinematic beweging, tracking shots, fly-through, top-down overzicht.",
       bookingDescription: "Korte omschrijving",
       bookingDescriptionPlaceholder: "Omschrijf de gewenste shots, timing, sfeer, beweging, restricties of andere nuttige productie-info.",
       bookingSubmit: "Boekingsaanvraag versturen",
+      mapSearchLabel: "Draailocatie",
+      mapSearchPlaceholder: "Zoek een adres, venue of stad",
+      mapSearchButton: "Zoeken",
+      mapLoading: "Kaart laden...",
+      mapReady: "Zoek een locatie en dubbelklik of tap daarna op het exacte draaipunt.",
+      mapSearching: "Locatie zoeken...",
+      mapChooseResult: "Kies een resultaat en dubbelklik of tap daarna op het exacte punt op de kaart.",
+      mapAfterSearch: "De kaart staat op je zoekresultaat. Dubbelklik of tap op het exacte draaipunt.",
+      mapResolving: "Geselecteerde locatie opslaan...",
+      mapSelected: "Geselecteerde draailocatie",
+      mapSelectedStatus: "Locatie geselecteerd en gekoppeld aan de boekingsaanvraag.",
+      mapNoResults: "Geen resultaat gevonden. Probeer een specifieker adres of plaats.",
+      mapSearchError: "Locatie zoeken is mislukt. Probeer het zo opnieuw.",
+      mapError: "Kaart kon niet laden. Ververs de pagina.",
+      mapSelectedLabel: "Geselecteerde locatie",
+      mapNoSelection: "Nog geen locatie geselecteerd",
+      mapRequired: "Selecteer eerst een draailocatie op de kaart voordat je verstuurt.",
+      mapAriaLabel: "Interactieve kaart voor boekingslocatie",
       contact: "Contact",
       contactLine: "Beschikbaar voor commercials, film, televisie en internationale producties.",
       heroLine: "AMSTERDAM · WERELDWIJD BESCHIKBAAR",
@@ -202,6 +432,17 @@ export default function TimDroneCompanyPortfolio() {
 
   const t = copy[language];
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const handleBookingLocationChange = useCallback((location) => {
+    setBookingLocation(location);
+    setIsBookingLocationMissing(false);
+  }, []);
+  const handleBookingSubmit = (event) => {
+    if (bookingLocation.label) return;
+
+    event.preventDefault();
+    setIsBookingLocationMissing(true);
+    document.getElementById("booking-map")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   const bookingDroneOptions = [
     "Freefly Alta X",
     "FPV Cinelifter",
@@ -832,7 +1073,7 @@ export default function TimDroneCompanyPortfolio() {
             <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
             <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
           </div>
-          <a href="#contact" className="hero-mobile-contact">Contact</a>
+          <a href="#booking" className="hero-top-book">{t.bookingNav}</a>
         </div>
       </header>
 
@@ -966,70 +1207,6 @@ export default function TimDroneCompanyPortfolio() {
         </div>
       </section>
 
-      <section id="booking" className="booking-section">
-        <div className="booking-container">
-          <div className="booking-header">
-            <div>
-              <p className="booking-label">{t.bookingLabel}</p>
-              <h2 className="booking-title">{t.bookingTitle}</h2>
-            </div>
-            <p className="booking-intro">{t.bookingIntro}</p>
-          </div>
-          <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="booking-form">
-            <input type="hidden" name="form-name" value="booking-request" />
-            <p className="booking-hidden">
-              <label>
-                Leave this field empty
-                <input name="bot-field" />
-              </label>
-            </p>
-            <label className="booking-field">
-              <span>{t.bookingName}</span>
-              <input type="text" name="name" autoComplete="name" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingEmail}</span>
-              <input type="email" name="email" autoComplete="email" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingPhone}</span>
-              <input type="tel" name="phone" autoComplete="tel" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingDate}</span>
-              <input type="date" name="date" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingStartTime}</span>
-              <input type="time" name="start_time" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingEndTime}</span>
-              <input type="time" name="end_time" required />
-            </label>
-            <label className="booking-field">
-              <span>{t.bookingDroneType}</span>
-              <select name="drone_type" required defaultValue="">
-                <option value="" disabled>{t.bookingDroneType}</option>
-                {bookingDroneOptions.map((drone) => (
-                  <option key={drone} value={drone}>{drone}</option>
-                ))}
-              </select>
-            </label>
-            <label className="booking-field booking-field-wide">
-              <span>{t.bookingLocation}</span>
-              <input type="text" name="google_maps_location" placeholder={t.bookingLocationPlaceholder} required />
-            </label>
-            <label className="booking-field booking-field-wide">
-              <span>{t.bookingDescription}</span>
-              <textarea name="shot_description" rows="6" placeholder={t.bookingDescriptionPlaceholder} required />
-              <small>{t.bookingShotSuggestions}</small>
-            </label>
-            <button type="submit" className="booking-submit">{t.bookingSubmit}</button>
-          </form>
-        </div>
-      </section>
-
       <section id="work" className="work-section">
         <div className="work-container">
           <p className="work-label">{t.portfolioLabel}</p>
@@ -1083,6 +1260,78 @@ export default function TimDroneCompanyPortfolio() {
           </div>
         </div>
       )}
+
+      <section id="booking" className="booking-section">
+        <div className="booking-container">
+          <div className="booking-header">
+            <div>
+              <p className="booking-label">{t.bookingLabel}</p>
+              <h2 className="booking-title">{t.bookingTitle}</h2>
+            </div>
+            <p className="booking-intro">{t.bookingIntro}</p>
+          </div>
+          <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="booking-form" onSubmit={handleBookingSubmit}>
+            <input type="hidden" name="form-name" value="booking-request" />
+            <p className="booking-hidden">
+              <label>
+                Leave this field empty
+                <input name="bot-field" />
+              </label>
+            </p>
+            <label className="booking-field">
+              <span>{t.bookingName}</span>
+              <input type="text" name="name" autoComplete="name" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingEmail}</span>
+              <input type="email" name="email" autoComplete="email" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingPhone}</span>
+              <input type="tel" name="phone" autoComplete="tel" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingDate}</span>
+              <input type="date" name="date" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingStartTime}</span>
+              <input type="time" name="start_time" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingEndTime}</span>
+              <input type="time" name="end_time" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingDroneType}</span>
+              <select name="drone_type" required defaultValue="">
+                <option value="" disabled>{t.bookingDroneType}</option>
+                {bookingDroneOptions.map((drone) => (
+                  <option key={drone} value={drone}>{drone}</option>
+                ))}
+              </select>
+            </label>
+            <div id="booking-map" className="booking-field booking-field-wide">
+              <span>{t.mapSearchLabel}</span>
+              <BookingMap copy={t} selectedLocation={bookingLocation} onLocationChange={handleBookingLocationChange} />
+            </div>
+            <label className="booking-field booking-field-wide booking-selected-location-field">
+              <span>{t.mapSelectedLabel}</span>
+              <input type="text" name="location_label" value={bookingLocation.label} placeholder={t.mapNoSelection} readOnly required />
+              {isBookingLocationMissing && <small className="booking-location-error">{t.mapRequired}</small>}
+            </label>
+            <input type="hidden" name="location_lat" value={bookingLocation.lat} readOnly />
+            <input type="hidden" name="location_lng" value={bookingLocation.lng} readOnly />
+            <input type="hidden" name="location_map_url" value={bookingLocation.mapUrl} readOnly />
+            <label className="booking-field booking-field-wide">
+              <span>{t.bookingDescription}</span>
+              <textarea name="shot_description" rows="6" placeholder={t.bookingDescriptionPlaceholder} required />
+              <small>{t.bookingShotSuggestions}</small>
+            </label>
+            <button type="submit" className="booking-submit">{t.bookingSubmit}</button>
+          </form>
+        </div>
+      </section>
 
       <section id="contact" className="contact-section">
         <div className="contact-container">
