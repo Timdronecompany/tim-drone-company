@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 function DroneVisual({ variant }) {
   const droneImages = {
@@ -50,136 +50,14 @@ function DroneVisual({ variant }) {
 }
 
 function BookingMap({ copy, selectedLocation, onLocationChange }) {
-  const mapElementRef = useRef(null);
-  const mapInstanceRef = useRef(null);
-  const markerRef = useRef(null);
-  const copyRef = useRef(copy);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [status, setStatus] = useState(copy.mapLoading);
+  const [status, setStatus] = useState(copy.mapReady);
 
-  useEffect(() => {
-    copyRef.current = copy;
-  }, [copy]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    function loadLeaflet() {
-      if (window.L) return Promise.resolve(window.L);
-
-      return new Promise((resolve, reject) => {
-        const existingScript = document.querySelector("script[data-leaflet]");
-        const existingStylesheet = document.querySelector("link[data-leaflet]");
-
-        if (!existingStylesheet) {
-          const stylesheet = document.createElement("link");
-          stylesheet.rel = "stylesheet";
-          stylesheet.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-          stylesheet.integrity = "sha256-p4NxAoJBhIINfQAc9nOFJH8V4YGCxF5lvTmlpD4Q7sM=";
-          stylesheet.crossOrigin = "";
-          stylesheet.dataset.leaflet = "true";
-          document.head.appendChild(stylesheet);
-        }
-
-        if (existingScript) {
-          existingScript.addEventListener("load", () => resolve(window.L), { once: true });
-          existingScript.addEventListener("error", reject, { once: true });
-          return;
-        }
-
-        const script = document.createElement("script");
-        script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-        script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
-        script.crossOrigin = "";
-        script.dataset.leaflet = "true";
-        script.addEventListener("load", () => resolve(window.L), { once: true });
-        script.addEventListener("error", reject, { once: true });
-        document.body.appendChild(script);
-      });
-    }
-
-    loadLeaflet()
-      .then((L) => {
-        if (!isMounted || !mapElementRef.current || mapInstanceRef.current) return;
-
-        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-        const map = L.map(mapElementRef.current, {
-          center: [52.3676, 4.9041],
-          zoom: 11,
-          zoomControl: false,
-          doubleClickZoom: false,
-          dragging: !isTouchDevice,
-          scrollWheelZoom: false,
-          tap: true,
-          touchZoom: true,
-        });
-        mapInstanceRef.current = map;
-
-        L.control.zoom({ position: "bottomright" }).addTo(map);
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-          maxZoom: 20,
-          detectRetina: true,
-        }).addTo(map);
-
-        const selectLocation = async (latlng) => {
-          const currentCopy = copyRef.current;
-          const lat = Number(latlng.lat.toFixed(6));
-          const lng = Number(latlng.lng.toFixed(6));
-          let label = `${lat}, ${lng}`;
-
-          setStatus(currentCopy.mapResolving);
-
-          try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
-            if (response.ok) {
-              const data = await response.json();
-              label = data.display_name || label;
-            }
-          } catch {
-            label = `${lat}, ${lng}`;
-          }
-
-          if (markerRef.current) {
-            markerRef.current.setLatLng([lat, lng]);
-          } else {
-            markerRef.current = L.marker([lat, lng]).addTo(map);
-          }
-
-          map.invalidateSize();
-          markerRef.current.bindPopup(currentCopy.mapSelected).openPopup();
-          onLocationChange({
-            label,
-            lat,
-            lng,
-            mapUrl: `https://www.google.com/maps?q=${lat},${lng}`,
-          });
-          setStatus(currentCopy.mapSelectedStatus);
-        };
-
-        map.on("dblclick", (event) => selectLocation(event.latlng));
-        map.on("click", (event) => selectLocation(event.latlng));
-        setStatus(copyRef.current.mapReady);
-
-        map.whenReady(() => {
-          requestAnimationFrame(() => map.invalidateSize());
-          setTimeout(() => map.invalidateSize(), 250);
-        });
-      })
-      .catch(() => {
-        if (isMounted) setStatus(copyRef.current.mapError);
-      });
-
-    return () => {
-      isMounted = false;
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
-        markerRef.current = null;
-      }
-    };
-  }, [onLocationChange]);
+  const previewQuery = selectedLocation.lat && selectedLocation.lng
+    ? `${selectedLocation.lat},${selectedLocation.lng}`
+    : "Amsterdam, Netherlands";
+  const previewSrc = `https://www.google.com/maps?q=${encodeURIComponent(previewQuery)}&z=${selectedLocation.lat ? "16" : "10"}&output=embed`;
 
   async function searchLocation(event) {
     event.preventDefault();
@@ -202,12 +80,16 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
   function focusResult(result) {
     const lat = Number.parseFloat(result.lat);
     const lng = Number.parseFloat(result.lon);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng) || !mapInstanceRef.current) return;
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
 
-    mapInstanceRef.current.setView([lat, lng], 16);
-    requestAnimationFrame(() => mapInstanceRef.current?.invalidateSize());
+    onLocationChange({
+      label: result.display_name || `${lat}, ${lng}`,
+      lat: Number(lat.toFixed(6)),
+      lng: Number(lng.toFixed(6)),
+      mapUrl: `https://www.google.com/maps?q=${lat},${lng}`,
+    });
     setSearchResults([]);
-    setStatus(copy.mapAfterSearch);
+    setStatus(copy.mapSelectedStatus);
   }
 
   return (
@@ -245,7 +127,13 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
         </div>
       </div>
       <div className="booking-map-frame">
-        <div ref={mapElementRef} className="booking-map-canvas" aria-label={copy.mapAriaLabel} />
+        <iframe
+          className="booking-map-canvas"
+          src={previewSrc}
+          title={copy.mapAriaLabel}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
     </div>
   );
@@ -311,7 +199,7 @@ export default function TimDroneCompanyPortfolio() {
       bookingNav: "Book",
       bookingLabel: "Booking",
       bookingTitle: "Plan a drone shoot.",
-      bookingIntro: "Share the date, time, preferred drone and shot requirements. Search the map, then double click or tap the exact location to attach it to the request.",
+      bookingIntro: "Share the date, time, preferred drone and shot requirements. Search the location and choose the right result to attach it to the request.",
       bookingName: "Name",
       bookingEmail: "Email",
       bookingPhone: "Phone",
@@ -328,10 +216,10 @@ export default function TimDroneCompanyPortfolio() {
       mapSearchPlaceholder: "Search an address, venue or city",
       mapSearchButton: "Search",
       mapLoading: "Loading map...",
-      mapReady: "Search a location, then double click or tap the exact shoot point.",
+      mapReady: "Search a location and choose the right result.",
       mapSearching: "Searching location...",
-      mapChooseResult: "Choose a result, then double click or tap the exact point on the map.",
-      mapAfterSearch: "Map moved to your search. Double click or tap the exact shoot point.",
+      mapChooseResult: "Choose the correct result to attach it to the booking request.",
+      mapAfterSearch: "Map preview updated.",
       mapResolving: "Saving selected location...",
       mapSelected: "Selected shoot location",
       mapSelectedStatus: "Location selected and attached to the booking request.",
@@ -341,7 +229,7 @@ export default function TimDroneCompanyPortfolio() {
       mapSelectedLabel: "Selected location",
       mapNoSelection: "No location selected yet",
       mapRequired: "Please select a shoot location on the map before sending.",
-      mapAriaLabel: "Interactive booking location map",
+      mapAriaLabel: "Booking location map preview",
       contact: "Contact",
       contactLine: "Available for commercials, film, television and international productions.",
       heroLine: "AMSTERDAM · AVAILABLE WORLDWIDE",
@@ -398,7 +286,7 @@ export default function TimDroneCompanyPortfolio() {
       bookingNav: "Boeken",
       bookingLabel: "Boeking",
       bookingTitle: "Plan een drone shoot.",
-      bookingIntro: "Deel datum, tijd, gewenste drone en shotwensen. Zoek op de kaart en dubbelklik of tap op de exacte draailocatie om die aan de aanvraag te koppelen.",
+      bookingIntro: "Deel datum, tijd, gewenste drone en shotwensen. Zoek de locatie en kies het juiste resultaat om die aan de aanvraag te koppelen.",
       bookingName: "Naam",
       bookingEmail: "E-mail",
       bookingPhone: "Telefoon",
@@ -415,10 +303,10 @@ export default function TimDroneCompanyPortfolio() {
       mapSearchPlaceholder: "Zoek een adres, venue of stad",
       mapSearchButton: "Zoeken",
       mapLoading: "Kaart laden...",
-      mapReady: "Zoek een locatie en dubbelklik of tap daarna op het exacte draaipunt.",
+      mapReady: "Zoek een locatie en kies het juiste resultaat.",
       mapSearching: "Locatie zoeken...",
-      mapChooseResult: "Kies een resultaat en dubbelklik of tap daarna op het exacte punt op de kaart.",
-      mapAfterSearch: "De kaart staat op je zoekresultaat. Dubbelklik of tap op het exacte draaipunt.",
+      mapChooseResult: "Kies het juiste resultaat om de locatie aan de aanvraag te koppelen.",
+      mapAfterSearch: "Kaartvoorbeeld bijgewerkt.",
       mapResolving: "Geselecteerde locatie opslaan...",
       mapSelected: "Geselecteerde draailocatie",
       mapSelectedStatus: "Locatie geselecteerd en gekoppeld aan de boekingsaanvraag.",
@@ -428,7 +316,7 @@ export default function TimDroneCompanyPortfolio() {
       mapSelectedLabel: "Geselecteerde locatie",
       mapNoSelection: "Nog geen locatie geselecteerd",
       mapRequired: "Selecteer eerst een draailocatie op de kaart voordat je verstuurt.",
-      mapAriaLabel: "Interactieve kaart voor boekingslocatie",
+      mapAriaLabel: "Kaartvoorbeeld voor boekingslocatie",
       contact: "Contact",
       contactLine: "Beschikbaar voor commercials, film, televisie en internationale producties.",
       heroLine: "AMSTERDAM · WERELDWIJD BESCHIKBAAR",

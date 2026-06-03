@@ -970,48 +970,13 @@ body {
 }
 
 .booking-map-canvas {
+  display: block;
   width: 100%;
   height: 24rem;
   min-height: 24rem;
+  border: 0;
   background: #050505;
-  touch-action: pan-y;
-}
-
-.booking-map-canvas.leaflet-container {
-  background: #050505;
-  font: inherit;
-}
-
-.booking-map-canvas .leaflet-tile {
-  max-width: none !important;
-  max-height: none !important;
-  outline: 1px solid rgba(5, 5, 5, 0.01);
-  image-rendering: auto;
-}
-
-.booking-map-canvas .leaflet-tile-pane {
-  filter: none;
-}
-
-.booking-map-canvas .leaflet-control-zoom a {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.78);
-  color: #ffffff;
-}
-
-.booking-map-canvas .leaflet-control-attribution {
-  background: rgba(0, 0, 0, 0.68);
-  color: rgba(255, 255, 255, 0.56);
-}
-
-.booking-map-canvas .leaflet-control-attribution a {
-  color: rgba(255, 255, 255, 0.74);
-}
-
-.booking-map-canvas .leaflet-popup-content-wrapper,
-.booking-map-canvas .leaflet-popup-tip {
-  background: #0a0a0a;
-  color: #ffffff;
+  pointer-events: none;
 }
 
 .booking-selected-location-field input {
@@ -1072,7 +1037,7 @@ body {
 
   .booking-map {
     grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr);
-    align-items: stretch;
+    align-items: start;
   }
 
   .booking-map-frame,
