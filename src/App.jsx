@@ -117,9 +117,10 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
         mapInstanceRef.current = map;
 
         L.control.zoom({ position: "bottomright" }).addTo(map);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "&copy; OpenStreetMap contributors",
-          maxZoom: 19,
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+          maxZoom: 20,
+          detectRetina: true,
         }).addTo(map);
 
         const selectLocation = async (latlng) => {
@@ -146,6 +147,7 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
             markerRef.current = L.marker([lat, lng]).addTo(map);
           }
 
+          map.invalidateSize();
           markerRef.current.bindPopup(currentCopy.mapSelected).openPopup();
           onLocationChange({
             label,
@@ -160,7 +162,10 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
         map.on("click", (event) => selectLocation(event.latlng));
         setStatus(copyRef.current.mapReady);
 
-        setTimeout(() => map.invalidateSize(), 150);
+        map.whenReady(() => {
+          requestAnimationFrame(() => map.invalidateSize());
+          setTimeout(() => map.invalidateSize(), 250);
+        });
       })
       .catch(() => {
         if (isMounted) setStatus(copyRef.current.mapError);
@@ -200,6 +205,7 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
     if (!Number.isFinite(lat) || !Number.isFinite(lng) || !mapInstanceRef.current) return;
 
     mapInstanceRef.current.setView([lat, lng], 16);
+    requestAnimationFrame(() => mapInstanceRef.current?.invalidateSize());
     setSearchResults([]);
     setStatus(copy.mapAfterSearch);
   }

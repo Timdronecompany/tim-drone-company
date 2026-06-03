@@ -977,13 +977,20 @@ body {
   touch-action: pan-y;
 }
 
+.booking-map-canvas.leaflet-container {
+  background: #050505;
+  font: inherit;
+}
+
 .booking-map-canvas .leaflet-tile {
-  outline: 1px solid transparent;
+  max-width: none !important;
+  max-height: none !important;
+  outline: 1px solid rgba(5, 5, 5, 0.01);
   image-rendering: auto;
 }
 
-.booking-map-canvas .leaflet-tile-container {
-  filter: grayscale(0.82) contrast(1.04) brightness(0.72);
+.booking-map-canvas .leaflet-tile-pane {
+  filter: none;
 }
 
 .booking-map-canvas .leaflet-control-zoom a {
