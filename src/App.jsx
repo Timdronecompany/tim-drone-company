@@ -99,6 +99,24 @@ export default function TimDroneCompanyPortfolio() {
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
       portfolioFilters: ["All", "Aerial video", "Awards", "Commercials", "Events", "Feature films", "Fly-Through", "FPV", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
+      bookingNav: "Booking",
+      bookingLabel: "Booking",
+      bookingTitle: "Plan a drone shoot.",
+      bookingIntro: "Share the date, time, location, preferred drone and shot requirements. The request is sent directly to T.I.M. Drone Company for review.",
+      bookingName: "Name",
+      bookingEmail: "Email",
+      bookingPhone: "Phone",
+      bookingDate: "Date",
+      bookingTime: "Time",
+      bookingLocation: "Google Maps location",
+      bookingLocationPlaceholder: "Paste a Google Maps link or exact address",
+      bookingGoDrone: "GoDrone map/app link",
+      bookingGoDroneHelp: "Paste the Dutch GoDrone location link if you already checked the area.",
+      bookingDroneType: "Drone type",
+      bookingShotTypes: "Shot types needed",
+      bookingDescription: "Short description",
+      bookingDescriptionPlaceholder: "Describe the shots: establishing, crane moves, fast or slow FPV, tracking, top-down, timing, restrictions, etc.",
+      bookingSubmit: "Send booking request",
       contact: "Contact",
       contactLine: "Available for commercials, film, television and international productions.",
       heroLine: "AMSTERDAM · AVAILABLE WORLDWIDE",
@@ -152,6 +170,24 @@ export default function TimDroneCompanyPortfolio() {
       portfolioTitle: "Een selectie van ons werk.",
       portfolioSubtitle: "Luchtbeelden, FPV, commercials, events en bioscoopfilms.",
       portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "Commercials", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
+      bookingNav: "Boeken",
+      bookingLabel: "Boeking",
+      bookingTitle: "Plan een drone shoot.",
+      bookingIntro: "Deel datum, tijd, locatie, gewenste drone en shotwensen. De aanvraag wordt direct naar T.I.M. Drone Company gestuurd voor review.",
+      bookingName: "Naam",
+      bookingEmail: "E-mail",
+      bookingPhone: "Telefoon",
+      bookingDate: "Datum",
+      bookingTime: "Tijd",
+      bookingLocation: "Google Maps locatie",
+      bookingLocationPlaceholder: "Plak een Google Maps-link of exact adres",
+      bookingGoDrone: "GoDrone map/app link",
+      bookingGoDroneHelp: "Plak de Nederlandse GoDrone locatielink als je het gebied al hebt gecontroleerd.",
+      bookingDroneType: "Drone type",
+      bookingShotTypes: "Gewenste shots",
+      bookingDescription: "Korte omschrijving",
+      bookingDescriptionPlaceholder: "Omschrijf de shots: establishing, crane shots, snelle of langzame FPV, tracking, top-down, timing, restricties, etc.",
+      bookingSubmit: "Boekingsaanvraag versturen",
       contact: "Contact",
       contactLine: "Beschikbaar voor commercials, film, televisie en internationale producties.",
       heroLine: "AMSTERDAM · WERELDWIJD BESCHIKBAAR",
@@ -166,6 +202,18 @@ export default function TimDroneCompanyPortfolio() {
 
   const t = copy[language];
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const bookingDroneOptions = [
+    "Freefly Alta X",
+    "FPV Cinelifter",
+    "DJI Inspire 3",
+    "DJI Mavic 4 Pro",
+    "DJI Mini 5",
+    "Micro FPV Drone",
+    "Custom drone build",
+  ];
+  const bookingShotOptions = language === "nl"
+    ? ["Establishing shots", "Crane shots", "Snelle FPV-beweging", "Langzame cinematic beweging", "Tracking shots", "Fly-through", "Top-down / overzicht"]
+    : ["Establishing shots", "Crane-style moves", "Fast FPV movement", "Slow cinematic movement", "Tracking shots", "Fly-through", "Top-down / overview"];
   const categoryLabels = {
     en: {
       "Bioscoop films": "Feature films",
@@ -778,6 +826,7 @@ export default function TimDroneCompanyPortfolio() {
               <a href="#about" className="hero-nav-link">About</a>
               <a href="#fleet" className="hero-nav-link">Fleet</a>
               <a href="#custom-drones" className="hero-nav-link">Custom</a>
+              <a href="#booking" className="hero-nav-link">{t.bookingNav}</a>
               <a href="#work" className="hero-nav-link">Work</a>
               <a href="#contact" className="hero-nav-link">Contact</a>
             </nav>
@@ -808,6 +857,7 @@ export default function TimDroneCompanyPortfolio() {
           <div className="hero-cta-group">
             <a href="#about" className="hero-cta-btn hero-cta-btn-primary">About</a>
             <a href="#fleet" className="hero-cta-btn hero-cta-btn-secondary">Fleet</a>
+            <a href="#booking" className="hero-cta-btn hero-cta-btn-secondary">{t.bookingNav}</a>
             <a href="#work" className="hero-cta-btn hero-cta-btn-secondary">Work</a>
           </div>
         </div>
@@ -916,6 +966,81 @@ export default function TimDroneCompanyPortfolio() {
               <p>{t.customDroneWorkflowText}</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="booking" className="booking-section">
+        <div className="booking-container">
+          <div className="booking-header">
+            <div>
+              <p className="booking-label">{t.bookingLabel}</p>
+              <h2 className="booking-title">{t.bookingTitle}</h2>
+            </div>
+            <p className="booking-intro">{t.bookingIntro}</p>
+          </div>
+          <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="booking-form">
+            <input type="hidden" name="form-name" value="booking-request" />
+            <p className="booking-hidden">
+              <label>
+                Leave this field empty
+                <input name="bot-field" />
+              </label>
+            </p>
+            <label className="booking-field">
+              <span>{t.bookingName}</span>
+              <input type="text" name="name" autoComplete="name" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingEmail}</span>
+              <input type="email" name="email" autoComplete="email" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingPhone}</span>
+              <input type="tel" name="phone" autoComplete="tel" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingDate}</span>
+              <input type="date" name="date" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingTime}</span>
+              <input type="time" name="time" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingDroneType}</span>
+              <select name="drone_type" required defaultValue="">
+                <option value="" disabled>{t.bookingDroneType}</option>
+                {bookingDroneOptions.map((drone) => (
+                  <option key={drone} value={drone}>{drone}</option>
+                ))}
+              </select>
+            </label>
+            <label className="booking-field booking-field-wide">
+              <span>{t.bookingLocation}</span>
+              <input type="text" name="google_maps_location" placeholder={t.bookingLocationPlaceholder} required />
+            </label>
+            <label className="booking-field booking-field-wide">
+              <span>{t.bookingGoDrone}</span>
+              <input type="url" name="godrone_location" placeholder="https://map.godrone.nl/" />
+              <small>{t.bookingGoDroneHelp}</small>
+            </label>
+            <fieldset className="booking-field booking-field-wide booking-shot-field">
+              <legend>{t.bookingShotTypes}</legend>
+              <div className="booking-shot-grid">
+                {bookingShotOptions.map((shotType) => (
+                  <label key={shotType} className="booking-check">
+                    <input type="checkbox" name="shot_types" value={shotType} />
+                    <span>{shotType}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <label className="booking-field booking-field-wide">
+              <span>{t.bookingDescription}</span>
+              <textarea name="shot_description" rows="6" placeholder={t.bookingDescriptionPlaceholder} required />
+            </label>
+            <button type="submit" className="booking-submit">{t.bookingSubmit}</button>
+          </form>
         </div>
       </section>
 

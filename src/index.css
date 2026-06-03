@@ -711,6 +711,219 @@ body {
   }
 }
 
+.booking-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000000;
+  padding: 6rem 1.5rem;
+}
+
+.booking-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.booking-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.booking-label {
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.45em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.booking-title {
+  max-width: 58rem;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.booking-intro {
+  max-width: 42rem;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.booking-hidden {
+  display: none;
+}
+
+.booking-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.booking-field span,
+.booking-shot-field legend {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.booking-field input,
+.booking-field select,
+.booking-field textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.35rem;
+  background: rgba(0, 0, 0, 0.62);
+  color: #ffffff;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.booking-field input,
+.booking-field select {
+  min-height: 3.25rem;
+  padding: 0 1rem;
+}
+
+.booking-field textarea {
+  resize: vertical;
+  min-height: 10rem;
+  padding: 1rem;
+}
+
+.booking-field input::placeholder,
+.booking-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.booking-field input:focus,
+.booking-field select:focus,
+.booking-field textarea:focus {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(0, 0, 0, 0.86);
+}
+
+.booking-field small {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.booking-shot-field {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.booking-shot-field legend {
+  padding: 0 0.4rem;
+}
+
+.booking-shot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.booking-check {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.booking-check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #ffffff;
+}
+
+.booking-check span {
+  min-width: 0;
+}
+
+.booking-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.4rem;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.booking-submit:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+@media (min-width: 768px) {
+  .booking-header {
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+    align-items: start;
+  }
+
+  .booking-title {
+    font-size: 4.5rem;
+  }
+
+  .booking-intro {
+    margin-left: auto;
+    padding-top: 3.35rem;
+  }
+
+  .booking-form {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 1.25rem;
+  }
+
+  .booking-field-wide,
+  .booking-shot-field,
+  .booking-submit {
+    grid-column: 1 / -1;
+  }
+
+  .booking-shot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .work-section {
   background: #000000;
   padding: 6rem 1.5rem;
