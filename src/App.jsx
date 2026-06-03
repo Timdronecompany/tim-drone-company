@@ -963,7 +963,11 @@ export default function TimDroneCompanyPortfolio() {
           <h2 className="contact-title">{t.contact}</h2>
           <div className="contact-info">
             <p>T.I.M. Drone Company</p>
-            <p>+31 6 25083448</p>
+            <p>
+              <a href="https://wa.me/31625083448" target="_blank" rel="noreferrer">
+                +31 6 25083448
+              </a>
+            </p>
             <p>timdronecompany@gmail.com</p>
             <p className="contact-subtext">{t.contactLine}</p>
           </div>
