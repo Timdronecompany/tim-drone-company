@@ -781,13 +781,13 @@ export default function TimDroneCompanyPortfolio() {
           <div className="hero-logo-frame" aria-label="T.I.M. Drone Company, the incredible machines">
             <span className="hero-logo-corner hero-logo-corner-top-right" />
             <span className="hero-logo-corner hero-logo-corner-bottom-left" />
-            <div className="hero-logo">
+            <h1 className="hero-logo">
               <span className="hero-logo-main">
                 T<span className="hero-logo-dot">.</span>I<span className="hero-logo-dot">.</span>M<span className="hero-logo-dot">.</span>
               </span>
               <span className="hero-logo-tagline">the incredible machines</span>
               <span className="hero-logo-company">Drone Company</span>
-            </div>
+            </h1>
           </div>
           <p className="hero-hero-line">{t.heroLine}</p>
           <div className="hero-cta-group">
