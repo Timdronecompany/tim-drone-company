@@ -103,11 +103,16 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
       .then((L) => {
         if (!isMounted || !mapElementRef.current || mapInstanceRef.current) return;
 
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
         const map = L.map(mapElementRef.current, {
           center: [52.3676, 4.9041],
           zoom: 11,
           zoomControl: false,
           doubleClickZoom: false,
+          dragging: !isTouchDevice,
+          scrollWheelZoom: false,
+          tap: true,
+          touchZoom: true,
         });
         mapInstanceRef.current = map;
 
