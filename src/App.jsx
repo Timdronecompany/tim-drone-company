@@ -110,12 +110,11 @@ export default function TimDroneCompanyPortfolio() {
       bookingTime: "Time",
       bookingLocation: "Google Maps location",
       bookingLocationPlaceholder: "Paste a Google Maps link or exact address",
-      bookingGoDrone: "GoDrone map/app link",
-      bookingGoDroneHelp: "Paste the Dutch GoDrone location link if you already checked the area.",
       bookingDroneType: "Drone type",
-      bookingShotTypes: "Shot types needed",
+      bookingShotTypes: "Shot ideas",
+      bookingShotSuggestions: "Suggestions: establishing shots, crane-style moves, fast FPV movement, slow cinematic movement, tracking shots, fly-through, top-down overview.",
       bookingDescription: "Short description",
-      bookingDescriptionPlaceholder: "Describe the shots: establishing, crane moves, fast or slow FPV, tracking, top-down, timing, restrictions, etc.",
+      bookingDescriptionPlaceholder: "Describe the shots you need, timing, mood, movement, restrictions or any useful production details.",
       bookingSubmit: "Send booking request",
       contact: "Contact",
       contactLine: "Available for commercials, film, television and international productions.",
@@ -181,12 +180,11 @@ export default function TimDroneCompanyPortfolio() {
       bookingTime: "Tijd",
       bookingLocation: "Google Maps locatie",
       bookingLocationPlaceholder: "Plak een Google Maps-link of exact adres",
-      bookingGoDrone: "GoDrone map/app link",
-      bookingGoDroneHelp: "Plak de Nederlandse GoDrone locatielink als je het gebied al hebt gecontroleerd.",
       bookingDroneType: "Drone type",
-      bookingShotTypes: "Gewenste shots",
+      bookingShotTypes: "Shot ideeën",
+      bookingShotSuggestions: "Suggesties: establishing shots, crane shots, snelle FPV-beweging, langzame cinematic beweging, tracking shots, fly-through, top-down overzicht.",
       bookingDescription: "Korte omschrijving",
-      bookingDescriptionPlaceholder: "Omschrijf de shots: establishing, crane shots, snelle of langzame FPV, tracking, top-down, timing, restricties, etc.",
+      bookingDescriptionPlaceholder: "Omschrijf de gewenste shots, timing, sfeer, beweging, restricties of andere nuttige productie-info.",
       bookingSubmit: "Boekingsaanvraag versturen",
       contact: "Contact",
       contactLine: "Beschikbaar voor commercials, film, televisie en internationale producties.",
@@ -211,9 +209,6 @@ export default function TimDroneCompanyPortfolio() {
     "Micro FPV Drone",
     "Custom drone build",
   ];
-  const bookingShotOptions = language === "nl"
-    ? ["Establishing shots", "Crane shots", "Snelle FPV-beweging", "Langzame cinematic beweging", "Tracking shots", "Fly-through", "Top-down / overzicht"]
-    : ["Establishing shots", "Crane-style moves", "Fast FPV movement", "Slow cinematic movement", "Tracking shots", "Fly-through", "Top-down / overview"];
   const categoryLabels = {
     en: {
       "Bioscoop films": "Feature films",
@@ -1020,24 +1015,9 @@ export default function TimDroneCompanyPortfolio() {
               <input type="text" name="google_maps_location" placeholder={t.bookingLocationPlaceholder} required />
             </label>
             <label className="booking-field booking-field-wide">
-              <span>{t.bookingGoDrone}</span>
-              <input type="url" name="godrone_location" placeholder="https://map.godrone.nl/" />
-              <small>{t.bookingGoDroneHelp}</small>
-            </label>
-            <fieldset className="booking-field booking-field-wide booking-shot-field">
-              <legend>{t.bookingShotTypes}</legend>
-              <div className="booking-shot-grid">
-                {bookingShotOptions.map((shotType) => (
-                  <label key={shotType} className="booking-check">
-                    <input type="checkbox" name="shot_types" value={shotType} />
-                    <span>{shotType}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-            <label className="booking-field booking-field-wide">
               <span>{t.bookingDescription}</span>
               <textarea name="shot_description" rows="6" placeholder={t.bookingDescriptionPlaceholder} required />
+              <small>{t.bookingShotSuggestions}</small>
             </label>
             <button type="submit" className="booking-submit">{t.bookingSubmit}</button>
           </form>
