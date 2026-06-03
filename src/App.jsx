@@ -107,7 +107,8 @@ export default function TimDroneCompanyPortfolio() {
       bookingEmail: "Email",
       bookingPhone: "Phone",
       bookingDate: "Date",
-      bookingTime: "Time",
+      bookingStartTime: "Start time",
+      bookingEndTime: "End time",
       bookingLocation: "Google Maps location",
       bookingLocationPlaceholder: "Paste a Google Maps link or exact address",
       bookingDroneType: "Drone type",
@@ -177,7 +178,8 @@ export default function TimDroneCompanyPortfolio() {
       bookingEmail: "E-mail",
       bookingPhone: "Telefoon",
       bookingDate: "Datum",
-      bookingTime: "Tijd",
+      bookingStartTime: "Starttijd",
+      bookingEndTime: "Eindtijd",
       bookingLocation: "Google Maps locatie",
       bookingLocationPlaceholder: "Plak een Google Maps-link of exact adres",
       bookingDroneType: "Drone type",
@@ -998,8 +1000,12 @@ export default function TimDroneCompanyPortfolio() {
               <input type="date" name="date" required />
             </label>
             <label className="booking-field">
-              <span>{t.bookingTime}</span>
-              <input type="time" name="time" required />
+              <span>{t.bookingStartTime}</span>
+              <input type="time" name="start_time" required />
+            </label>
+            <label className="booking-field">
+              <span>{t.bookingEndTime}</span>
+              <input type="time" name="end_time" required />
             </label>
             <label className="booking-field">
               <span>{t.bookingDroneType}</span>
