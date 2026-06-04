@@ -416,6 +416,11 @@ export default function TimDroneCompanyPortfolio() {
     "Micro FPV Drone",
     "Custom drone build",
   ];
+  const bookingTimeOptions = Array.from({ length: 96 }, (_, index) => {
+    const hours = String(Math.floor(index / 4)).padStart(2, "0");
+    const minutes = String((index % 4) * 15).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  });
   const categoryLabels = {
     en: {
       "Bioscoop films": "Feature films",
@@ -1261,11 +1266,21 @@ export default function TimDroneCompanyPortfolio() {
             </label>
             <label className="booking-field">
               <span>{t.bookingStartTime}</span>
-              <input type="time" name="start_time" required />
+              <select name="start_time" required defaultValue="">
+                <option value="" disabled>{t.bookingStartTime}</option>
+                {bookingTimeOptions.map((time) => (
+                  <option key={`start-${time}`} value={time}>{time}</option>
+                ))}
+              </select>
             </label>
             <label className="booking-field">
               <span>{t.bookingEndTime}</span>
-              <input type="time" name="end_time" required />
+              <select name="end_time" required defaultValue="">
+                <option value="" disabled>{t.bookingEndTime}</option>
+                {bookingTimeOptions.map((time) => (
+                  <option key={`end-${time}`} value={time}>{time}</option>
+                ))}
+              </select>
             </label>
             <label className="booking-field">
               <span>{t.bookingDroneType}</span>
