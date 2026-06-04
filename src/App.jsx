@@ -431,6 +431,14 @@ export default function TimDroneCompanyPortfolio() {
   };
   const portfolioProjects = [
       {
+          "title": "Bike Totaal – Vandaag pak je'm",
+          "categories": [
+              "Commercials"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=03rWXsV2UWQ",
+          "thumbnail": "/posters/bike-totaal-vandaag-pak-je-m.svg"
+      },
+      {
           "title": "Het Gouden Uur – Seizoen 2",
           "categories": [
               "Aerial video",
@@ -928,6 +936,7 @@ export default function TimDroneCompanyPortfolio() {
       }
   ];
   const projectReleaseDates = {
+    "Bike Totaal – Vandaag pak je'm": "2026-06-04",
     "De Film van Rutger, Thomas & Paco 2": "2026-06-03",
     "Budget Thuis": "2026-05-05",
     "Alpha 00": "2026-01-18",
