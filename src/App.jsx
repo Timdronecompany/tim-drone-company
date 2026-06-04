@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { companyFactPages, findServicePage, servicePages } from "./servicePages.js";
 
 function DroneVisual({ variant }) {
   const droneImages = {
@@ -139,11 +140,192 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
   );
 }
 
-export default function TimDroneCompanyPortfolio() {
+function SiteHeader({ language, setLanguage, isSoundOn, setIsSoundOn, spotifyPosition, spotifyPlayerRef, handleSpotifyDragStart }) {
+  return (
+    <>
+      <header className="hero-header">
+        <div className="hero-header-inner">
+          <div className="hero-header-brand">
+            <a href="/" className="hero-header-title">T.I.M. Drone Company</a>
+          </div>
+          <div className="hero-header-actions">
+            <div className="language-toggle">
+              <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
+              <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
+            </div>
+            <button
+              type="button"
+              className={`site-sound-toggle ${isSoundOn ? "site-sound-toggle-active" : ""}`}
+              onClick={() => setIsSoundOn((current) => !current)}
+              aria-pressed={isSoundOn}
+              aria-label={isSoundOn ? "Close Spotify player" : "Open Spotify player"}
+            >
+              {isSoundOn ? "Close" : "Music"}
+            </button>
+            {isSoundOn && (
+              <div
+                ref={spotifyPlayerRef}
+                className="site-spotify-player"
+                onPointerDown={handleSpotifyDragStart}
+              >
+                <iframe
+            title="Spotify player"
+            src="https://open.spotify.com/embed/track/4e9eGQYsOiBcftrWXwsVco?utm_source=generator&autoplay=1&theme=0"
+            width="100%"
+            height="100%"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          />
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+    </>
+  );
+}
+
+function ServicePage({ page, language, setLanguage, isSoundOn, setIsSoundOn, spotifyPosition, spotifyPlayerRef, handleSpotifyDragStart }) {
+  const isCompanyFactPage = companyFactPages.some((factPage) => factPage.slug === page.slug);
+  const relatedPages = (isCompanyFactPage ? companyFactPages : servicePages).filter((relatedPage) => relatedPage.slug !== page.slug);
+
+  return (
+    <div className={`min-h-screen bg-black text-white${isSoundOn ? " spotify-open" : ""}`}>
+      <SiteHeader
+        language={language}
+        setLanguage={setLanguage}
+        isSoundOn={isSoundOn}
+        setIsSoundOn={setIsSoundOn}
+        spotifyPosition={spotifyPosition}
+        spotifyPlayerRef={spotifyPlayerRef}
+        handleSpotifyDragStart={handleSpotifyDragStart}
+      />
+      <main className="service-page">
+        <section className="service-hero">
+          <p className="service-eyebrow">T.I.M. Drone Company · Amsterdam</p>
+          <h1 className="service-title">{page.title}</h1>
+          <p className="service-intro">{page.intro}</p>
+          <div className="service-cta-row">
+            <a href="/#booking" className="hero-cta-btn hero-cta-btn-primary">Book</a>
+            <a href="/#contact" className="hero-cta-btn hero-cta-btn-secondary">Contact</a>
+            <a href="/" className="hero-cta-btn hero-cta-btn-secondary">Home</a>
+          </div>
+        </section>
+
+        <section className="service-detail-section">
+          <div className="service-detail-container">
+            <aside className="service-summary">
+              <p className="service-summary-label">Service</p>
+              <h2>{page.serviceType}</h2>
+              <p>{page.focus}</p>
+              <div className="service-term-list">
+                {page.terms.map((term) => (
+                  <span key={term}>{term}</span>
+                ))}
+              </div>
+            </aside>
+
+            <div className="service-copy-grid">
+              {page.sections.map((section) => (
+                <article key={section.title} className="service-copy-item">
+                  <h2>{section.title}</h2>
+                  <p>{section.body}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="service-insight-grid">
+              {page.insights.map((insight) => (
+                <article key={insight.label} className="service-insight-card">
+                  <span>{insight.label}</span>
+                  <p>{insight.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="service-related-section">
+          <div className="service-related-container">
+            <p className="service-eyebrow">{isCompanyFactPage ? "Related pages" : "Related services"}</p>
+            <h2 className="service-related-title">{isCompanyFactPage ? "More company facts." : "More drone services in Amsterdam."}</h2>
+            <div className="company-capability-links service-related-links" aria-label="Related service pages">
+              {relatedPages.map((servicePage) => (
+                <a key={servicePage.slug} href={servicePage.path}>
+                  {servicePage.serviceType}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const [language, setLanguage] = useState("en");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(false);
+  const [spotifyPosition, setSpotifyPosition] = useState({ left: 16, bottom: 16 });
+  const spotifyPlayerRef = useRef(null);
+  const spotifyDragRef = useRef(null);
+
+  const handleSpotifyDragMove = useCallback((event) => {
+    if (!spotifyDragRef.current) return;
+
+    const clientX = event.clientX;
+    const clientY = event.clientY;
+    if (clientX == null || clientY == null) return;
+
+    const { startX, startY, left, bottom, width, height } = spotifyDragRef.current;
+    const dx = clientX - startX;
+    const dy = event.clientY - startY;
+
+    const maxLeft = Math.max(8, window.innerWidth - width - 8);
+    const maxBottom = Math.max(8, window.innerHeight - height - 8);
+
+    setSpotifyPosition({
+      left: Math.min(Math.max(8, left + dx), maxLeft),
+      bottom: Math.min(Math.max(8, bottom - dy), maxBottom),
+    });
+  }, []);
+
+  const handleSpotifyDragEnd = useCallback(() => {
+    spotifyDragRef.current = null;
+    window.removeEventListener("pointermove", handleSpotifyDragMove);
+    window.removeEventListener("pointerup", handleSpotifyDragEnd);
+  }, [handleSpotifyDragMove]);
+
+  const handleSpotifyDragStart = useCallback((event) => {
+    const clientX = event.clientX ?? event.touches?.[0]?.clientX;
+    const clientY = event.clientY ?? event.touches?.[0]?.clientY;
+    if (clientX == null || clientY == null) return;
+
+    const rect = spotifyPlayerRef.current?.getBoundingClientRect();
+    const width = rect?.width ?? 300;
+    const height = rect?.height ?? 96;
+
+    if (event.currentTarget?.setPointerCapture) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+
+    spotifyDragRef.current = {
+      startX: clientX,
+      startY: clientY,
+      left: spotifyPosition.left,
+      bottom: spotifyPosition.bottom,
+      width,
+      height,
+    };
+
+    window.addEventListener("pointermove", handleSpotifyDragMove);
+    window.addEventListener("pointerup", handleSpotifyDragEnd, { once: true });
+    event.preventDefault();
+  }, [spotifyPosition.left, spotifyPosition.bottom, handleSpotifyDragEnd, handleSpotifyDragMove]);
+
   const [showScrollControls, setShowScrollControls] = useState(false);
   const [isBookingLocationMissing, setIsBookingLocationMissing] = useState(false);
   const [bookingSubmitState, setBookingSubmitState] = useState("idle");
@@ -338,7 +520,9 @@ export default function TimDroneCompanyPortfolio() {
   };
 
   const t = copy[language];
+  const servicePage = findServicePage(path);
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const locationCheckWhatsAppUrl = `https://wa.me/31625083448?text=${encodeURIComponent("Hi T.I.M. Drone Company, I would like to check if a drone shoot is possible at this location: ")}`;
 
   useEffect(() => {
     function updateScrollControls() {
@@ -1032,19 +1216,13 @@ export default function TimDroneCompanyPortfolio() {
     return url;
   }
 
+  if (servicePage) {
+    return <ServicePage page={servicePage} language={language} setLanguage={setLanguage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} spotifyPosition={spotifyPosition} spotifyPlayerRef={spotifyPlayerRef} handleSpotifyDragStart={handleSpotifyDragStart} />;
+  }
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="hero-header">
-        <div className="hero-header-inner">
-          <div className="hero-header-brand">
-            <span className="hero-header-title">T.I.M. Drone Company</span>
-          </div>
-          <div className="language-toggle">
-            <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
-            <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
-          </div>
-        </div>
-      </header>
+    <div className={`min-h-screen bg-black text-white${isSoundOn ? " spotify-open" : ""}`}>
+      <SiteHeader language={language} setLanguage={setLanguage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} spotifyPosition={spotifyPosition} spotifyPlayerRef={spotifyPlayerRef} handleSpotifyDragStart={handleSpotifyDragStart} />
 
       <section className="hero-section">
         <div className="hero-overlay" />
@@ -1173,6 +1351,44 @@ export default function TimDroneCompanyPortfolio() {
               <h3>{t.customDroneWorkflow}</h3>
               <p>{t.customDroneWorkflowText}</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="service-directory-section">
+        <div className="service-directory-container">
+          <div className="service-directory-header">
+            <p className="service-directory-label">Company facts</p>
+            <h2 className="service-directory-title">Amsterdam-based drone company for film, TV and commercial productions.</h2>
+            <p className="service-directory-intro">
+              A compact overview for producers, agencies and directors who need to understand the crew, equipment and production workflow before booking aerial work.
+            </p>
+          </div>
+          <div className="company-facts-grid">
+            {companyFactPages.map((factPage) => (
+              <a key={factPage.slug} href={factPage.path} className="company-fact-card">
+                <span>{factPage.serviceType}</span>
+                <h3>{factPage.summaryTitle}</h3>
+                <p>{factPage.summaryText}</p>
+              </a>
+            ))}
+          </div>
+          <div className="company-capability-links" aria-label="Dedicated service pages">
+            <span>Dedicated pages</span>
+            {servicePages.map((servicePage) => (
+              <a key={servicePage.slug} href={servicePage.path}>
+                {servicePage.serviceType}
+              </a>
+            ))}
+          </div>
+          <div className="location-check-cta">
+            <div>
+              <span>Location check</span>
+              <p>Not sure if the shoot location is possible? Send us the address or a map pin on WhatsApp and we will help you check the basics before you book.</p>
+            </div>
+            <a href={locationCheckWhatsAppUrl} target="_blank" rel="noreferrer">
+              WhatsApp location
+            </a>
           </div>
         </div>
       </section>
@@ -1336,6 +1552,18 @@ export default function TimDroneCompanyPortfolio() {
                 timdronecompany@gmail.com
               </a>
             </p>
+            <p className="contact-kvk">KvK: 51784319</p>
+            <div className="contact-socials" aria-label="Social profiles">
+              <a href="https://www.linkedin.com/in/tim-van-vliet-26425193/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <span>in</span>
+              </a>
+              <a href="https://www.instagram.com/tim_dronecompany/" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <span>◎</span>
+              </a>
+              <a href="https://www.facebook.com/timdronecompany/" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <span>f</span>
+              </a>
+            </div>
             <p className="contact-subtext">{t.contactLine}</p>
           </div>
         </div>
