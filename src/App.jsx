@@ -153,14 +153,6 @@ function SiteHeader({ language, setLanguage }) {
               <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
               <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
             </div>
-            <a
-              className="site-sound-toggle"
-              href="https://open.spotify.com/track/4e9eGQYsOiBcftrWXwsVco"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Listen on Spotify
-            </a>
           </div>
         </div>
       </header>
@@ -1483,6 +1475,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               </a>
               <a href="https://www.facebook.com/timdronecompany/" target="_blank" rel="noreferrer" aria-label="Facebook">
                 <span>f</span>
+              </a>
+              <a href="https://open.spotify.com/track/4e9eGQYsOiBcftrWXwsVco" target="_blank" rel="noreferrer" aria-label="Listen on Spotify">
+                <span>♪</span>
               </a>
             </div>
             <p className="contact-subtext">{t.contactLine}</p>

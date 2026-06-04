@@ -1855,32 +1855,6 @@ body {
   border-color: rgba(255, 255, 255, 0.34);
 }
 
-.site-sound-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.42rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.42);
-  color: rgba(255, 255, 255, 0.58);
-  cursor: pointer;
-  padding: 0.58rem 0.82rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  line-height: 1;
-  text-decoration: none;
-  text-transform: uppercase;
-  backdrop-filter: blur(18px);
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.site-sound-toggle:hover {
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(20, 20, 20, 0.78);
-  color: #ffffff;
-}
-
 .scroll-jump-controls {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
@@ -1925,11 +1899,6 @@ body {
 }
 
 @media (max-width: 767px) {
-  .site-sound-toggle {
-    padding: 0.54rem 0.74rem;
-    font-size: 0.58rem;
-  }
-
   .scroll-jump-controls {
     right: max(0.75rem, env(safe-area-inset-right));
     bottom: calc(5.25rem + env(safe-area-inset-bottom));
