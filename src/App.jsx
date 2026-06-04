@@ -1040,6 +1040,7 @@ export default function TimDroneCompanyPortfolio() {
             <a href="#fleet" className="hero-cta-btn hero-cta-btn-secondary">Fleet</a>
             <a href="#booking" className="hero-cta-btn hero-cta-btn-secondary">{t.bookingNav}</a>
             <a href="#work" className="hero-cta-btn hero-cta-btn-secondary">Work</a>
+            <a href="#contact" className="hero-cta-btn hero-cta-btn-secondary">{t.contact}</a>
           </div>
         </div>
       </section>
