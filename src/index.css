@@ -136,27 +136,6 @@ body {
   color: #ffffff;
 }
 
-.hero-top-book {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  padding: 0.55rem 0.8rem;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(0, 0, 0, 0.45);
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  backdrop-filter: blur(18px);
-}
-
-.hero-top-book:hover {
-  color: #ffffff;
-}
-
 .language-toggle {
   display: flex;
   overflow: hidden;
@@ -485,17 +464,6 @@ body {
     grid-column: 1;
     justify-self: center;
     max-width: 100%;
-  }
-
-  .hero-top-book {
-    grid-column: 1;
-    justify-self: center;
-    min-height: 2.1rem;
-    max-width: 100%;
-    padding: 0.5rem 0.65rem;
-    font-size: 0.56rem;
-    letter-spacing: 0.14em;
-    white-space: nowrap;
   }
 
   .hero-logo-frame {

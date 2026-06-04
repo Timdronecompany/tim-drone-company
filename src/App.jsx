@@ -1017,7 +1017,6 @@ export default function TimDroneCompanyPortfolio() {
             <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
             <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
           </div>
-          <a href="#booking" className="hero-top-book">{t.bookingNav}</a>
         </div>
       </header>
 
