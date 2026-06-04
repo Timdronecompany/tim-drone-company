@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function DroneVisual({ variant }) {
   const droneImages = {
@@ -144,6 +144,7 @@ export default function TimDroneCompanyPortfolio() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
+  const [showScrollControls, setShowScrollControls] = useState(false);
   const [isBookingLocationMissing, setIsBookingLocationMissing] = useState(false);
   const [bookingSubmitState, setBookingSubmitState] = useState("idle");
   const [bookingLocation, setBookingLocation] = useState({
@@ -338,6 +339,25 @@ export default function TimDroneCompanyPortfolio() {
 
   const t = copy[language];
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
+
+  useEffect(() => {
+    function updateScrollControls() {
+      setShowScrollControls(window.scrollY > 240);
+    }
+
+    updateScrollControls();
+    window.addEventListener("scroll", updateScrollControls, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollControls);
+  }, []);
+
+  const scrollToPageStart = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const scrollToPageEnd = useCallback(() => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+  }, []);
+
   const handleBookingLocationChange = useCallback((location) => {
     setBookingLocation(location);
     setIsBookingLocationMissing(false);
@@ -1321,6 +1341,15 @@ export default function TimDroneCompanyPortfolio() {
           </div>
         </div>
       )}
+
+      <div className={`scroll-jump-controls ${showScrollControls ? "scroll-jump-controls-visible" : ""}`} aria-hidden={!showScrollControls}>
+        <button type="button" className="scroll-jump-button" onClick={scrollToPageStart} aria-label={language === "nl" ? "Naar boven" : "Scroll to top"}>
+          ↑
+        </button>
+        <button type="button" className="scroll-jump-button" onClick={scrollToPageEnd} aria-label={language === "nl" ? "Naar beneden" : "Scroll to bottom"}>
+          ↓
+        </button>
+      </div>
     </div>
   );
 }
