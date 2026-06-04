@@ -1316,7 +1316,11 @@ export default function TimDroneCompanyPortfolio() {
                 +31 6 25083448
               </button>
             </p>
-            <p>timdronecompany@gmail.com</p>
+            <p>
+              <a className="contact-link" href="mailto:timdronecompany@gmail.com">
+                timdronecompany@gmail.com
+              </a>
+            </p>
             <p className="contact-subtext">{t.contactLine}</p>
           </div>
         </div>

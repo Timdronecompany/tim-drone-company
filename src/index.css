@@ -1295,7 +1295,8 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 
-.contact-phone-button {
+.contact-phone-button,
+.contact-link {
   padding: 0;
   border: 0;
   background: transparent;
@@ -1308,7 +1309,8 @@ body {
   text-underline-offset: 0.28em;
 }
 
-.contact-phone-button:hover {
+.contact-phone-button:hover,
+.contact-link:hover {
   color: #ffffff;
 }
 
