@@ -199,6 +199,31 @@ function posterSvg(project, framePath) {
 `;
 }
 
+// Generate homepage poster with black background and white text
+function homepagePosterSvg() {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="T.I.M. Drone Company">
+  <defs>
+    <pattern id="grain" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M3 8h1v1H3zM17 29h1v1h-1zM34 13h1v1h-1zM49 41h1v1h-1zM61 23h1v1h-1zM8 57h1v1H8zM27 49h1v1h-1zM43 5h1v1h-1z" fill="#fff" opacity="0.08"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#e7c873" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#000000"/>
+  <rect width="1200" height="630" fill="url(#grain)"/>
+  
+  <text x="600" y="280" text-anchor="middle" font-family="Outfit, Inter, Arial, sans-serif" font-size="96" font-weight="800" letter-spacing="4" fill="#ffffff" filter="url(#softShadow)">T.I.M.</text>
+  <text x="600" y="380" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="6" fill="#e7c873" opacity="0.9">DRONE COMPANY</text>
+  <text x="600" y="440" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" letter-spacing="3" fill="#ffffff" opacity="0.6">Cinematic Drone & FPV Filming</text>
+</svg>
+`;
+}
+
+const homepagePosterPath = path.join(root, "public", "og-poster.svg");
+fs.writeFileSync(homepagePosterPath, homepagePosterSvg());
+
 const updatedProjects = projects.map((project) => {
   const filename = `${slugify(project.title)}.svg`;
   const outputPath = path.join(postersDir, filename);
@@ -219,3 +244,4 @@ const nextSource = source.replace(/  const portfolioProjects = \[[\s\S]*?\n  \];
 fs.writeFileSync(appPath, nextSource);
 
 console.log(`Generated ${updatedProjects.length - 1} poster thumbnails in public/posters`);
+console.log(`Generated homepage OG poster`);
