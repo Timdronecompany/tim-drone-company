@@ -400,11 +400,13 @@ body {
   color: rgba(255, 255, 255, 0.65);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .hero-nav {
     display: flex;
   }
+}
 
+@media (min-width: 768px) {
   .fleet-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
@@ -451,11 +453,10 @@ body {
 
   .hero-header-inner {
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
+    grid-template-columns: 1fr;
+    justify-items: center;
     align-items: center;
-    column-gap: 0.75rem;
-    row-gap: 0.75rem;
+    row-gap: 0.65rem;
     width: 100%;
   }
 
@@ -482,13 +483,13 @@ body {
 
   .language-toggle {
     grid-column: 1;
-    justify-self: start;
+    justify-self: center;
     max-width: 100%;
   }
 
   .hero-top-book {
-    grid-column: 2;
-    justify-self: end;
+    grid-column: 1;
+    justify-self: center;
     min-height: 2.1rem;
     max-width: 100%;
     padding: 0.5rem 0.65rem;
