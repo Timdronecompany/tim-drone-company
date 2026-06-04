@@ -1214,7 +1214,7 @@ export default function TimDroneCompanyPortfolio() {
             </div>
             <p className="booking-intro">{t.bookingIntro}</p>
           </div>
-          <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="booking-form" onSubmit={handleBookingSubmit}>
+          <form name="booking-request" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" className="booking-form" onSubmit={handleBookingSubmit}>
             <input type="hidden" name="form-name" value="booking-request" />
             <p className="booking-hidden">
               <label>
