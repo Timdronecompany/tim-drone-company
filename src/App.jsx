@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { companyFactPages, findServicePage, servicePages } from "./servicePages.js";
 
 function DroneVisual({ variant }) {
@@ -140,7 +140,7 @@ function BookingMap({ copy, selectedLocation, onLocationChange }) {
   );
 }
 
-function SiteHeader({ language, setLanguage, isSoundOn, setIsSoundOn, spotifyPosition, spotifyPlayerRef, handleSpotifyDragStart }) {
+function SiteHeader({ language, setLanguage }) {
   return (
     <>
       <header className="hero-header">
@@ -153,31 +153,14 @@ function SiteHeader({ language, setLanguage, isSoundOn, setIsSoundOn, spotifyPos
               <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
               <button onClick={() => setLanguage("nl")} className={`hero-language-button ${language === "nl" ? "hero-language-button-active" : ""}`}>NL</button>
             </div>
-            <button
-              type="button"
-              className={`site-sound-toggle ${isSoundOn ? "site-sound-toggle-active" : ""}`}
-              onClick={() => setIsSoundOn((current) => !current)}
-              aria-pressed={isSoundOn}
-              aria-label={isSoundOn ? "Close Spotify player" : "Open Spotify player"}
+            <a
+              className="site-sound-toggle"
+              href="https://open.spotify.com/track/4e9eGQYsOiBcftrWXwsVco"
+              target="_blank"
+              rel="noreferrer"
             >
-              {isSoundOn ? "Close" : "Music"}
-            </button>
-            {isSoundOn && (
-              <div
-                ref={spotifyPlayerRef}
-                className="site-spotify-player"
-                onPointerDown={handleSpotifyDragStart}
-              >
-                <iframe
-            title="Spotify player"
-            src="https://open.spotify.com/embed/track/4e9eGQYsOiBcftrWXwsVco?utm_source=generator&autoplay=1&theme=0"
-            width="100%"
-            height="100%"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
-              </div>
-            )}
+              Listen on Spotify
+            </a>
           </div>
         </div>
       </header>
@@ -185,20 +168,15 @@ function SiteHeader({ language, setLanguage, isSoundOn, setIsSoundOn, spotifyPos
   );
 }
 
-function ServicePage({ page, language, setLanguage, isSoundOn, setIsSoundOn, spotifyPosition, spotifyPlayerRef, handleSpotifyDragStart }) {
+function ServicePage({ page, language, setLanguage }) {
   const isCompanyFactPage = companyFactPages.some((factPage) => factPage.slug === page.slug);
   const relatedPages = (isCompanyFactPage ? companyFactPages : servicePages).filter((relatedPage) => relatedPage.slug !== page.slug);
 
   return (
-    <div className={`min-h-screen bg-black text-white${isSoundOn ? " spotify-open" : ""}`}>
+    <div className="min-h-screen bg-black text-white">
       <SiteHeader
         language={language}
         setLanguage={setLanguage}
-        isSoundOn={isSoundOn}
-        setIsSoundOn={setIsSoundOn}
-        spotifyPosition={spotifyPosition}
-        spotifyPlayerRef={spotifyPlayerRef}
-        handleSpotifyDragStart={handleSpotifyDragStart}
       />
       <main className="service-page">
         <section className="service-hero">
@@ -268,63 +246,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
-  const [isSoundOn, setIsSoundOn] = useState(false);
-  const [spotifyPosition, setSpotifyPosition] = useState({ left: 16, bottom: 16 });
-  const spotifyPlayerRef = useRef(null);
-  const spotifyDragRef = useRef(null);
-
-  const handleSpotifyDragMove = useCallback((event) => {
-    if (!spotifyDragRef.current) return;
-
-    const clientX = event.clientX;
-    const clientY = event.clientY;
-    if (clientX == null || clientY == null) return;
-
-    const { startX, startY, left, bottom, width, height } = spotifyDragRef.current;
-    const dx = clientX - startX;
-    const dy = event.clientY - startY;
-
-    const maxLeft = Math.max(8, window.innerWidth - width - 8);
-    const maxBottom = Math.max(8, window.innerHeight - height - 8);
-
-    setSpotifyPosition({
-      left: Math.min(Math.max(8, left + dx), maxLeft),
-      bottom: Math.min(Math.max(8, bottom - dy), maxBottom),
-    });
-  }, []);
-
-  const handleSpotifyDragEnd = useCallback(() => {
-    spotifyDragRef.current = null;
-    window.removeEventListener("pointermove", handleSpotifyDragMove);
-    window.removeEventListener("pointerup", handleSpotifyDragEnd);
-  }, [handleSpotifyDragMove]);
-
-  const handleSpotifyDragStart = useCallback((event) => {
-    const clientX = event.clientX ?? event.touches?.[0]?.clientX;
-    const clientY = event.clientY ?? event.touches?.[0]?.clientY;
-    if (clientX == null || clientY == null) return;
-
-    const rect = spotifyPlayerRef.current?.getBoundingClientRect();
-    const width = rect?.width ?? 300;
-    const height = rect?.height ?? 96;
-
-    if (event.currentTarget?.setPointerCapture) {
-      event.currentTarget.setPointerCapture(event.pointerId);
-    }
-
-    spotifyDragRef.current = {
-      startX: clientX,
-      startY: clientY,
-      left: spotifyPosition.left,
-      bottom: spotifyPosition.bottom,
-      width,
-      height,
-    };
-
-    window.addEventListener("pointermove", handleSpotifyDragMove);
-    window.addEventListener("pointerup", handleSpotifyDragEnd, { once: true });
-    event.preventDefault();
-  }, [spotifyPosition.left, spotifyPosition.bottom, handleSpotifyDragEnd, handleSpotifyDragMove]);
 
   const [showScrollControls, setShowScrollControls] = useState(false);
   const [isBookingLocationMissing, setIsBookingLocationMissing] = useState(false);
@@ -1217,12 +1138,12 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   }
 
   if (servicePage) {
-    return <ServicePage page={servicePage} language={language} setLanguage={setLanguage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} spotifyPosition={spotifyPosition} spotifyPlayerRef={spotifyPlayerRef} handleSpotifyDragStart={handleSpotifyDragStart} />;
+    return <ServicePage page={servicePage} language={language} setLanguage={setLanguage} />;
   }
 
   return (
-    <div className={`min-h-screen bg-black text-white${isSoundOn ? " spotify-open" : ""}`}>
-      <SiteHeader language={language} setLanguage={setLanguage} isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} spotifyPosition={spotifyPosition} spotifyPlayerRef={spotifyPlayerRef} handleSpotifyDragStart={handleSpotifyDragStart} />
+    <div className="min-h-screen bg-black text-white">
+      <SiteHeader language={language} setLanguage={setLanguage} />
 
       <section className="hero-section">
         <div className="hero-overlay" />
