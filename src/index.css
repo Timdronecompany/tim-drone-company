@@ -1010,6 +1010,32 @@ body {
   background: rgba(255, 255, 255, 0.18);
 }
 
+.booking-submit:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.booking-form-message {
+  grid-column: 1 / -1;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.35rem;
+  padding: 1rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.booking-form-message-success {
+  background: rgba(160, 255, 200, 0.08);
+  color: rgba(210, 255, 228, 0.92);
+}
+
+.booking-form-message-error {
+  background: rgba(255, 190, 160, 0.08);
+  color: rgba(255, 210, 190, 0.94);
+}
+
 @media (min-width: 768px) {
   .booking-header {
     grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);

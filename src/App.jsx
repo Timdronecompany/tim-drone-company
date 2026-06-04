@@ -145,6 +145,7 @@ export default function TimDroneCompanyPortfolio() {
   const [activeProject, setActiveProject] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
   const [isBookingLocationMissing, setIsBookingLocationMissing] = useState(false);
+  const [bookingSubmitState, setBookingSubmitState] = useState("idle");
   const [bookingLocation, setBookingLocation] = useState({
     label: "",
     lat: "",
@@ -212,6 +213,9 @@ export default function TimDroneCompanyPortfolio() {
       bookingDescription: "Short description",
       bookingDescriptionPlaceholder: "Describe the shots you need, timing, mood, movement, restrictions or any useful production details.",
       bookingSubmit: "Send booking request",
+      bookingSending: "Sending...",
+      bookingSuccess: "Booking request sent. We will get back to you soon.",
+      bookingError: "Something went wrong while sending. Please try again or email timdronecompany@gmail.com.",
       mapSearchLabel: "Shoot location",
       mapSearchPlaceholder: "Search an address, venue or city",
       mapSearchButton: "Search",
@@ -299,6 +303,9 @@ export default function TimDroneCompanyPortfolio() {
       bookingDescription: "Korte omschrijving",
       bookingDescriptionPlaceholder: "Omschrijf de gewenste shots, timing, sfeer, beweging, restricties of andere nuttige productie-info.",
       bookingSubmit: "Boekingsaanvraag versturen",
+      bookingSending: "Versturen...",
+      bookingSuccess: "Boekingsaanvraag verstuurd. We komen snel bij je terug.",
+      bookingError: "Er ging iets mis met versturen. Probeer opnieuw of mail naar timdronecompany@gmail.com.",
       mapSearchLabel: "Draailocatie",
       mapSearchPlaceholder: "Zoek een adres, venue of stad",
       mapSearchButton: "Zoeken",
@@ -334,13 +341,51 @@ export default function TimDroneCompanyPortfolio() {
   const handleBookingLocationChange = useCallback((location) => {
     setBookingLocation(location);
     setIsBookingLocationMissing(false);
+    setBookingSubmitState("idle");
   }, []);
-  const handleBookingSubmit = (event) => {
-    if (bookingLocation.label) return;
-
+  const handleBookingSubmit = async (event) => {
     event.preventDefault();
-    setIsBookingLocationMissing(true);
-    document.getElementById("booking-map")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const form = event.currentTarget;
+
+    if (!bookingLocation.label) {
+      setIsBookingLocationMissing(true);
+      setBookingSubmitState("idle");
+      document.getElementById("booking-map")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    if (!form.reportValidity()) return;
+
+    setBookingSubmitState("sending");
+
+    try {
+      const formData = new FormData(form);
+      formData.set("form-name", "booking-request");
+      formData.set("location_label", bookingLocation.label);
+      formData.set("location_lat", bookingLocation.lat);
+      formData.set("location_lng", bookingLocation.lng);
+      formData.set("location_map_url", bookingLocation.mapUrl);
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) throw new Error("Booking request failed");
+
+      form.reset();
+      setBookingLocation({
+        label: "",
+        lat: "",
+        lng: "",
+        mapUrl: "",
+      });
+      setIsBookingLocationMissing(false);
+      setBookingSubmitState("success");
+    } catch {
+      setBookingSubmitState("error");
+    }
   };
   const bookingDroneOptions = [
     "Freefly Alta X",
@@ -1227,7 +1272,15 @@ export default function TimDroneCompanyPortfolio() {
               <textarea name="shot_description" rows="6" placeholder={t.bookingDescriptionPlaceholder} required />
               <small>{t.bookingShotSuggestions}</small>
             </label>
-            <button type="submit" className="booking-submit">{t.bookingSubmit}</button>
+            <button type="submit" className="booking-submit" disabled={bookingSubmitState === "sending"}>
+              {bookingSubmitState === "sending" ? t.bookingSending : t.bookingSubmit}
+            </button>
+            {bookingSubmitState === "success" && (
+              <p className="booking-form-message booking-form-message-success" role="status">{t.bookingSuccess}</p>
+            )}
+            {bookingSubmitState === "error" && (
+              <p className="booking-form-message booking-form-message-error" role="alert">{t.bookingError}</p>
+            )}
           </form>
         </div>
       </section>
