@@ -88,6 +88,30 @@
     </script>
   </head>
   <body>
+    <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="booking-request" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="date" name="date" />
+      <input type="time" name="start_time" />
+      <input type="time" name="end_time" />
+      <select name="drone_type">
+        <option value="Freefly Alta X">Freefly Alta X</option>
+        <option value="FPV Cinelifter">FPV Cinelifter</option>
+        <option value="DJI Inspire 3">DJI Inspire 3</option>
+        <option value="DJI Mavic 4 Pro">DJI Mavic 4 Pro</option>
+        <option value="DJI Mini 5">DJI Mini 5</option>
+        <option value="Micro FPV Drone">Micro FPV Drone</option>
+        <option value="Custom drone build">Custom drone build</option>
+      </select>
+      <input type="text" name="location_label" />
+      <input type="text" name="location_lat" />
+      <input type="text" name="location_lng" />
+      <input type="url" name="location_map_url" />
+      <textarea name="shot_description"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
