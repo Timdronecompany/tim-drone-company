@@ -1024,14 +1024,6 @@ export default function TimDroneCompanyPortfolio() {
         <div className="hero-header-inner">
           <div className="hero-header-brand">
             <span className="hero-header-title">T.I.M. Drone Company</span>
-            <nav className="hero-nav">
-              <a href="#about" className="hero-nav-link">About</a>
-              <a href="#fleet" className="hero-nav-link">Fleet</a>
-              <a href="#custom-drones" className="hero-nav-link">Custom</a>
-              <a href="#booking" className="hero-nav-link">{t.bookingNav}</a>
-              <a href="#work" className="hero-nav-link">Work</a>
-              <a href="#contact" className="hero-nav-link">Contact</a>
-            </nav>
           </div>
           <div className="language-toggle">
             <button onClick={() => setLanguage("en")} className={`hero-language-button ${language === "en" ? "hero-language-button-active" : ""}`}>EN</button>
