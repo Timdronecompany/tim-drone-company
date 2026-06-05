@@ -6,6 +6,7 @@ function DroneVisual({ variant }) {
     alta: "/alta.png",
     inspire: "/inspire.png",
     fpv: "/fpv.png",
+    bmpcc: "/bmpcc4k-cinewhoop.png",
     mavic: "/mavic4profinal.png",
     micro: "/mini5.png",
     microFpv: "/micro.png",
@@ -47,6 +48,36 @@ function DroneVisual({ variant }) {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
     </div>
+  );
+}
+
+function FleetCard({ drone, isActive, onToggle }) {
+  const specsId = `fleet-specs-${drone.id}`;
+
+  return (
+    <button
+      type="button"
+      className={`fleet-card group ${isActive ? "fleet-card-active" : ""}`}
+      onClick={onToggle}
+      aria-expanded={isActive}
+      aria-controls={specsId}
+    >
+      <DroneVisual variant={drone.variant} />
+      <div className="fleet-card-body">
+        <p className="fleet-card-label">{drone.label}</p>
+        <h3 className="fleet-card-title">{drone.title}</h3>
+        <p className="fleet-card-copy">{drone.copy}</p>
+        <span className="fleet-card-spec-prompt">{drone.prompt}</span>
+      </div>
+      <div id={specsId} className="fleet-card-specs" hidden={!isActive}>
+        <p className="fleet-card-specs-label">{drone.specLabel}</p>
+        <ul>
+          {drone.specs.map((spec) => (
+            <li key={spec}>{spec}</li>
+          ))}
+        </ul>
+      </div>
+    </button>
   );
 }
 
@@ -237,6 +268,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const [language, setLanguage] = useState("en");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
+  const [activeFleetDrone, setActiveFleetDrone] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
 
   const [showScrollControls, setShowScrollControls] = useState(false);
@@ -269,15 +301,19 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       heavyLift: "Heavy Lift",
       cinemaDrone: "Cinema Drone",
       fpvPlatform: "FPV Platform",
+      bmpccPlatform: "BMPCC 4K",
       cinematicDrone: "Cinematic Drone",
       altaText: <>Configured for the <span className="text-white">ARRI Alexa Mini LF</span> with anamorphic lens setups and professional cinema workflows.</>,
       inspireText: "High-end aerial cinematography platform designed for demanding productions and cinematic camera movement.",
       fpvText: "Heavy lift dual operator FPV systems for dynamic cinematic movement, precision flying and immersive action sequences.",
+      bmpccText: "Compact cinewhoop setup with a BMPCC 4K camera for cinematic FPV movement in tighter production spaces.",
       mavicText: "Compact professional aerial platform with advanced stabilization, ideal for fast-paced productions and versatile camera movements.",
       microDrone: "Micro Drone",
       microText: "Ultra-compact professional platform for agile productions, ideal for tight spaces and fast-response aerial coverage.",
       microFpvLabel: "Micro FPV",
       microFpvText: "Compact FPV platform for dynamic, immersive aerial movement and precision flying in confined spaces.",
+      cameraSpecs: "Camera specs",
+      viewCameraSpecs: "View camera specs",
       customDroneLabel: "Custom Drones",
       customDroneTitle: "Built around the shot, not the other way around.",
       customDroneIntro: "When an existing platform does not fit the production, we design and build custom drone solutions for specific camera payloads, safety demands, locations and movement requirements.",
@@ -359,15 +395,19 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       heavyLift: "Heavy Lift",
       cinemaDrone: "Cinema Drone",
       fpvPlatform: "FPV Platform",
+      bmpccPlatform: "BMPCC 4K",
       cinematicDrone: "Cinematic Drone",
       altaText: <>Geconfigureerd voor de <span className="text-white">ARRI Alexa Mini LF</span> met anamorphic lens setups en professionele cinema-workflows.</>,
       inspireText: "High-end aerial cinematography platform voor veeleisende producties en cinematografische camerabewegingen.",
       fpvText: "Heavy lift dual operator FPV-systemen voor dynamische camerabewegingen, precisievluchten en meeslepende action sequences.",
+      bmpccText: "Compacte cinewhoop setup met BMPCC 4K-camera voor cinematic FPV-bewegingen in kleinere productieruimtes.",
       mavicText: "Compact professional aerial platform met geavanceerde stabilisatie, ideaal voor snelle producties en veelzijdige camerabewegingen.",
       microDrone: "Micro Drone",
       microText: "Ultracompact professioneel platform voor wendbare producties, ideaal voor krappe ruimtes en snelle camerabewegingen.",
       microFpvLabel: "Micro FPV",
       microFpvText: "Compact FPV platform voor dynamische, meeslepende camerabewegingen en precisievluchten in krappe ruimtes.",
+      cameraSpecs: "Camera specs",
+      viewCameraSpecs: "Bekijk camera specs",
       customDroneLabel: "Custom drones",
       customDroneTitle: "Gebouwd rondom het shot, niet andersom.",
       customDroneIntro: "Wanneer een bestaande drone niet past bij de productie, ontwerpen en bouwen we custom drone-oplossingen voor specifieke camera-payloads, veiligheidseisen, locaties en camerabewegingen.",
@@ -436,6 +476,120 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const servicePage = findServicePage(path);
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
   const locationCheckWhatsAppUrl = `https://wa.me/31625083448?text=${encodeURIComponent("Hi T.I.M. Drone Company, I would like to check if a drone shoot is possible at this location: ")}`;
+  const fleetItems = [
+    {
+      id: "alta",
+      variant: "alta",
+      label: t.heavyLift,
+      title: "Freefly Alta X",
+      copy: t.altaText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: ARRI ALEXA Mini LF on Movi Pro; large-format ALEV III A2X CMOS sensor, up to 4.5K Open Gate, 14+ stops dynamic range.",
+        "ISO: EI 160-3200 with EI 800 base sensitivity; no dual native ISO system.",
+        "Codecs: MXF/ARRIRAW and MXF/Apple ProRes 4444 XQ, 4444, 422 HQ; up to 4.5K Open Gate depending on mode.",
+        "Lens/aperture/ND: lens-dependent with wireless iris possible; internal ARRI FSND filters Clear, ND 0.6, 1.2, 1.8.",
+        "Flight time: Freefly quotes up to 50 min with no payload; cinema camera builds are payload/weather dependent, often roughly 8-15 min.",
+      ],
+    },
+    {
+      id: "inspire",
+      variant: "inspire",
+      label: t.cinemaDrone,
+      title: "DJI Inspire 3",
+      copy: t.inspireText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: Zenmuse X9-8K Air, 35mm full-frame CMOS, 8192x4320 video and 8192x5456 photo.",
+        "ISO: video EI 200-6400 with DJI dual native EI ranges; photo ISO 100-25600.",
+        "Codecs: MOV and CinemaDNG; 8K CinemaDNG / Apple ProRes RAW workflows depending on license and setup.",
+        "Lens/aperture: available Inspire 3 lens set includes 18, 24, 35, 50, 75 and 90 mm lenses; aperture depends on lens, external ND filters used per lens.",
+        "Flight time: approx. 28 min gear down or 26 min gear up; real production time may vary.",
+      ],
+    },
+    {
+      id: "fpv",
+      variant: "fpv",
+      label: t.fpvPlatform,
+      title: "FPV Cinelifter",
+      copy: t.fpvText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: GoPro 12 / HERO12 Black payload; 1/1.9-inch sensor, 27MP photo, 5.3K up to 60fps and 4K up to 120fps.",
+        "ISO: no dual native ISO; manual video ISO limits available depending on GoPro profile.",
+        "Codecs/bitrate: MP4 H.265/HEVC, 8-bit or 10-bit color, high-bitrate mode up to about 120 Mbps.",
+        "Lens/aperture/ND: fixed ultra-wide lens, approx. f/2.5 aperture; external ND filters used for shutter control.",
+        "Flight time: build and payload dependent, typically approx. 4-8 min for cinelifter work.",
+      ],
+    },
+    {
+      id: "bmpcc",
+      variant: "bmpcc",
+      label: t.bmpccPlatform,
+      title: "BMPCC 4K Cinewhoop",
+      copy: t.bmpccText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: Blackmagic Pocket Cinema Camera 4K; Four Thirds sensor, 4096x2160, 13 stops dynamic range.",
+        "ISO: dual native ISO 400 and 3200; ISO range up to 25,600.",
+        "Codecs/bitrate: Blackmagic RAW 3:1 to 12:1 and Q0-Q5 plus ProRes 422 HQ/422/LT/Proxy; bitrate depends on codec, frame rate and compression.",
+        "Lens/aperture/ND: active MFT mount with iris/focus/zoom control on supported lenses; no built-in ND on BMPCC 4K, external ND required.",
+        "Flight time: cinewhoop setup is payload dependent, typically approx. 3-6 min.",
+      ],
+    },
+    {
+      id: "mavic",
+      variant: "mavic",
+      label: t.cinematicDrone,
+      title: "DJI Mavic 4 Pro",
+      copy: t.mavicText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: triple camera system: 100MP 4/3 Hasselblad wide, 48MP 1/1.3 medium tele, 50MP 1/1.5 tele.",
+        "ISO: Dual Native ISO Fusion; video ranges include Normal up to ISO 12800, D-Log 400-6400, D-Log M 100-6400, HLG 400-3200.",
+        "Codecs/bitrate: MP4 H.264/H.265; Creator Combo supports H.264 ALL-I up to 1200 Mbps, H.265 Standard up to 180 Mbps.",
+        "Lens/aperture/ND: Hasselblad wide has adjustable f/2-f/11; tele cameras fixed f/2.8; ND filters available/used for shutter control.",
+        "Flight time: DJI quotes up to approx. 51 min; real production time may vary.",
+      ],
+    },
+    {
+      id: "micro",
+      variant: "micro",
+      label: t.microDrone,
+      title: "DJI Mini 5",
+      copy: t.microText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: DJI Mini 5 Pro class camera; 1-inch CMOS, 50MP effective pixels, 24mm equivalent field of view.",
+        "ISO: video Normal 100-12800, D-Log M 100-3200, HLG 100-3200; no interchangeable lens system.",
+        "Codecs/bitrate: MP4 H.264/H.265; 4K up to 120fps, max video bitrate up to 130 Mbps in 4K/120 D-Log M.",
+        "Lens/aperture/ND: fixed f/1.8 lens; ND filter set available/used externally for motion blur and exposure control.",
+        "Flight time: approx. 36 min max, around 21 min typical recording profile with standard battery; may vary.",
+      ],
+    },
+    {
+      id: "micro-fpv",
+      variant: "microFpv",
+      label: t.microFpvLabel,
+      title: "Micro FPV Drone",
+      copy: t.microFpvText,
+      prompt: t.viewCameraSpecs,
+      specLabel: t.cameraSpecs,
+      specs: [
+        "Camera: GoPro 12 / HERO12 Black; 1/1.9-inch sensor, 27MP photo, 5.3K up to 60fps and 4K up to 120fps.",
+        "ISO: no dual native ISO; manual video ISO limits available depending on GoPro profile.",
+        "Codecs/bitrate: MP4 H.265/HEVC, 8-bit or 10-bit color, high-bitrate mode up to about 120 Mbps.",
+        "Lens/aperture/ND: fixed ultra-wide lens, approx. f/2.5 aperture; clip-on/external ND filters used where practical.",
+        "Flight time: build and battery dependent, typically approx. 2-5 min indoors or technical FPV.",
+      ],
+    },
+  ];
 
   useEffect(() => {
     function updateScrollControls() {
@@ -507,6 +661,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const bookingDroneOptions = [
     "Freefly Alta X",
     "FPV Cinelifter",
+    "BMPCC 4K Cinewhoop",
     "DJI Inspire 3",
     "DJI Mavic 4 Pro",
     "DJI Mini 5",
@@ -1187,54 +1342,14 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           <p className="fleet-label">{t.fleetLabel}</p>
           <h2 className="fleet-title">{t.fleetTitle}</h2>
           <div className="fleet-grid">
-            <div className="fleet-card">
-              <DroneVisual variant="alta" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.heavyLift}</p>
-                <h3 className="fleet-card-title">Freefly Alta X</h3>
-                <p className="fleet-card-copy">{t.altaText}</p>
-              </div>
-            </div>
-            <div className="fleet-card">
-              <DroneVisual variant="inspire" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.cinemaDrone}</p>
-                <h3 className="fleet-card-title">DJI Inspire 3</h3>
-                <p className="fleet-card-copy">{t.inspireText}</p>
-              </div>
-            </div>
-            <div className="fleet-card">
-              <DroneVisual variant="fpv" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.fpvPlatform}</p>
-                <h3 className="fleet-card-title">FPV Cinelifter</h3>
-                <p className="fleet-card-copy">{t.fpvText}</p>
-              </div>
-            </div>
-            <div className="fleet-card">
-              <DroneVisual variant="mavic" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.cinematicDrone}</p>
-                <h3 className="fleet-card-title">DJI Mavic 4 Pro</h3>
-                <p className="fleet-card-copy">{t.mavicText}</p>
-              </div>
-            </div>
-            <div className="fleet-card">
-              <DroneVisual variant="micro" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.microDrone}</p>
-                <h3 className="fleet-card-title">DJI Mini 5</h3>
-                <p className="fleet-card-copy">{t.microText}</p>
-              </div>
-            </div>
-            <div className="fleet-card">
-              <DroneVisual variant="microFpv" />
-              <div className="fleet-card-body">
-                <p className="fleet-card-label">{t.microFpvLabel}</p>
-                <h3 className="fleet-card-title">Micro FPV Drone</h3>
-                <p className="fleet-card-copy">{t.microFpvText}</p>
-              </div>
-            </div>
+            {fleetItems.map((drone) => (
+              <FleetCard
+                key={drone.id}
+                drone={drone}
+                isActive={activeFleetDrone === drone.id}
+                onToggle={() => setActiveFleetDrone(activeFleetDrone === drone.id ? null : drone.id)}
+              />
+            ))}
           </div>
         </div>
       </section>
