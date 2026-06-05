@@ -636,8 +636,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       formData.set("location_lat", bookingLocation.lat);
       formData.set("location_lng", bookingLocation.lng);
       formData.set("location_map_url", bookingLocation.mapUrl);
+      formData.set("_subject", "New drone booking request");
 
-      const response = await fetch("/", {
+      const response = await fetch(window.location.pathname || "/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
@@ -1486,6 +1487,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           </div>
           <form name="booking-request" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" className="booking-form" onSubmit={handleBookingSubmit}>
             <input type="hidden" name="form-name" value="booking-request" />
+            <input type="hidden" name="_subject" value="New drone booking request" />
             <p className="booking-hidden">
               <label>
                 Leave this field empty
