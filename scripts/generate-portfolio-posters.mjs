@@ -371,7 +371,7 @@ function posterSvg(project, framePath) {
     </linearGradient>
   </defs>
   <rect width="1600" height="900" fill="url(#bg)"/>
-  ${framePath ? `<image href="${framePath}" x="0" y="0" width="1600" height="900" preserveAspectRatio="xMidYMid slice" opacity="1" filter="url(#imagePolish)" style="image-rendering:auto"/>` : ""}
+  ${framePath ? `<image href="${framePath}" x="0" y="0" width="1600" height="900" preserveAspectRatio="xMidYMid slice" opacity="1" style="image-rendering:auto"/>` : ""}
   <rect width="1600" height="900" fill="#000" opacity="${framePath ? "0.1" : "0.24"}"/>
   <rect width="1600" height="900" fill="url(#glow)" opacity="${framePath ? "0.22" : "0.78"}"/>
   <rect width="1600" height="900" fill="url(#grain)" opacity="${framePath ? "0.12" : "0.34"}"/>

@@ -779,6 +779,12 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Fly-Through"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=xwJb0-20Ad4",
+          "extraLinks": [
+              {
+                  "title": "Instagram BTS",
+                  "url": "https://www.instagram.com/p/BuBa6NcnrV4/?igsh=MXE0YnMxdXJnM2ZndA=="
+              }
+          ],
           "thumbnail": "/posters/iris-van-herpen-fashion-show-drone-tour.svg"
       },
       {
@@ -1448,6 +1454,12 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const visiblePortfolioProjects = activeFilter === "All"
     ? sortedPortfolioProjects
     : sortedPortfolioProjects.filter((project) => project.categories.includes(activeFilter));
+  const hasActiveProjectDetails = Boolean(
+    activeProject?.intro ||
+    activeProject?.extraVideos?.length ||
+    activeProject?.extraImages?.length ||
+    activeProject?.extraLinks?.length
+  );
   const portfolioFilterAliases = {
     "Feature films": "Bioscoop films",
     "TV series": "Tv-series",
@@ -1661,7 +1673,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       {activeProject && (
         <div className="video-modal" onClick={() => setActiveProject(null)}>
           <div
-            className={`video-modal-inner ${activeProject.intro ? "video-modal-inner-with-copy" : ""}`}
+            className={`video-modal-inner ${hasActiveProjectDetails ? "video-modal-inner-with-copy" : ""}`}
             onClick={(event) => event.stopPropagation()}
           >
             <button type="button" className="video-modal-close" onClick={() => setActiveProject(null)}>Close</button>
@@ -1685,11 +1697,13 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
                 />
               )}
             </div>
-            {activeProject.intro && (
+            {hasActiveProjectDetails && (
               <div className="video-modal-copy">
                 <p className="video-modal-copy-label">{categoryLabels[language][activeProject.categories[0]] || activeProject.categories[0]}</p>
                 <h3>{activeProject.title}</h3>
-                <p className="video-modal-intro">{activeProject.intro[language] || activeProject.intro.en}</p>
+                {activeProject.intro && (
+                  <p className="video-modal-intro">{activeProject.intro[language] || activeProject.intro.en}</p>
+                )}
                 {activeProject.extraVideos?.length > 0 && (
                   <div className="video-modal-extra-videos">
                     {activeProject.extraVideos.map((video) => (
@@ -1707,6 +1721,15 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
                         <img src={image.src} alt={image.title} loading="lazy" />
                         <figcaption>{image.title}</figcaption>
                       </figure>
+                    ))}
+                  </div>
+                )}
+                {activeProject.extraLinks?.length > 0 && (
+                  <div className="video-modal-extra-links">
+                    {activeProject.extraLinks.map((link) => (
+                      <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                        {link.title}
+                      </a>
                     ))}
                   </div>
                 )}
