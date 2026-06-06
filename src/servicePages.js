@@ -4,9 +4,9 @@ export const servicePages = [
     path: "/drone-operator-amsterdam/",
     title: "Production Drone Operations",
     metaTitle: "Drone Operator Amsterdam | EASA-Aware Aerial Filming | T.I.M.",
-    metaDescription: "Professional drone operator in Amsterdam for commercials, film, television, branded content and production work. Cinematic aerial filming, FPV and heavy-lift drone operation.",
+    metaDescription: "Professional drone operator in Amsterdam for commercials, film, television and branded content, with EASA-aware planning, ILT workflow checks and airspace coordination.",
     keywords: "drone operator Amsterdam, droneoperator Amsterdam, professional drone operator, aerial filming Amsterdam, drone filming Amsterdam, T.I.M. Drone Company",
-    intro: "T.I.M. supports productions with experienced drone operators, cinematic movement and practical awareness of EASA rules, CTR areas, no-fly zones and location risk.",
+    intro: "T.I.M. supports productions with experienced drone operators, cinematic movement and an EASA-aware workflow for Open category limits, EU Specific operations, CTR areas, no-fly zones and location risk.",
     serviceType: "Airspace planning",
     focus: "A reliable aerial camera partner for commercials, film, TV and branded content.",
     sections: [
@@ -16,7 +16,11 @@ export const servicePages = [
       },
       {
         title: "CTR, no-fly zone and airspace checks",
-        body: "Many city locations sit close to controlled airspace, restricted areas, roads, water, people and privacy-sensitive environments. A professional approach starts with checking what is realistically possible before the production day."
+        body: "Many city locations sit close to controlled airspace, restricted areas, roads, water, people and privacy-sensitive environments. T.I.M. Drone Company checks the airspace, local limits and required coordination before a production day is confirmed."
+      },
+      {
+        title: "EASA and ILT compliant workflow",
+        body: "Drone flights are assessed against the European Open, Specific and Certified category framework. When a shot falls outside Open category limits, the preparation follows the required Specific category route, including operational planning, risk assessment and ILT authorisation or coordination where applicable."
       },
       {
         title: "From lightweight to cinema setups",
@@ -37,7 +41,7 @@ export const servicePages = [
         text: "Clear communication before the shoot, practical planning on location and footage that fits the director's timing."
       }
     ],
-    terms: ["EASA-aware workflow", "CTR checks", "no-fly zone planning", "commercial operator", "dual-operator crew"]
+    terms: ["EASA-aware workflow", "ILT workflow", "CTR checks", "no-fly zone planning", "commercial operator", "dual-operator crew"]
   },
   {
     slug: "drone-pilot-amsterdam",
@@ -60,7 +64,7 @@ export const servicePages = [
       },
       {
         title: "Open, Specific and location limits",
-        body: "Every drone request starts with the same question: what category, location and risk level does the shot fall into? Open category work, EU Specific operations and local restrictions all require different preparation."
+        body: "Every drone request starts with the same question: what category, location and risk level does the shot fall into? T.I.M. Drone Company works within the applicable EASA category and only proceeds when the flight can be planned with the required permissions, coordination and safety measures."
       }
     ],
     insights: [
@@ -77,7 +81,7 @@ export const servicePages = [
         text: "A pilot who thinks with the camera, not only with the aircraft."
       }
     ],
-    terms: ["pilot workflow", "EU Specific operations", "Open category checks", "set communication", "controlled movement"]
+    terms: ["pilot workflow", "EU Specific operations", "Open category checks", "permissions", "set communication", "controlled movement"]
   },
   {
     slug: "fpv-drone-amsterdam",
@@ -124,40 +128,40 @@ export const servicePages = [
     path: "/drone-filmen-amsterdam/",
     title: "Aerial Filming Permissions",
     metaTitle: "Drone Filming Amsterdam | Aerial Filming Permissions | T.I.M.",
-    metaDescription: "Professional drone filming in Amsterdam for commercials, film, television, real estate, events and branded content.",
+    metaDescription: "Professional drone filming in Amsterdam for commercials, film, television, real estate, events and branded content, planned around EASA, ILT and local permission requirements.",
     keywords: "drone filmen Amsterdam, drone video Amsterdam, luchtbeelden Amsterdam, drone opname Amsterdam, drone videografie Amsterdam, T.I.M. Drone Company",
-    intro: "T.I.M. creates professional aerial video with attention to EASA rules, EU Specific operations, local airspace limits, privacy, crew communication and footage that fits the edit.",
+    intro: "T.I.M. plans professional drone flights around EASA rules, EU Specific operations, ILT requirements, local airspace limits, privacy, crew communication and the permissions needed for each location.",
     serviceType: "Permissions",
-    focus: "Professional aerial footage for creative teams, brands and production companies.",
+    focus: "Permission-aware drone planning for professional productions.",
     sections: [
       {
-        title: "Aerial video with purpose",
-        body: "Drone footage should add context, movement or scale. A shot is selected because it helps the story, not simply because it comes from above."
+        title: "EASA, EU Specific and ILT workflow",
+        body: "Professional drone shoots are planned against the EASA framework. If a flight cannot stay within Open category limits, T.I.M. Drone Company operates under EASA Specific when required, with the right operational preparation, risk assessment, crew setup and ILT authorisation route in place."
       },
       {
-        title: "Matched to the production",
-        body: "A compact web campaign, a commercial, a documentary and a film scene all need different choices in speed, camera quality, crew size and planning."
+        title: "EASA Specific operations",
+        body: "When a production needs more than Open category allows, T.I.M. flies under EASA Specific where necessary. That means the location, airspace, operational limitations, documentation and any local permissions are checked before the flight is accepted."
       },
       {
-        title: "EASA, EU Specific and Amsterdam airspace",
-        body: "Professional city shoots are planned against the EASA framework, including Open category limits and EU Specific operations where the risk, location or shot requires it. In Amsterdam, current air traffic coordination only allows one drone team or operator in the air at a time. Multiple drones can be possible within one coordinated operation, but not multiple separate operators or teams flying at the same time."
+        title: "Amsterdam air traffic coordination",
+        body: "In Amsterdam, current air traffic coordination only allows one coordinated drone team or operator in the air at a time. Multiple drones can be possible within one coordinated operation, but not multiple separate operators or teams flying at the same time."
       }
     ],
     insights: [
       {
-        label: "Best for",
-        text: "Commercials, corporate films, online campaigns, film scenes, events, real estate and branded content."
+        label: "Checks",
+        text: "EASA category, ILT route, airspace, local permissions, crew setup and operational limitations."
       },
       {
-        label: "Typical shots",
-        text: "Establishing shots, reveals, pull-backs, tracking movement, top-down details and wide location context."
+        label: "EASA Specific",
+        text: "When a production needs more than Open category allows, T.I.M. flies under EASA Specific where necessary."
       },
       {
         label: "Client value",
-        text: "Aerial footage that feels designed for the edit, not added as a generic extra."
+        text: "A clearer answer early in pre-production about what can be flown, what needs permission and how the operation should be prepared."
       }
     ],
-    terms: ["EASA", "EU Specific operations", "Amsterdam airspace", "one drone team at a time", "location permissions"]
+    terms: ["EASA", "ILT", "EU Specific operations", "Skymotion", "Amsterdam airspace", "one drone team at a time", "location permissions"]
   },
   {
     slug: "dronebedrijf-amsterdam",
@@ -166,13 +170,13 @@ export const servicePages = [
     metaTitle: "Drone Company Amsterdam | EASA-Aware Drone Production | T.I.M.",
     metaDescription: "Amsterdam drone company for professional drone productions, aerial filming, FPV, heavy-lift camera drones, commercials, film and custom drone builds.",
     keywords: "dronebedrijf Amsterdam, drone company Amsterdam, drone productie Amsterdam, professioneel dronebedrijf, drone diensten Amsterdam, T.I.M. Drone Company",
-    intro: "T.I.M. Drone Company is built for productions that need technical confidence, cinematic imagery and practical planning around EASA, airspace, crew workflow and flexible aerial solutions.",
+    intro: "T.I.M. Drone Company is built for productions that need technical confidence, cinematic imagery and practical planning around EASA, ILT requirements, airspace, crew workflow and flexible aerial solutions.",
     serviceType: "Production support",
     focus: "A drone partner for commercials, film, TV, branded content and custom builds.",
     sections: [
       {
         title: "Creative, technical and regulatory in one place",
-        body: "The work sits between camera, aviation and engineering. That means the right drone company should be able to talk about image, safety, movement, equipment, EASA categories and practical production limits."
+        body: "The work sits between camera, aviation and engineering. That means the right drone company should be able to talk about image, safety, movement, equipment, EASA categories, ILT authorisation routes and practical production limits."
       },
       {
         title: "Scalable crew and gear",
@@ -180,7 +184,7 @@ export const servicePages = [
       },
       {
         title: "Designed for real production pressure",
-        body: "Production days move quickly. The value is in preparation, clear choices, backup systems and a crew that can keep the aerial work calm while the rest of the set is changing."
+        body: "Production days move quickly. The value is in preparation, clear choices, backup systems and a crew that keeps aerial work compliant, calm and executable while the rest of the set is changing."
       }
     ],
     insights: [
@@ -190,14 +194,14 @@ export const servicePages = [
       },
       {
         label: "Typical requests",
-        text: "Commercial drone work, FPV routes, custom drone builds, CTR checks, no-fly zone planning, high-end camera workflows and location-based aerial coverage."
+        text: "Commercial drone work, FPV routes, custom drone builds, CTR checks, no-fly zone planning, Open/Specific category checks, high-end camera workflows and location-based aerial coverage."
       },
       {
         label: "Client value",
         text: "One place for creative thinking, technical setup and practical execution."
       }
     ],
-    terms: ["EASA-aware planning", "CTR checks", "no-fly zones", "FPV", "heavy-lift workflows"]
+    terms: ["EASA-aware planning", "ILT requirements", "CTR checks", "no-fly zones", "FPV", "heavy-lift workflows"]
   },
   {
     slug: "luchtbeelden-amsterdam",
@@ -289,13 +293,13 @@ export const companyFactPages = [
     path: "/easa-aware-aerial-work/",
     title: "EASA-Aware Aerial Work",
     metaTitle: "EASA-Aware Drone Work | Open & Specific Operations | T.I.M.",
-    metaDescription: "Drone production planning with awareness of EASA rules, Open category limits, EU Specific operations, location risk and production boundaries.",
+    metaDescription: "Drone production planning with awareness of EASA rules, Open category limits, EU Specific operations, ILT authorisation routes, location risk and production boundaries.",
     keywords: "EASA drone operations, EU Specific operations, Open category drone, drone rules Netherlands, drone production planning",
-    intro: "Professional drone work starts with understanding what a location, shot and production require under the EASA framework and local operating conditions.",
+    intro: "Professional drone work starts with understanding what a location, shot and production require under the EASA framework, Dutch ILT requirements and local operating conditions.",
     serviceType: "Operations",
     focus: "Planning around Open category limits, EU Specific operations and practical production boundaries.",
     summaryTitle: "EASA-aware aerial work",
-    summaryText: "Planning around Open category limits, EU Specific operations, location risk and the practical boundaries of each production.",
+    summaryText: "Planning around Open category limits, EU Specific operations, ILT authorisation routes, location risk and the practical boundaries of each production.",
     sections: [
       {
         title: "A practical first check",
@@ -303,7 +307,11 @@ export const companyFactPages = [
       },
       {
         title: "Open or Specific",
-        body: "Some drone work can fit within Open category limits. Other requests may require EU Specific operations, extra preparation or a different approach to the shot."
+        body: "Some drone work can fit within Open category limits. If those limits cannot be met, the flight moves into the Specific category and needs the right operational preparation, risk assessment and authorisation route before it can be executed."
+      },
+      {
+        title: "T.I.M. meets the required workflow",
+        body: "T.I.M. Drone Company plans flights around the applicable EASA category, Dutch ILT requirements, crew qualifications, equipment suitability, airspace checks, privacy considerations and local location permissions. The production is only flown when the operational setup fits those requirements."
       },
       {
         title: "Creative choices follow reality",
@@ -313,7 +321,7 @@ export const companyFactPages = [
     insights: [
       {
         label: "Checks",
-        text: "Category, location, people, airspace, timing and operational limits."
+        text: "Category, location, people, airspace, timing, operational limits, permissions and documentation."
       },
       {
         label: "Best for",
@@ -324,49 +332,49 @@ export const companyFactPages = [
         text: "Fewer surprises on set and a clearer route from idea to executable shot."
       }
     ],
-    terms: ["EASA", "Open category", "EU Specific operations", "location risk", "production limits"]
+    terms: ["EASA", "Open category", "EU Specific operations", "ILT", "location risk", "production limits"]
   },
   {
     slug: "ctr-no-fly-zone-checks",
     path: "/ctr-no-fly-zone-checks/",
     title: "CTR and No-Fly Zone Checks",
     metaTitle: "CTR & No-Fly Zone Drone Checks | T.I.M. Drone Company",
-    metaDescription: "Drone shoot location checks for CTR areas, no-fly zones, restricted areas, public space, roads, water, people and privacy concerns.",
-    keywords: "CTR drone check, no-fly zone drone, drone airspace check Netherlands, Amsterdam drone location check, restricted area drone",
-    intro: "Many strong drone ideas depend on the location. CTR areas, no-fly zones, restricted spaces and public environments can all affect what is possible.",
+    metaDescription: "Drone shoot location checks for CTR areas, UAS geographical zones, restricted areas, public space, ground risk, privacy and required permissions.",
+    keywords: "CTR drone check, UAS geographical zone, no-fly zone drone, drone airspace check Netherlands, Amsterdam drone location check, restricted area drone",
+    intro: "Many strong drone ideas depend on the location. Under the EASA framework, CTR areas, UAS geographical zones, restricted spaces and public environments can all affect what is possible.",
     serviceType: "Airspace",
-    focus: "Locations are checked for controlled airspace, restricted areas and practical shoot risks.",
+    focus: "Locations are checked against EASA category limits, controlled airspace, UAS geographical zones, restricted areas and practical shoot risks.",
     summaryTitle: "CTR and no-fly zone checks",
-    summaryText: "Locations are checked for controlled airspace, restricted areas, public space, roads, water, people and privacy concerns.",
+    summaryText: "Locations are checked for EASA category fit, controlled airspace, UAS geographical zones, public space, roads, water, people, privacy concerns and required permissions.",
     sections: [
       {
-        title: "Airspace before aesthetics",
-        body: "A great shot still needs a realistic flight environment. Controlled airspace, temporary restrictions and local conditions can change the plan."
+        title: "EASA category and airspace check",
+        body: "A great shot still needs a compliant flight environment. Each location is checked against the EASA Open and EASA Specific category framework, controlled airspace, CTR restrictions, UAS geographical zones, temporary restrictions and any authorisation requirements that may affect the operation."
       },
       {
-        title: "Public space and surroundings",
-        body: "Roads, water, crowds, buildings, events and privacy-sensitive areas are part of the planning, especially in dense city locations."
+        title: "Ground risk and surroundings",
+        body: "Roads, water, crowds, buildings, events and privacy-sensitive areas are assessed as part of the operational risk. In dense city locations this helps determine whether the flight can remain within EASA Open category limits or needs EASA Specific preparation."
       },
       {
-        title: "Early location checks help",
-        body: "Checking a map pin before the shoot allows the creative team to adjust timing, camera movement or location before the production day is locked."
+        title: "Permission route before scheduling",
+        body: "Checking a map pin before the shoot allows the production team to understand the permission route early. Timing, camera movement, crew setup or location can then be adjusted before the aerial shot is locked into the schedule."
       }
     ],
     insights: [
       {
         label: "Best for",
-        text: "City shoots, event locations, waterfronts, industrial zones and locations close to airports or controlled airspace."
+        text: "City shoots, event locations, waterfronts, industrial zones, CTR areas and locations inside or near UAS geographical zones."
       },
       {
         label: "Typical input",
-        text: "Address, Google Maps pin, call sheet location or rough production area."
+        text: "Address, Google Maps pin, call sheet location, rough production area, intended flight direction and preferred timing."
       },
       {
         label: "Client value",
-        text: "A quick reality check before the shot becomes part of the schedule."
+        text: "A practical EASA-aware check before the shot becomes part of the schedule, including whether the location fits EASA Open category limits or needs an EASA Specific permission workflow."
       }
     ],
-    terms: ["CTR", "no-fly zones", "restricted areas", "public space", "privacy"]
+    terms: ["EASA", "EASA Specific", "CTR", "UAS geographical zones", "restricted areas", "permissions", "public space", "privacy"]
   },
   {
     slug: "drone-pre-production-workflow",
