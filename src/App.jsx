@@ -305,7 +305,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       cinematicDrone: "Cinematic Drone",
       altaText: <>Configured for the <span className="text-white">ARRI Alexa Mini LF</span> with anamorphic lens setups and professional cinema workflows.</>,
       inspireText: "High-end aerial cinematography platform designed for demanding productions and cinematic camera movement.",
-      fpvText: "Heavy lift dual operator FPV systems for dynamic cinematic movement, precision flying and immersive action sequences.",
+      fpvText: "Heavy lift dual operator FPV systems built to carry cinema payloads like the RED KOMODO 6K for dynamic cinematic movement, precision flying and immersive action sequences.",
       bmpccText: "Compact cinewhoop setup with a BMPCC 4K camera for cinematic FPV movement in tighter production spaces.",
       mavicText: "Compact professional aerial platform with advanced stabilization, ideal for fast-paced productions and versatile camera movements.",
       microDrone: "Micro Drone",
@@ -328,7 +328,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioLabel: "Projects",
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
-      portfolioFilters: ["All", "Aerial video", "Awards", "Commercials", "Events", "Feature films", "Fly-Through", "FPV", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
+      portfolioFilters: ["All", "Aerial video", "Awards", "Commercials", "Events", "Feature films", "Fly-Through", "FPV", "Photography", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
       bookingNav: "Book",
       bookingLabel: "Booking",
       bookingTitle: "Plan a drone shoot.",
@@ -399,7 +399,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       cinematicDrone: "Cinematic Drone",
       altaText: <>Geconfigureerd voor de <span className="text-white">ARRI Alexa Mini LF</span> met anamorphic lens setups en professionele cinema-workflows.</>,
       inspireText: "High-end aerial cinematography platform voor veeleisende producties en cinematografische camerabewegingen.",
-      fpvText: "Heavy lift dual operator FPV-systemen voor dynamische camerabewegingen, precisievluchten en meeslepende action sequences.",
+      fpvText: "Heavy lift dual operator FPV-systemen gebouwd voor cinema-payloads zoals de RED KOMODO 6K, met dynamische camerabewegingen, precisievluchten en meeslepende action sequences.",
       bmpccText: "Compacte cinewhoop setup met BMPCC 4K-camera voor cinematic FPV-bewegingen in kleinere productieruimtes.",
       mavicText: "Compact professional aerial platform met geavanceerde stabilisatie, ideaal voor snelle producties en veelzijdige camerabewegingen.",
       microDrone: "Micro Drone",
@@ -422,7 +422,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioLabel: "Projecten",
       portfolioTitle: "Een selectie van ons werk.",
       portfolioSubtitle: "Luchtbeelden, FPV, commercials, events en bioscoopfilms.",
-      portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "Commercials", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
+      portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "Commercials", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Fotografie", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
       bookingNav: "Boeken",
       bookingLabel: "Boeking",
       bookingTitle: "Plan een drone shoot.",
@@ -518,11 +518,11 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       prompt: t.viewCameraSpecs,
       specLabel: t.cameraSpecs,
       specs: [
-        "Camera: GoPro 12 / HERO12 Black payload; 1/1.9-inch sensor, 27MP photo, 5.3K up to 60fps and 4K up to 120fps.",
-        "ISO: no dual native ISO; manual video ISO limits available depending on GoPro profile.",
-        "Codecs/bitrate: MP4 H.265/HEVC, 8-bit or 10-bit color, high-bitrate mode up to about 120 Mbps.",
-        "Lens/aperture/ND: fixed ultra-wide lens, approx. f/2.5 aperture; external ND filters used for shutter control.",
-        "Flight time: build and payload dependent, typically approx. 4-8 min for cinelifter work.",
+        "Camera: RED KOMODO 6K payload; 19.9MP Super 35 global shutter CMOS sensor, 27.03 x 14.26 mm, 6144 x 3240 max resolution.",
+        "ISO: RED KOMODO is not a dual native ISO camera; ISO range 250-12800 with ISO 800 commonly used as the base/reference exposure.",
+        "Codecs/bitrate: REDCODE RAW R3D HQ/MQ/LQ; 6K 17:9 up to 40fps, 4K 17:9 up to 60fps, 2K 17:9 up to 120fps. Data rate depends on resolution, frame rate and compression.",
+        "Lens/aperture/ND: integrated Canon RF mount; aperture control depends on lens/adapters and rigging. No internal ND, external ND filters used for shutter and exposure control.",
+        "Flight time: RED KOMODO cinelifter setup is build, lens, battery and weather dependent, typically approx. 4-7 min for cinema FPV work.",
       ],
     },
     {
@@ -682,6 +682,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     },
     nl: {
       "Aerial video": "Luchtbeelden",
+      Photography: "Fotografie",
       "Fly-Through": "Fly-through",
       "Prop drones": "Prop-drones",
       Sports: "Sport",
@@ -1024,7 +1025,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "categories": [
               "Commercials"
           ],
-          "videoUrl": "https://www.youtube.com/watch?v=jIKMPBLFCtU",
+          "videoUrl": "https://vimeo.com/539594841",
           "thumbnail": "/posters/grolsch-0-0.svg"
       },
       {
@@ -1112,14 +1113,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "thumbnail": "/posters/drone-show-al-ula-saudi-arabia.svg"
       },
       {
-          "title": "Sisyphus at Work",
-          "categories": [
-              "Bioscoop films"
-          ],
-          "videoUrl": "https://www.youtube.com/watch?v=d7YhKLlXrXs",
-          "thumbnail": "/posters/sisyphus-at-work.svg"
-      },
-      {
           "title": "Madurodam Commercials 2019",
           "categories": [
               "Commercials"
@@ -1191,6 +1184,196 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           ],
           "videoUrl": "https://www.youtube.com/watch?v=aknbXFsrU9I",
           "thumbnail": "/posters/challengeaccepted.svg"
+      },
+      {
+          "title": "BOSS x AMF1 x Apple Vision Pro",
+          "categories": [
+              "FPV",
+              "Sports",
+              "Commercials"
+          ],
+          "intro": {
+              "en": "For EmpathyLab's Step Inside The Mind of a BOSS activation, we worked closely with the creative and technical team to translate an ambitious Apple Vision Pro experience into shootable, cinematic drone movement. The project needed more than a standard FPV setup, so we helped think through the shot design and built two dedicated camera systems on cinelifters for the specific 360 and high-speed perspectives required at Circuit Zandvoort.",
+              "nl": "Voor EmpathyLab's Step Inside The Mind of a BOSS activatie dachten we vanaf de technische en creatieve kant mee om een ambitieuze Apple Vision Pro ervaring te vertalen naar filmische dronebeweging. Dit vroeg om meer dan een standaard FPV-setup: voor de specifieke 360- en high-speed shots op Circuit Zandvoort bouwden we twee dedicated camerasystemen op cinelifters."
+          },
+          "extraImages": [
+              {
+                  "title": "Canon 3D cinelifter build",
+                  "src": "/poster-frames/boss-amf1-canon-3d-stylish.jpg"
+              },
+              {
+                  "title": "Insta360 12K cinelifter build",
+                  "src": "/poster-frames/boss-amf1-insta360-stylish.jpg"
+              }
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=pd-FxtLuyXI",
+          "thumbnail": "/posters/boss-x-amf1-x-apple-vision-pro.svg"
+      },
+      {
+          "title": "Fly-Through logistics center Enexis",
+          "categories": [
+              "Aerial video",
+              "Fly-Through"
+          ],
+          "thumbnail": "/posters/fly-through-logistics-center-enexis.svg"
+      },
+      {
+          "title": "Liander logistics location Fly-Through",
+          "categories": [
+              "Aerial video",
+              "Fly-Through"
+          ],
+          "thumbnail": "/posters/liander-logistics-location-fly-through.svg"
+      },
+      {
+          "title": "Welcome to the club",
+          "categories": [
+              "Aerial video",
+              "Commercials"
+          ],
+          "thumbnail": "/posters/welcome-to-the-club.svg"
+      },
+      {
+          "title": "CS Short: Color Grading",
+          "categories": [
+              "Aerial video",
+              "Shorts"
+          ],
+          "thumbnail": "/posters/cs-short-color-grading.svg"
+      },
+      {
+          "title": "Sam & Sophie",
+          "categories": [
+              "Commercials"
+          ],
+          "thumbnail": "/posters/sam-and-sophie.svg"
+      },
+      {
+          "title": "Hornbach Viral",
+          "categories": [
+              "Commercials"
+          ],
+          "thumbnail": "/posters/hornbach-viral.svg"
+      },
+      {
+          "title": "Flikken Rotterdam",
+          "categories": [
+              "Tv-series"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=Xq8jlXbC5jE",
+          "thumbnail": "/posters/flikken-rotterdam.svg"
+      },
+      {
+          "title": "Droneshow Montenegro",
+          "categories": [
+              "Aerial video",
+              "Events"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=hZfLACMiRrM",
+          "thumbnail": "/posters/droneshow-montenegro.svg"
+      },
+      {
+          "title": "SAMCITY FPV Drone Fly-Through",
+          "categories": [
+              "Aerial video",
+              "Fly-Through"
+          ],
+          "videoUrl": "/videos/samcity-fpv-drone-fly-through.mp4",
+          "thumbnail": "/posters/samcity-fpv-drone-fly-through.svg"
+      },
+      {
+          "title": "KARGO Case Study 2025",
+          "categories": [
+              "Commercials",
+              "Aerial video"
+          ],
+          "videoUrl": "https://vimeo.com/1120747780",
+          "thumbnail": "/posters/kargo-case-study-2025.svg"
+      },
+      {
+          "title": "Expeditie Robinson 2021",
+          "categories": [
+              "Tv-series",
+              "FPV"
+          ],
+          "thumbnail": "/posters/expeditie-robinson-2021.svg"
+      },
+      {
+          "title": "Albert Heijn – Steeds beter eten",
+          "categories": [
+              "Commercials"
+          ],
+          "thumbnail": "/posters/albert-heijn-steeds-beter-eten.svg"
+      },
+      {
+          "title": "Toyota GR Yaris",
+          "categories": [
+              "Commercials",
+              "FPV"
+          ],
+          "thumbnail": "/posters/toyota-gr-yaris.svg"
+      },
+      {
+          "title": "Opa en oma | McDonald’s",
+          "categories": [
+              "Commercials"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=KUprsszZLOI",
+          "thumbnail": "/posters/opa-en-oma-mcdonald-s.svg"
+      },
+      {
+          "title": "De Volksbank",
+          "categories": [
+              "Commercials"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=DmUrAH8Wmz0",
+          "thumbnail": "/posters/de-volksbank.svg"
+      },
+      {
+          "title": "CS Short: MINERS HAVEN",
+          "categories": [
+              "Awards",
+              "Shorts"
+          ],
+          "videoUrl": "/videos/cs-short-miners-haven.mp4",
+          "thumbnail": "/posters/cs-short-miners-haven.svg"
+      },
+      {
+          "title": "Omgevingsdienst Noordzeekanaal",
+          "categories": [
+              "Photography"
+          ],
+          "thumbnail": "/posters/omgevingsdienst-noordzeekanaal.svg"
+      },
+      {
+          "title": "SpaceBoy",
+          "categories": [
+              "Bioscoop films"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=g21kraN6mDs",
+          "thumbnail": "/posters/spaceboy.svg"
+      },
+      {
+          "title": "McDonald’s for You",
+          "categories": [
+              "Commercials"
+          ],
+          "thumbnail": "/posters/mcdonald-s-for-you.svg"
+      },
+      {
+          "title": "Netflix – Our planet",
+          "categories": [
+              "Tv-series"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=aETNYyrqNYE",
+          "thumbnail": "/posters/netflix-our-planet.svg"
+      },
+      {
+          "title": "Facebook intro Postcode Loterij",
+          "categories": [
+              "Aerial video"
+          ],
+          "thumbnail": "/posters/facebook-intro-postcode-loterij.svg"
       }
   ];
   const projectReleaseDates = {
@@ -1202,13 +1385,18 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Het Gouden Uur – Seizoen 2": "2025-09-18",
     "SUGA: RIDE OR DIE": "2025-09-04",
     "P&O FERRIES \"Sail Your Way\"": "2025-08-15",
+    "BOSS x AMF1 x Apple Vision Pro": "2025-06-01",
     "Miljoenenrace": "2025-01-01",
     "Sphinx": "2024-03-22",
     "Iris van Herpen Fashion show drone tour": "2024-01-01",
+    "Fly-Through logistics center Enexis": "2023-12-30",
+    "Liander logistics location Fly-Through": "2023-12-28",
     "BON BINI: BANGKOK NIGHTS": "2023-12-21",
     "Bellezza Restaurant Drone Tour": "2023-11-01",
     "Hilton Luminair Opening": "2023-10-01",
+    "Welcome to the club": "2023-09-20",
     "Enexis TVC": "2023-09-01",
+    "CS Short: Color Grading": "2023-08-20",
     "Toffler Festival": "2023-08-01",
     "Mocro Maffia 5": "2023-06-02",
     "Utrecht heeft jou nodig": "2023-05-01",
@@ -1216,7 +1404,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "De Stamhouder": "2023-01-01",
     "Spotify drone show Amsterdam Dance Event": "2022-10-01",
     "Eerlijk is eerlijk": "2022-09-01",
+    "Sam & Sophie": "2022-08-30",
     "Interparking Scheveningen": "2022-09-01",
+    "Hornbach Viral": "2022-08-29",
     "Drone show for Ukraine": "2022-08-01",
     "Texel op z’n Texels": "2022-07-01",
     "Murky Skies": "2022-06-01",
@@ -1226,16 +1416,24 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Zeeman – Skeer": "2022-02-01",
     "Upload – De Nationale Opera": "2022-01-15",
     "Sanquin Bloedbank": "2021-12-01",
+    "Flikken Rotterdam": "2021-11-15",
     "Hyundai IONIQ concept ‘SEVEN’": "2021-11-01",
     "Awakenings presents ADE": "2021-10-01",
     "Franchise Freedom": "2021-09-01",
+    "Droneshow Montenegro": "2021-08-15",
     "Van der Valk, Seizoen 2": "2021-08-01",
     "Beekse Bergen": "2021-08-01",
+    "SAMCITY FPV Drone Fly-Through": "2021-07-15",
     "Samsung Droneshow": "2021-07-01",
     "DJ Brennan Heart – In The Fastlane": "2021-06-01",
     "RAUWCC Studio Drone Tours": "2021-05-01",
     "Grolsch 0.0%": "2021-04-01",
+    "KARGO Case Study 2025": "2025-09-22",
+    "Expeditie Robinson 2021": "2021-03-15",
+    "Albert Heijn – Steeds beter eten": "2021-03-10",
+    "Toyota GR Yaris": "2021-03-05",
     "McDonald’s – Corona love story": "2021-03-01",
+    "Opa en oma | McDonald’s": "2021-02-15",
     "Radio 10": "2021-02-01",
     "BeBoulder Fly-Through": "2021-01-01",
     "Boogie woogie now": "2020-12-15",
@@ -1243,14 +1441,20 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "David Attenborough: A Life On Our Planet": "2020-10-04",
     "Lidl zomer commercial 2020": "2020-06-01",
     "Drone Show AL ULA Saudi Arabia": "2020-03-01",
-    "Sisyphus at Work": "2020-01-01",
+    "De Volksbank": "2020-02-15",
     "Kruimeltje": "2019-12-04",
+    "CS Short: MINERS HAVEN": "2019-11-15",
+    "Omgevingsdienst Noordzeekanaal": "2019-11-10",
+    "SpaceBoy": "2019-11-05",
     "Madurodam Commercials 2019": "2019-11-01",
     "Antea Group commercial 2019": "2019-09-01",
     "De Patrick": "2019-08-28",
     "Suzuki Katana challenge": "2019-05-01",
     "Iris van Herpen – Shift Souls": "2019-01-21",
+    "McDonald’s for You": "2019-01-01",
     "PLUS Kerst reclame 2018": "2018-12-01",
+    "Netflix – Our planet": "2018-11-01",
+    "Facebook intro Postcode Loterij": "2018-10-15",
     "Van Moof": "2018-10-01",
     "#ChallengeAccepted": "2018-09-01",
   };
@@ -1270,6 +1474,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Real estate": "Vastgoed",
     Alles: "All",
     Luchtbeelden: "Aerial video",
+    Fotografie: "Photography",
     Bioscoopfilms: "Bioscoop films",
     "Fly-through": "Fly-Through",
     "Prop-drones": "Prop drones",
@@ -1283,6 +1488,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     if (youtubeId) return `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
     if (vimeoId) return `https://player.vimeo.com/video/${vimeoId}?autoplay=1&title=0&byline=0&portrait=0`;
     return url;
+  }
+
+  function isLocalVideo(url) {
+    return url?.startsWith("/videos/");
   }
 
   if (servicePage) {
@@ -1444,10 +1653,17 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           </div>
           <div className="portfolio-grid">
             {visiblePortfolioProjects.map((project) => (
-              <button key={project.title} type="button" className="portfolio-card" onClick={() => setActiveProject(project)}>
+              <button
+                key={project.title}
+                type="button"
+                className={`portfolio-card ${project.videoUrl ? "" : "portfolio-card-static"}`}
+                onClick={() => {
+                  if (project.videoUrl) setActiveProject(project);
+                }}
+                aria-disabled={!project.videoUrl}
+              >
                 <img src={project.thumbnail} alt={project.title} className="portfolio-card-image" />
                 <div className="portfolio-card-body">
-                  <div className="portfolio-card-badge">Project</div>
                   <h3 className="portfolio-card-title">{project.title}</h3>
                   <div className="portfolio-card-categories">
                     {project.categories.map((category) => (
@@ -1463,15 +1679,58 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
 
       {activeProject && (
         <div className="video-modal" onClick={() => setActiveProject(null)}>
-          <div className="video-modal-inner" onClick={(event) => event.stopPropagation()}>
+          <div
+            className={`video-modal-inner ${activeProject.intro ? "video-modal-inner-with-copy" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
             <button type="button" className="video-modal-close" onClick={() => setActiveProject(null)}>Close</button>
-            <iframe
-              src={getEmbedUrl(activeProject.videoUrl)}
-              title={activeProject.title}
-              className="video-modal-frame"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-            />
+            <div className="video-modal-media">
+              {isLocalVideo(activeProject.videoUrl) ? (
+                <video
+                  src={activeProject.videoUrl}
+                  title={activeProject.title}
+                  className="video-modal-frame"
+                  controls
+                  playsInline
+                />
+              ) : (
+                <iframe
+                  src={getEmbedUrl(activeProject.videoUrl)}
+                  title={activeProject.title}
+                  className="video-modal-frame"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              )}
+            </div>
+            {activeProject.intro && (
+              <div className="video-modal-copy">
+                <p className="video-modal-copy-label">{categoryLabels[language][activeProject.categories[0]] || activeProject.categories[0]}</p>
+                <h3>{activeProject.title}</h3>
+                <p className="video-modal-intro">{activeProject.intro[language] || activeProject.intro.en}</p>
+                {activeProject.extraVideos?.length > 0 && (
+                  <div className="video-modal-extra-videos">
+                    {activeProject.extraVideos.map((video) => (
+                      <div className="video-modal-extra-video" key={video.src}>
+                        <video src={video.src} controls playsInline preload="metadata" />
+                        <span>{video.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeProject.extraImages?.length > 0 && (
+                  <div className="video-modal-extra-images">
+                    {activeProject.extraImages.map((image) => (
+                      <figure className="video-modal-extra-image" key={image.src}>
+                        <img src={image.src} alt={image.title} loading="lazy" />
+                        <figcaption>{image.title}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
