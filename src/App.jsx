@@ -1228,36 +1228,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "thumbnail": "/posters/liander-logistics-location-fly-through.svg"
       },
       {
-          "title": "Welcome to the club",
-          "categories": [
-              "Aerial video",
-              "Commercials"
-          ],
-          "thumbnail": "/posters/welcome-to-the-club.svg"
-      },
-      {
-          "title": "CS Short: Color Grading",
-          "categories": [
-              "Aerial video",
-              "Shorts"
-          ],
-          "thumbnail": "/posters/cs-short-color-grading.svg"
-      },
-      {
-          "title": "Sam & Sophie",
-          "categories": [
-              "Commercials"
-          ],
-          "thumbnail": "/posters/sam-and-sophie.svg"
-      },
-      {
-          "title": "Hornbach Viral",
-          "categories": [
-              "Commercials"
-          ],
-          "thumbnail": "/posters/hornbach-viral.svg"
-      },
-      {
           "title": "Flikken Rotterdam",
           "categories": [
               "Tv-series"
@@ -1316,13 +1286,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "FPV"
           ],
           "thumbnail": "/posters/expeditie-robinson-2021.svg"
-      },
-      {
-          "title": "Albert Heijn – Steeds beter eten",
-          "categories": [
-              "Commercials"
-          ],
-          "thumbnail": "/posters/albert-heijn-steeds-beter-eten.svg"
       },
       {
           "title": "Toyota GR Yaris",
@@ -1418,9 +1381,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "BON BINI: BANGKOK NIGHTS": "2023-12-21",
     "Bellezza Restaurant Drone Tour": "2023-11-01",
     "Hilton Luminair Opening": "2023-10-01",
-    "Welcome to the club": "2023-09-20",
     "Enexis TVC": "2023-09-01",
-    "CS Short: Color Grading": "2023-08-20",
     "Toffler Festival": "2023-08-01",
     "Mocro Maffia 5": "2023-06-02",
     "Utrecht heeft jou nodig": "2023-05-01",
@@ -1428,9 +1389,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "De Stamhouder": "2023-01-01",
     "Spotify drone show Amsterdam Dance Event": "2022-10-01",
     "Eerlijk is eerlijk": "2022-09-01",
-    "Sam & Sophie": "2022-08-30",
     "Interparking Scheveningen": "2022-09-01",
-    "Hornbach Viral": "2022-08-29",
     "Drone show for Ukraine": "2022-08-01",
     "Texel op z’n Texels": "2022-07-01",
     "Murky Skies": "2022-06-01",
@@ -1453,7 +1412,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "RAUWCC Studio Drone Tours": "2021-05-01",
     "Grolsch 0.0%": "2021-04-01",
     "Expeditie Robinson 2021": "2021-03-15",
-    "Albert Heijn – Steeds beter eten": "2021-03-10",
     "Toyota GR Yaris": "2021-03-05",
     "McDonald’s – Corona love story": "2021-03-01",
     "Opa en oma | McDonald’s": "2021-02-15",
