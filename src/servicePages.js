@@ -208,40 +208,40 @@ export const servicePages = [
     path: "/luchtbeelden-amsterdam/",
     title: "Aerial Footage and Location Risk",
     metaTitle: "Aerial Footage Amsterdam | Location Risk Planning | T.I.M.",
-    metaDescription: "Professional aerial footage in Amsterdam for film, television, commercials, real estate, events and branded content.",
-    keywords: "luchtbeelden Amsterdam, aerial footage Amsterdam, dronebeelden Amsterdam, drone video Amsterdam, aerial cinematography Amsterdam, T.I.M. Drone Company",
-    intro: "Aerial footage gives a production scale, context and movement. T.I.M. creates cinematic drone shots while checking location risk, airspace limitations and practical safety around the shot.",
+    metaDescription: "Aerial footage and location risk planning in Amsterdam, including EASA-aware risk analysis, mitigations, airspace checks and practical safety measures.",
+    keywords: "luchtbeelden Amsterdam, aerial footage Amsterdam, drone risk analysis, location risk drone, EASA Specific drone, dronebeelden Amsterdam, T.I.M. Drone Company",
+    intro: "Strong aerial footage starts with a realistic location risk analysis. T.I.M. assesses ground risk, airspace limitations, people, roads, water, buildings and production conditions, then looks at the mitigating measures that can make the shot possible.",
     serviceType: "Location risk",
-    focus: "Cinematic views that add location, scale and visual rhythm.",
+    focus: "Location risk analysis and mitigating measures for professional drone shoots.",
     sections: [
       {
-        title: "More than a wide shot",
-        body: "Aerial footage can open a story, reveal a subject, connect locations or add production value. The strongest shots are composed with the same care as ground-based cinematography."
+        title: "Location risk before flight",
+        body: "Before a drone shot is confirmed, the location is reviewed for EASA Open or EASA Specific fit, airspace limitations, ground risk, nearby people, traffic, water, buildings, events and privacy-sensitive areas. This gives the production a clear view of what is possible before the shoot is locked."
       },
       {
-        title: "For city, coast, events and restricted areas",
-        body: "Every location has a different visual language and a different risk profile. Canals, industrial areas, open landscapes, event spaces and restricted areas all need a different pace, height and planning approach."
+        title: "Mitigating measures",
+        body: "A challenging location does not always mean the shot is impossible. Risk can often be reduced with measures such as controlled take-off and landing areas, spotters, adjusted timing, reduced flight height, alternative routing, clear crew communication, separation from uninvolved people and coordination with the location or local authorities."
       },
       {
-        title: "Clean movement for the edit",
-        body: "Good aerial footage gives editors options: steady holds, motivated reveals, short transitions, long establishing takes and movement that can breathe under music or dialogue."
+        title: "Often still possible",
+        body: "When the risk profile is understood early, the shot can often be adapted instead of removed. T.I.M. helps production teams find a safe and workable version of the idea, including EASA Specific preparation where necessary."
       }
     ],
     insights: [
       {
         label: "Best for",
-        text: "Films, commercials, event films, corporate stories, campaigns and productions that need strong location context."
+        text: "City shoots, events, roads, waterfronts, industrial areas, public locations and productions where the drone shot depends heavily on the location."
       },
       {
-        label: "Typical shots",
-        text: "Wide establishing images, vertical top-downs, slow reveals, location passes and scale shots around buildings or talent."
+        label: "Risk factors",
+        text: "People, traffic, water, obstacles, privacy, airspace, emergency access, weather, take-off area and the intended flight path."
       },
       {
         label: "Client value",
-        text: "Shots that feel cinematic and useful instead of only spectacular."
+        text: "A practical risk assessment with clear mitigations, so the production knows whether the shot can be flown safely and what needs to be arranged."
       }
     ],
-    terms: ["location risk", "restricted areas", "aerial cinematography", "location reveals", "visual scale"]
+    terms: ["location risk", "risk analysis", "mitigating measures", "EASA Specific", "ground risk", "airspace", "restricted areas"]
   }
 ];
 
