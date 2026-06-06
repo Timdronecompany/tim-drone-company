@@ -1038,14 +1038,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "thumbnail": "/posters/mcdonald-s-corona-love-story.svg"
       },
       {
-          "title": "Radio 10",
-          "categories": [
-              "Commercials"
-          ],
-          "videoUrl": "https://www.youtube.com/watch?v=2kgPNGe9ExE",
-          "thumbnail": "/posters/radio-10.svg"
-      },
-      {
           "title": "BeBoulder Fly-Through",
           "categories": [
               "Aerial video",
@@ -1465,7 +1457,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Toyota GR Yaris": "2021-03-05",
     "McDonald’s – Corona love story": "2021-03-01",
     "Opa en oma | McDonald’s": "2021-02-15",
-    "Radio 10": "2021-02-01",
     "BeBoulder Fly-Through": "2021-01-01",
     "Boogie woogie now": "2020-12-15",
     "Oud en nieuw 2021": "2020-12-01",
