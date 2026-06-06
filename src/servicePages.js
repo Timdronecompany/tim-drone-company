@@ -469,27 +469,27 @@ export const companyFactPages = [
     keywords: "cinematic drone movement, drone tracking shots, FPV fly-through, establishing drone shots, location reveal drone",
     intro: "The best drone shots are not just high. They are timed, motivated and controlled so the movement supports the story and the edit.",
     serviceType: "Shots",
-    focus: "Establishing shots, tracking moves, fly-throughs, location reveals and high-energy FPV.",
+    focus: "Establishing shots, tracking moves, crane-style rises, slider-like reveals, dolly-style pushes, fly-throughs and high-energy FPV.",
     summaryTitle: "Cinematic movement with technical control",
-    summaryText: "Designed for establishing shots, tracking moves, fly-throughs, location reveals and high-energy FPV.",
+    summaryText: "Drone movement can replace or extend crane, slider and dolly-style shots when the production needs elegant movement without building a heavy rig around the camera.",
     sections: [
       {
         title: "Movement with a reason",
         body: "Aerial movement should reveal information, follow action, connect locations or create atmosphere. The shot needs to earn its place in the edit."
       },
       {
-        title: "From slow reveals to FPV energy",
-        body: "Different shots need different platforms and speeds, from calm establishing movement to precise tracking shots and dynamic FPV routes."
+        title: "Crane, slider and dolly energy",
+        body: "A drone can create a slow crane-style rise, a clean sideways slider move or a dolly-style push through space without bringing in the full traditional rig for every shot. That makes it useful for tight schedules, difficult locations and productions that need movement without turning the set into a large technical build."
       },
       {
         title: "Technical control supports creativity",
-        body: "Smooth timing, repeatable moves, safe routes and the right drone setup let the creative team focus on the image rather than the aircraft."
+        body: "Smooth timing, repeatable moves, safe routes and the right drone setup let the creative team focus on the image. The goal is not just to fly, but to design camera movement that feels intentional on screen."
       }
     ],
     insights: [
       {
         label: "Typical shots",
-        text: "Establishing, tracking, reveals, crane-style moves, top-downs, fly-throughs and FPV passes."
+        text: "Establishing, tracking, crane-style rises, slider-like reveals, dolly-style pushes, top-downs, fly-throughs and FPV passes."
       },
       {
         label: "Best for",
@@ -497,10 +497,10 @@ export const companyFactPages = [
       },
       {
         label: "Client value",
-        text: "Aerial images that feel designed, not generic."
+        text: "Designed camera movement without always needing the footprint, build time or crew size of a traditional crane, slider or dolly setup."
       }
     ],
-    terms: ["establishing shots", "tracking moves", "fly-throughs", "location reveals", "FPV"]
+    terms: ["establishing shots", "tracking moves", "crane movement", "slider movement", "dolly movement", "fly-throughs", "location reveals", "FPV"]
   }
 ];
 
