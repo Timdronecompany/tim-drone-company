@@ -126,7 +126,7 @@ export const servicePages = [
     metaTitle: "Drone Filming Amsterdam | Aerial Filming Permissions | T.I.M.",
     metaDescription: "Professional drone filming in Amsterdam for commercials, film, television, real estate, events and branded content.",
     keywords: "drone filmen Amsterdam, drone video Amsterdam, luchtbeelden Amsterdam, drone opname Amsterdam, drone videografie Amsterdam, T.I.M. Drone Company",
-    intro: "T.I.M. creates professional aerial video with attention to location permissions, privacy, airspace checks, crew communication and footage that fits the edit.",
+    intro: "T.I.M. creates professional aerial video with attention to EASA rules, EU Specific operations, local airspace limits, privacy, crew communication and footage that fits the edit.",
     serviceType: "Permissions",
     focus: "Professional aerial footage for creative teams, brands and production companies.",
     sections: [
@@ -139,8 +139,8 @@ export const servicePages = [
         body: "A compact web campaign, a commercial, a documentary and a film scene all need different choices in speed, camera quality, crew size and planning."
       },
       {
-        title: "Permissions, privacy and public space",
-        body: "City shoots often need careful preparation around people, roads, water, privacy, permissions and airspace. The earlier this is checked, the smoother the production day becomes."
+        title: "EASA, EU Specific and Amsterdam airspace",
+        body: "Professional city shoots are planned against the EASA framework, including Open category limits and EU Specific operations where the risk, location or shot requires it. In Amsterdam, current air traffic coordination only allows one drone team or operator in the air at a time. Multiple drones can be possible within one coordinated operation, but not multiple separate operators or teams flying at the same time."
       }
     ],
     insights: [
@@ -157,7 +157,7 @@ export const servicePages = [
         text: "Aerial footage that feels designed for the edit, not added as a generic extra."
       }
     ],
-    terms: ["location permissions", "privacy checks", "aerial video", "establishing shots", "cinematic movement"]
+    terms: ["EASA", "EU Specific operations", "Amsterdam airspace", "one drone team at a time", "location permissions"]
   },
   {
     slug: "dronebedrijf-amsterdam",

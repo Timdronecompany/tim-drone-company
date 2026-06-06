@@ -328,7 +328,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioLabel: "Projects",
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
-      portfolioFilters: ["All", "Aerial video", "Awards", "Commercials", "Events", "Feature films", "Fly-Through", "FPV", "Photography", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
+      portfolioFilters: ["All", "Aerial video", "Awards", "BTS", "Commercials", "Event registration", "Events", "Feature films", "Fly-Through", "FPV", "Photography", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
       bookingNav: "Book",
       bookingLabel: "Booking",
       bookingTitle: "Plan a drone shoot.",
@@ -422,7 +422,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioLabel: "Projecten",
       portfolioTitle: "Een selectie van ons werk.",
       portfolioSubtitle: "Luchtbeelden, FPV, commercials, events en bioscoopfilms.",
-      portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "Commercials", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Fotografie", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
+      portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "BTS", "Commercials", "Event registratie", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Fotografie", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
       bookingNav: "Boeken",
       bookingLabel: "Boeking",
       bookingTitle: "Plan een drone shoot.",
@@ -682,6 +682,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     },
     nl: {
       "Aerial video": "Luchtbeelden",
+      "Event registration": "Event registratie",
       Photography: "Fotografie",
       "Fly-Through": "Fly-through",
       "Prop drones": "Prop-drones",
@@ -801,7 +802,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "title": "Hilton Luminair Opening",
           "categories": [
               "Aerial video",
-              "Vastgoed",
+              "Event registration",
               "FPV"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=LUbHEB1Mb7w",
@@ -1141,7 +1142,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "categories": [
               "Bioscoop films"
           ],
-          "videoUrl": "https://www.youtube.com/watch?v=67l1__WnwZg",
+          "videoUrl": "https://www.youtube.com/watch?v=yT2PAsQabps",
           "thumbnail": "/posters/kruimeltje.svg"
       },
       {
@@ -1186,6 +1187,14 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "thumbnail": "/posters/challengeaccepted.svg"
       },
       {
+          "title": "Behind the scenes fly-through",
+          "categories": [
+              "BTS"
+          ],
+          "videoUrl": "/hero.mp4",
+          "thumbnail": "/poster-frames/bts-hero-video.jpg"
+      },
+      {
           "title": "BOSS x AMF1 x Apple Vision Pro",
           "categories": [
               "FPV",
@@ -1193,8 +1202,8 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Commercials"
           ],
           "intro": {
-              "en": "For EmpathyLab's Step Inside The Mind of a BOSS activation, we worked closely with the creative and technical team to translate an ambitious Apple Vision Pro experience into shootable, cinematic drone movement. The project needed more than a standard FPV setup, so we helped think through the shot design and built two dedicated camera systems on cinelifters for the specific 360 and high-speed perspectives required at Circuit Zandvoort.",
-              "nl": "Voor EmpathyLab's Step Inside The Mind of a BOSS activatie dachten we vanaf de technische en creatieve kant mee om een ambitieuze Apple Vision Pro ervaring te vertalen naar filmische dronebeweging. Dit vroeg om meer dan een standaard FPV-setup: voor de specifieke 360- en high-speed shots op Circuit Zandvoort bouwden we twee dedicated camerasystemen op cinelifters."
+              "en": "For EmpathyLab's Step Inside The Mind of a BOSS activation, we worked closely with the creative and technical team to translate an ambitious Apple Vision Pro experience into fast, precise FPV shots. The project needed more than a standard FPV setup, so we helped think through the shot design and built two dedicated camera systems on cinelifters for the specific 360 and high-speed perspectives required at Circuit Zandvoort.",
+              "nl": "Voor EmpathyLab's Step Inside The Mind of a BOSS activatie dachten we vanaf de technische en creatieve kant mee om een ambitieuze Apple Vision Pro ervaring te vertalen naar snelle, precieze FPV-shots. Dit vroeg om meer dan een standaard FPV-setup: voor de specifieke 360- en high-speed shots op Circuit Zandvoort bouwden we twee dedicated camerasystemen op cinelifters."
           },
           "extraImages": [
               {
@@ -1215,6 +1224,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Aerial video",
               "Fly-Through"
           ],
+          "videoUrl": "/videos/enexis-openingsfilm-logistiek-centrum-hoogeveen.mp4",
           "thumbnail": "/posters/fly-through-logistics-center-enexis.svg"
       },
       {
@@ -1284,7 +1294,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       {
           "title": "KARGO Case Study 2025",
           "categories": [
-              "Commercials",
+              "Event registration",
               "Aerial video"
           ],
           "videoUrl": "https://vimeo.com/1120747780",
@@ -1293,11 +1303,19 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       {
           "title": "KARGO Cannes Case Study",
           "categories": [
-              "Commercials",
+              "Event registration",
               "Aerial video"
           ],
           "videoUrl": "https://vimeo.com/1017139438?h=4327ec4d14",
           "thumbnail": "/posters/kargo-cannes-case-study.svg"
+      },
+      {
+          "title": "Witte Flits",
+          "categories": [
+              "Bioscoop films"
+          ],
+          "videoUrl": "/videos/witte-flits-trailer.mp4",
+          "thumbnail": "/poster-frames/witte-flits.jpg"
       },
       {
           "title": "Expeditie Robinson 2021",
@@ -1320,6 +1338,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Commercials",
               "FPV"
           ],
+          "videoUrl": "/videos/toyota-gr-yaris-circuit-assen.mp4",
           "thumbnail": "/posters/toyota-gr-yaris.svg"
       },
       {
@@ -1394,8 +1413,12 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Het Gouden Uur – Seizoen 2": "2025-09-18",
     "SUGA: RIDE OR DIE": "2025-09-04",
     "P&O FERRIES \"Sail Your Way\"": "2025-08-15",
+    "KARGO Case Study 2025": "2025-09-22",
+    "Behind the scenes fly-through": "2025-06-02",
     "BOSS x AMF1 x Apple Vision Pro": "2025-06-01",
     "Miljoenenrace": "2025-01-01",
+    "KARGO Cannes Case Study": "2024-10-07",
+    "Witte Flits": "2024-09-26",
     "Sphinx": "2024-03-22",
     "Iris van Herpen Fashion show drone tour": "2024-01-01",
     "Fly-Through logistics center Enexis": "2023-12-30",
@@ -1437,8 +1460,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "DJ Brennan Heart – In The Fastlane": "2021-06-01",
     "RAUWCC Studio Drone Tours": "2021-05-01",
     "Grolsch 0.0%": "2021-04-01",
-    "KARGO Case Study 2025": "2025-09-22",
-    "KARGO Cannes Case Study": "2024-10-07",
     "Expeditie Robinson 2021": "2021-03-15",
     "Albert Heijn – Steeds beter eten": "2021-03-10",
     "Toyota GR Yaris": "2021-03-05",
@@ -1482,6 +1503,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "Feature films": "Bioscoop films",
     "TV series": "Tv-series",
     "Real estate": "Vastgoed",
+    "Event registratie": "Event registration",
     Alles: "All",
     Luchtbeelden: "Aerial video",
     Fotografie: "Photography",
