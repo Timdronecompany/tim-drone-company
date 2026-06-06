@@ -1291,6 +1291,15 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "thumbnail": "/posters/kargo-case-study-2025.svg"
       },
       {
+          "title": "KARGO Cannes Case Study",
+          "categories": [
+              "Commercials",
+              "Aerial video"
+          ],
+          "videoUrl": "https://vimeo.com/1017139438?h=4327ec4d14",
+          "thumbnail": "/posters/kargo-cannes-case-study.svg"
+      },
+      {
           "title": "Expeditie Robinson 2021",
           "categories": [
               "Tv-series",
@@ -1429,6 +1438,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     "RAUWCC Studio Drone Tours": "2021-05-01",
     "Grolsch 0.0%": "2021-04-01",
     "KARGO Case Study 2025": "2025-09-22",
+    "KARGO Cannes Case Study": "2024-10-07",
     "Expeditie Robinson 2021": "2021-03-15",
     "Albert Heijn – Steeds beter eten": "2021-03-10",
     "Toyota GR Yaris": "2021-03-05",

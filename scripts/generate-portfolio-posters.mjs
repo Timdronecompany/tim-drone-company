@@ -73,6 +73,7 @@ const localFrameOverrides = {
   "McDonald’s – Corona love story": "mcdonald-s-corona-love-story.jpg",
   "De Volksbank": "de-volksbank.jpg",
   "KARGO Case Study 2025": "kargo-case-study-2025-4k.jpg",
+  "KARGO Cannes Case Study": "kargo-cannes-case-study.jpg",
 };
 
 function hashString(value) {
