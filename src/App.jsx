@@ -492,9 +492,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       prompt: t.viewCameraSpecs,
       specLabel: t.cameraSpecs,
       specs: [
-        "Camera: ARRI ALEXA Mini LF on Movi Pro; large-format ALEV III A2X CMOS sensor, up to 4.5K Open Gate, 14+ stops dynamic range.",
+        "Camera: ARRI ALEXA Mini LF on Movi Pro; large-format ALEV III A2X CMOS sensor, up to 4.5K Open Gate.",
+        "Dynamic range: 14+ stops across EI 160-3200.",
         "ISO: EI 160-3200 with EI 800 base sensitivity; no dual native ISO system.",
-        "Codecs: MXF/ARRIRAW and MXF/Apple ProRes 4444 XQ, 4444, 422 HQ; up to 4.5K Open Gate depending on mode.",
+        "Codecs/bitrate: MXF/ARRIRAW and MXF/Apple ProRes 4444 XQ, 4444, 422 HQ; approx. up to 2.4 Gbps ARRIRAW and 1.6 Gbps ProRes 4444 XQ in high-resolution LF modes, depending on resolution and frame rate.",
         "Lens/aperture/ND: lens-dependent with wireless iris possible; internal ARRI FSND filters Clear, ND 0.6, 1.2, 1.8.",
         "Flight time: Freefly quotes up to 50 min with no payload; cinema camera builds are payload/weather dependent, often roughly 8-15 min.",
       ],
@@ -509,8 +510,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       specLabel: t.cameraSpecs,
       specs: [
         "Camera: Zenmuse X9-8K Air, 35mm full-frame CMOS, 8192x4320 video and 8192x5456 photo.",
+        "Dynamic range: 14+ stops up to 30fps; approx. 12+ stops above 30fps depending on recording mode.",
         "ISO: video EI 200-6400 with DJI dual native EI ranges; photo ISO 100-25600.",
-        "Codecs: MOV and CinemaDNG; 8K CinemaDNG / Apple ProRes RAW workflows depending on license and setup.",
+        "Codecs/bitrate: MOV, CinemaDNG, Apple ProRes RAW and ProRes 422 HQ depending on license and setup; CinemaDNG reaches approx. 885 MB/s, ProRes RAW approx. 531 MB/s and ProRes 422 HQ approx. 471 MB/s in high-end modes.",
         "Lens/aperture: available Inspire 3 lens set includes 18, 24, 35, 50, 75 and 90 mm lenses; aperture depends on lens, external ND filters used per lens.",
         "Flight time: approx. 28 min gear down or 26 min gear up; real production time may vary.",
       ],
@@ -525,8 +527,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       specLabel: t.cameraSpecs,
       specs: [
         "Camera: RED KOMODO 6K payload; 19.9MP Super 35 global shutter CMOS sensor, 27.03 x 14.26 mm, 6144 x 3240 max resolution.",
+        "Dynamic range: 16+ stops.",
         "ISO: RED KOMODO is not a dual native ISO camera; ISO range 250-12800 with ISO 800 commonly used as the base/reference exposure.",
-        "Codecs/bitrate: REDCODE RAW R3D HQ/MQ/LQ; 6K 17:9 up to 40fps, 4K 17:9 up to 60fps, 2K 17:9 up to 120fps. Data rate depends on resolution, frame rate and compression.",
+        "Codecs/bitrate: REDCODE RAW R3D HQ/MQ/LQ; up to 280 MB/s data rate, with 6K 17:9 up to 40fps, 4K 17:9 up to 60fps and 2K 17:9 up to 120fps.",
         "Lens/aperture/ND: integrated Canon RF mount; aperture control depends on lens/adapters and rigging. No internal ND, external ND filters used for shutter and exposure control.",
         "Flight time: RED KOMODO cinelifter setup is build, lens, battery and weather dependent, typically approx. 4-7 min for cinema FPV work.",
       ],
@@ -540,9 +543,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       prompt: t.viewCameraSpecs,
       specLabel: t.cameraSpecs,
       specs: [
-        "Camera: Blackmagic Pocket Cinema Camera 4K; Four Thirds sensor, 4096x2160, 13 stops dynamic range.",
+        "Camera: Blackmagic Pocket Cinema Camera 4K; Four Thirds sensor, 4096x2160.",
+        "Dynamic range: 13 stops.",
         "ISO: dual native ISO 400 and 3200; ISO range up to 25,600.",
-        "Codecs/bitrate: Blackmagic RAW 3:1 to 12:1 and Q0-Q5 plus ProRes 422 HQ/422/LT/Proxy; bitrate depends on codec, frame rate and compression.",
+        "Codecs/bitrate: Blackmagic RAW 3:1 to 12:1 and Q0-Q5 plus ProRes 422 HQ/422/LT/Proxy; 4K DCI Blackmagic RAW 3:1 reaches approx. 136 MB/s, with lower data rates available via 5:1, 8:1, 12:1 and ProRes options.",
         "Lens/aperture/ND: active MFT mount with iris/focus/zoom control on supported lenses; no built-in ND on BMPCC 4K, external ND required.",
         "Flight time: cinewhoop setup is payload dependent, typically approx. 3-6 min.",
       ],
@@ -557,6 +561,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       specLabel: t.cameraSpecs,
       specs: [
         "Camera: triple camera system: 100MP 4/3 Hasselblad wide, 48MP 1/1.3 medium tele, 50MP 1/1.5 tele.",
+        "Dynamic range: up to 15.5 stops on the main Hasselblad camera; tele camera range is lower and mode-dependent.",
         "ISO: Dual Native ISO Fusion; video ranges include Normal up to ISO 12800, D-Log 400-6400, D-Log M 100-6400, HLG 400-3200.",
         "Codecs/bitrate: MP4 H.264/H.265; Creator Combo supports H.264 ALL-I up to 1200 Mbps, H.265 Standard up to 180 Mbps.",
         "Lens/aperture/ND: Hasselblad wide has adjustable f/2-f/11; tele cameras fixed f/2.8; ND filters available/used for shutter control.",
@@ -573,6 +578,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       specLabel: t.cameraSpecs,
       specs: [
         "Camera: DJI Mini 5 Pro class camera; 1-inch CMOS, 50MP effective pixels, 24mm equivalent field of view.",
+        "Dynamic range: up to 14 stops / 14 EV in HDR-style video modes.",
         "ISO: video Normal 100-12800, D-Log M 100-3200, HLG 100-3200; no interchangeable lens system.",
         "Codecs/bitrate: MP4 H.264/H.265; 4K up to 120fps, max video bitrate up to 130 Mbps in 4K/120 D-Log M.",
         "Lens/aperture/ND: fixed f/1.8 lens; ND filter set available/used externally for motion blur and exposure control.",
@@ -589,6 +595,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       specLabel: t.cameraSpecs,
       specs: [
         "Camera: GoPro 12 / HERO12 Black; 1/1.9-inch sensor, 27MP photo, 5.3K up to 60fps and 4K up to 120fps.",
+        "Dynamic range: GoPro does not publish an official stops figure; HERO12 supports HDR video, 10-bit color and GP-Log for improved highlight/shadow handling.",
         "ISO: no dual native ISO; manual video ISO limits available depending on GoPro profile.",
         "Codecs/bitrate: MP4 H.265/HEVC, 8-bit or 10-bit color, high-bitrate mode up to about 120 Mbps.",
         "Lens/aperture/ND: fixed ultra-wide lens, approx. f/2.5 aperture; clip-on/external ND filters used where practical.",
