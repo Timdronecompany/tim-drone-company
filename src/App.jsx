@@ -267,6 +267,8 @@ function ServicePage({ page, language, setLanguage }) {
 export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const [language, setLanguage] = useState("en");
   const [activeFilter, setActiveFilter] = useState("All");
+  const [portfolioExpanded, setPortfolioExpanded] = useState(false);
+  const [initialPortfolioProjectCount, setInitialPortfolioProjectCount] = useState(15);
   const [activeProject, setActiveProject] = useState(null);
   const [activeFleetDrone, setActiveFleetDrone] = useState(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
@@ -329,6 +331,8 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
       portfolioFilters: ["All", "Aerial video", "Awards", "BTS", "Commercials", "Event registration", "Events", "Feature films", "Fly-Through", "FPV", "Photography", "Prop drones", "Real estate", "Shorts", "Sports", "TV series"],
+      portfolioShowMore: "Show more",
+      portfolioShowLess: "Show less",
       bookingNav: "Book",
       bookingLabel: "Booking",
       bookingTitle: "Plan a drone shoot.",
@@ -423,6 +427,8 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       portfolioTitle: "Een selectie van ons werk.",
       portfolioSubtitle: "Luchtbeelden, FPV, commercials, events en bioscoopfilms.",
       portfolioFilters: ["Alles", "Luchtbeelden", "Awards", "BTS", "Commercials", "Event registratie", "Events", "Bioscoopfilms", "Fly-through", "FPV", "Fotografie", "Prop-drones", "Vastgoed", "Shorts", "Sport", "Tv-series"],
+      portfolioShowMore: "Meer tonen",
+      portfolioShowLess: "Minder tonen",
       bookingNav: "Boeken",
       bookingLabel: "Boeking",
       bookingTitle: "Plan een drone shoot.",
@@ -592,13 +598,28 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   ];
 
   useEffect(() => {
+    function updatePortfolioRows() {
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        setInitialPortfolioProjectCount(5);
+      } else if (window.matchMedia("(max-width: 1099px)").matches) {
+        setInitialPortfolioProjectCount(10);
+      } else {
+        setInitialPortfolioProjectCount(15);
+      }
+    }
+
     function updateScrollControls() {
       setShowScrollControls(window.scrollY > 240);
     }
 
+    updatePortfolioRows();
     updateScrollControls();
+    window.addEventListener("resize", updatePortfolioRows);
     window.addEventListener("scroll", updateScrollControls, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrollControls);
+    return () => {
+      window.removeEventListener("resize", updatePortfolioRows);
+      window.removeEventListener("scroll", updateScrollControls);
+    };
   }, []);
 
   const scrollToPageStart = useCallback(() => {
@@ -705,6 +726,30 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Tv-series"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=JpfaSsH9KBQ",
+          "intro": {
+              "en": "For Het Gouden Uur, T.I.M. built a dedicated phone delivery system for a hostage scene. Because current drone regulations do not allow objects to simply be dropped from the air, the drone first landed before the phone could be released, which made the moment even more tense within the story. We also flew the FPV drone footage from the criminals' point of view, and the drone is already shot out of the air in the opening minutes of the series.",
+              "nl": "Voor Het Gouden Uur bouwde T.I.M. een speciaal telefoon-delivery systeem voor een gijzelingsscene. Omdat je volgens de huidige regelgeving niet zomaar iets uit de lucht mag droppen, landde de drone eerst voordat de telefoon kon worden afgegeven. Dat maakte het moment in het verhaal juist extra spannend. Daarnaast vlogen we de FPV-beelden vanuit het perspectief van de criminelen, en worden we in de eerste minuten van de serie al uit de lucht gevlogen."
+          },
+          "extraVideos": [
+              {
+                  "src": "/videos/het-gouden-uur-phone-delivery-bts-720p.mp4",
+                  "title": "Phone delivery scene BTS",
+                  "aspect": "compact"
+              }
+          ],
+          "mediaLayout": "paired",
+          "extraImages": [
+              {
+                  "src": "/poster-frames/het-gouden-uur-phone-delivery-final.png",
+                  "title": "Drone landing before phone release"
+              }
+          ],
+          "extraLinks": [
+              {
+                  "title": "Watch on NPO Start",
+                  "url": "https://npo.nl/start/serie/het-gouden-uur/afleveringen/seizoen-1"
+              }
+          ],
           "thumbnail": "/posters/het-gouden-uur-seizoen-2.svg"
       },
       {
@@ -721,7 +766,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Tv-series"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=kN-ej-drDbY",
-          "thumbnail": "/posters/suga-ride-or-die.svg"
+          "thumbnail": "/posters/suga-ride-or-die-reviews.jpg"
       },
       {
           "title": "P&O FERRIES \"Sail Your Way\"",
@@ -746,6 +791,17 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Prop drones"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=hws4dHuvAXE",
+          "intro": {
+              "en": "For Budget Thuis, T.I.M. flew the prop drone used in the commercial. The catch was created in post-production with a bluescreen setup, so the practical drone movement and the final interaction could be combined safely and cleanly for the shot.",
+              "nl": "Voor Budget Thuis vloog T.I.M. de prop-drone die in de commercial werd gebruikt. Het vangen is in post-productie gedaan met een bluescreen setup, zodat de praktische dronebeweging en de uiteindelijke interactie veilig en strak konden worden gecombineerd."
+          },
+          "extraVideos": [
+              {
+                  "src": "/videos/budget-thuis-propdrone-1080p.mp4",
+                  "title": "Prop-drone BTS",
+                  "aspect": "portrait"
+              }
+          ],
           "thumbnail": "/posters/budget-thuis.svg"
       },
       {
@@ -1454,11 +1510,20 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   const visiblePortfolioProjects = activeFilter === "All"
     ? sortedPortfolioProjects
     : sortedPortfolioProjects.filter((project) => project.categories.includes(activeFilter));
+  const displayedPortfolioProjects = portfolioExpanded
+    ? visiblePortfolioProjects
+    : visiblePortfolioProjects.slice(0, initialPortfolioProjectCount);
+  const hasHiddenPortfolioProjects = visiblePortfolioProjects.length > initialPortfolioProjectCount;
   const hasActiveProjectDetails = Boolean(
     activeProject?.intro ||
     activeProject?.extraVideos?.length ||
     activeProject?.extraImages?.length ||
     activeProject?.extraLinks?.length
+  );
+  const hasPairedActiveProjectMedia = Boolean(
+    activeProject?.mediaLayout === "paired" &&
+    activeProject?.extraVideos?.length &&
+    activeProject?.extraImages?.length
   );
   const portfolioFilterAliases = {
     "Feature films": "Bioscoop films",
@@ -1637,7 +1702,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
                   key={filter}
                   type="button"
                   className={`work-filter-button ${activeFilter === filterValue ? "work-filter-button-active" : ""}`}
-                  onClick={() => setActiveFilter(filterValue)}
+                  onClick={() => {
+                    setActiveFilter(filterValue);
+                    setPortfolioExpanded(false);
+                  }}
                 >
                   {filter}
                 </button>
@@ -1645,7 +1713,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
             })}
           </div>
           <div className="portfolio-grid">
-            {visiblePortfolioProjects.map((project) => (
+            {displayedPortfolioProjects.map((project) => (
               <button
                 key={project.title}
                 type="button"
@@ -1667,6 +1735,15 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               </button>
             ))}
           </div>
+          {hasHiddenPortfolioProjects && (
+            <button
+              type="button"
+              className="portfolio-expand-button"
+              onClick={() => setPortfolioExpanded((isExpanded) => !isExpanded)}
+            >
+              {portfolioExpanded ? t.portfolioShowLess : t.portfolioShowMore}
+            </button>
+          )}
         </div>
       </section>
 
@@ -1704,17 +1781,29 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
                 {activeProject.intro && (
                   <p className="video-modal-intro">{activeProject.intro[language] || activeProject.intro.en}</p>
                 )}
-                {activeProject.extraVideos?.length > 0 && (
+                {hasPairedActiveProjectMedia && (
+                  <div className="video-modal-extra-media-pair">
+                    <div className={`video-modal-extra-video ${activeProject.extraVideos[0].aspect === "portrait" ? "video-modal-extra-video-portrait" : ""} ${activeProject.extraVideos[0].aspect === "compact" ? "video-modal-extra-video-compact" : ""}`} key={activeProject.extraVideos[0].src}>
+                      <video src={activeProject.extraVideos[0].src} controls playsInline preload="metadata" />
+                      <span>{activeProject.extraVideos[0].title}</span>
+                    </div>
+                    <figure className="video-modal-extra-image" key={activeProject.extraImages[0].src}>
+                      <img src={activeProject.extraImages[0].src} alt={activeProject.extraImages[0].title} loading="lazy" />
+                      <figcaption>{activeProject.extraImages[0].title}</figcaption>
+                    </figure>
+                  </div>
+                )}
+                {!hasPairedActiveProjectMedia && activeProject.extraVideos?.length > 0 && (
                   <div className="video-modal-extra-videos">
                     {activeProject.extraVideos.map((video) => (
-                      <div className="video-modal-extra-video" key={video.src}>
+                      <div className={`video-modal-extra-video ${video.aspect === "portrait" ? "video-modal-extra-video-portrait" : ""} ${video.aspect === "compact" ? "video-modal-extra-video-compact" : ""}`} key={video.src}>
                         <video src={video.src} controls playsInline preload="metadata" />
                         <span>{video.title}</span>
                       </div>
                     ))}
                   </div>
                 )}
-                {activeProject.extraImages?.length > 0 && (
+                {!hasPairedActiveProjectMedia && activeProject.extraImages?.length > 0 && (
                   <div className="video-modal-extra-images">
                     {activeProject.extraImages.map((image) => (
                       <figure className="video-modal-extra-image" key={image.src}>

@@ -1651,6 +1651,29 @@ body {
   font-size: 0.75rem;
 }
 
+.portfolio-expand-button {
+  display: block;
+  min-height: 3rem;
+  margin: 2.25rem auto 0;
+  padding: 0.9rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.portfolio-expand-button:hover {
+  border-color: rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.11);
+  transform: translateY(-1px);
+}
+
 .video-modal {
   position: fixed;
   inset: 0;
@@ -1741,12 +1764,45 @@ body {
   object-fit: cover;
 }
 
+.video-modal-extra-video-portrait {
+  justify-self: start;
+  width: min(100%, 22rem);
+}
+
+.video-modal-extra-video-portrait video {
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+.video-modal-extra-video-compact {
+  justify-self: start;
+  width: min(100%, 32rem);
+}
+
 .video-modal-extra-video span {
   display: block;
   margin-top: 0.45rem;
   color: rgba(255, 255, 255, 0.64);
   font-size: 0.78rem;
   line-height: 1.35;
+}
+
+.video-modal-extra-media-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  align-items: start;
+  margin-top: 1.1rem;
+}
+
+.video-modal-extra-media-pair .video-modal-extra-video-compact {
+  justify-self: stretch;
+  width: 100%;
+}
+
+.video-modal-extra-media-pair .video-modal-extra-image img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
 }
 
 .video-modal-extra-images {
@@ -1810,6 +1866,7 @@ body {
 
 @media (max-width: 700px) {
   .video-modal-extra-videos,
+  .video-modal-extra-media-pair,
   .video-modal-extra-images {
     grid-template-columns: 1fr;
   }
