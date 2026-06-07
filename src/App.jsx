@@ -191,9 +191,286 @@ function SiteHeader({ language, setLanguage }) {
   );
 }
 
+const serviceUiCopy = {
+  en: {
+    book: "Book",
+    contact: "Contact",
+    home: "Home",
+    service: "Service",
+    relatedPages: "Related pages",
+    relatedServices: "Related services",
+    moreCompanyFacts: "More company facts.",
+    moreDroneServices: "More drone services in Amsterdam.",
+    companyFactsLabel: "Company facts",
+    companyFactsTitle: "Amsterdam-based drone company for film, TV and commercial productions.",
+    companyFactsIntro: "A compact overview for producers, agencies and directors who need to understand the crew, equipment and production workflow before booking aerial work.",
+    dedicatedPages: "Dedicated pages",
+    locationCheck: "Location check",
+    locationCheckText: "Not sure if the shoot location is possible? Send us the address or a map pin on WhatsApp and we will help you check the basics before you book.",
+    locationCheckButton: "WhatsApp location",
+  },
+  nl: {
+    book: "Boeken",
+    contact: "Contact",
+    home: "Home",
+    service: "Dienst",
+    relatedPages: "Gerelateerde pagina's",
+    relatedServices: "Gerelateerde diensten",
+    moreCompanyFacts: "Meer bedrijfsinformatie.",
+    moreDroneServices: "Meer drone-diensten in Amsterdam.",
+    companyFactsLabel: "Bedrijfsinformatie",
+    companyFactsTitle: "Dronebedrijf uit Amsterdam voor film, tv en commercial producties.",
+    companyFactsIntro: "Een compact overzicht voor producers, agencies en regisseurs die vooraf willen begrijpen hoe crew, apparatuur, vergunningen en productieflow werken.",
+    dedicatedPages: "Verdiepende pagina's",
+    locationCheck: "Locatiecheck",
+    locationCheckText: "Twijfel je of een draailocatie mogelijk is? Stuur het adres of een Google Maps-pin via WhatsApp, dan kijken we de basis alvast met je mee voordat je boekt.",
+    locationCheckButton: "WhatsApp locatie",
+  },
+};
+
+const nlPageCopy = {
+  "custom-drones": {
+    title: "Custom Drones",
+    intro: "Wanneer een bestaande drone niet past bij de productie, ontwerpt en bouwt T.I.M. custom drone-oplossingen rondom camera-payload, veiligheid, locatie en de gewenste camerabeweging.",
+    serviceType: "Custom drones",
+    focus: "Gebouwd rondom het shot, niet andersom.",
+    sections: [
+      { title: "Custom FPV- en heavy-lift builds", body: "Airframes, power-setups, cameramounts en bescherming kunnen op maat worden gebouwd voor cinematografische, commerciële en technische producties. T.I.M. bouwt ook prop-drones voor scènes waarin de drone zelf in beeld moet komen of een specifieke praktische rol heeft." },
+      { title: "Payload-specifieke configuratie", body: "Van lichte actioncams tot cinemacamera's en specialistische apparatuur: het platform wordt afgestemd op de creatieve en technische briefing, in plaats van het shot in een standaard drone-setup te persen." },
+      { title: "Klaar voor productie", body: "Tests, back-ups, monitoring en integratie op set worden vanaf het begin meegenomen, zodat custom apparatuur voorspelbaar werkt op draaidagen." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Shots met een specifieke camera, praktische prop-drone, afwijkende beweging, beschermende constructie of een platform dat niet standaard bestaat." },
+      { label: "Typische builds", text: "Custom FPV-platforms, heavy-lift configuraties, prop-drones, specialistische cameramounts en payload-specifieke rigs." },
+      { label: "Waarde voor de klant", text: "Een drone-oplossing die rondom het creatieve probleem wordt ontworpen, vooraf getest is en logisch in de setworkflow past." },
+    ],
+  },
+  "drone-operator-amsterdam": {
+    title: "Professionele drone-operaties",
+    intro: "T.I.M. ondersteunt producties met ervaren drone-operators, cinematografische beweging en een EASA-bewuste workflow voor Open category limieten, EU Specific operaties, CTR-gebieden, no-fly zones en locatierisico.",
+    serviceType: "Luchtruimplanning",
+    focus: "Een betrouwbare aerial camera partner voor commercials, film, tv en branded content.",
+    sections: [
+      { title: "Gebouwd voor draaidagen", body: "Een goede aerial crew begrijpt meer dan vliegen. Timing, communicatie, blocking, lenzen, monitoring en het ritme van een set bepalen of de beelden echt bruikbaar zijn in de edit." },
+      { title: "CTR, no-fly zones en luchtruimchecks", body: "Veel stedelijke locaties liggen dicht bij gecontroleerd luchtruim, restrictiegebieden, wegen, water, mensen en privacygevoelige omgevingen. T.I.M. checkt luchtruim, lokale beperkingen en benodigde afstemming voordat een draaidag wordt bevestigd." },
+      { title: "EASA- en ILT-bewuste workflow", body: "Dronevluchten worden getoetst aan het Europese Open, Specific en Certified framework. Wanneer een shot buiten de Open category valt, volgt de voorbereiding de juiste Specific route met operationele planning, risicoanalyse en waar nodig ILT-autorisatie of afstemming." },
+      { title: "Van lichtgewicht tot cinema setups", body: "Het dronepakket wordt afgestemd op het shot: compacte platforms voor snelle bewegingen, Inspire-class systemen voor hoge beeldkwaliteit, FPV voor energie of zwaardere workflows wanneer de camera-briefing daarom vraagt." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Commercials, music videos, branded films, tv-items, campagnes en producties die gecontroleerde aerial movement nodig hebben." },
+      { label: "Typische shots", text: "Openingsreveals, tracking shots, top-down perspectieven, crane-style bewegingen, locatie-overgangen en bewegende hero shots." },
+      { label: "Waarde voor de klant", text: "Heldere communicatie vooraf, praktische planning op locatie en footage die past bij de timing van de regisseur." },
+    ],
+  },
+  "drone-pilot-amsterdam": {
+    title: "Pilot workflow",
+    intro: "T.I.M. combineert gecontroleerd vliegen met production-minded camerawerk, veiligheidschecks en heldere communicatie over wat een drone-shot nodig heeft voordat het kan gebeuren.",
+    serviceType: "Pilot workflow",
+    focus: "Cinematografisch vliegen met het bewustzijn van een camera department.",
+    sections: [
+      { title: "Vliegen in dienst van het shot", body: "Het doel is niet om zoveel mogelijk te vliegen. Het doel is de juiste beweging vinden, die schoon uitvoeren en een shot leveren met een begin, midden en einde." },
+      { title: "Nuttig op kleine en grote sets", body: "Sommige draaidagen hebben één snelle operator en een compacte drone nodig. Andere vragen om een aparte camera-operator, precieze framing en een formelere monitor-setup voor agency, regisseur of DOP." },
+      { title: "Open, Specific en locatielimieten", body: "Elke drone-aanvraag begint met dezelfde vraag: in welke categorie, locatie en risicoklasse valt het shot? T.I.M. werkt binnen de toepasselijke EASA-categorie en vliegt alleen wanneer de vlucht met de juiste toestemming, afstemming en veiligheidsmaatregelen gepland kan worden." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Producties die een rustige operator nodig hebben die kan reageren op creatieve regie en de set in beweging houdt." },
+      { label: "Typische shots", text: "Langzame establishing shots, precieze architecturale bewegingen, subject follow shots, reveal shots en gecontroleerde beweging rondom talent." },
+      { label: "Waarde voor de klant", text: "Een pilot die meedenkt met de camera, niet alleen met het toestel." },
+    ],
+  },
+  "fpv-drone-amsterdam": {
+    title: "FPV en fly-through planning",
+    intro: "T.I.M. brengt FPV in een production-safe workflow, waarbij high-energy beweging wordt gecombineerd met routeplanning, spotters, gecontroleerde ruimte en realistische veiligheidsgrenzen.",
+    serviceType: "FPV routeontwerp",
+    focus: "Snelle, immersieve camerabeweging voor ruimtes en actie die momentum nodig hebben.",
+    sections: [
+      { title: "Energie zonder chaos", body: "FPV is sterk wanneer de route is ontworpen. Snelheid, nabijheid, timing en veiligheid moeten gepland worden zodat het eindshot bewust voelt in plaats van willekeurig." },
+      { title: "Indoor routes en gecontroleerde gebieden", body: "Kleine FPV-drones kunnen door interieurs en krappe routes bewegen, terwijl grotere FPV-platforms buiten snelheid of chase movement kunnen maken. Elke route vraagt om duidelijke grenzen, crew-awareness en een realistisch resetplan." },
+      { title: "Een route gebouwd rondom de edit", body: "De beste FPV-shots verbinden momenten. Ze bewegen door een ruimte, onthullen een product, volgen een performer of maken een overgang tussen scènes op een manier die de edit energie geeft." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Fly-throughs, venues, sport, automotive, events, product reveals, interieurs en social-first campagnes." },
+      { label: "Typische shots", text: "One-take routes, fast passes, dive-ins, room-to-room beweging, orbit transitions en close-proximity action." },
+      { label: "Waarde voor de klant", text: "Een geplande FPV-route die herhaalbaar, bij te sturen en af te stemmen is op de timing van de productie." },
+    ],
+  },
+  "drone-filmen-amsterdam": {
+    title: "Vergunningen voor drone-opnames",
+    intro: "T.I.M. plant professionele dronevluchten rondom EASA-regels, EU Specific operaties, ILT-eisen, lokale luchtruimlimieten, privacy, crewcommunicatie en de toestemming die per locatie nodig is.",
+    serviceType: "Vergunningen",
+    focus: "Droneplanning met aandacht voor toestemming en regelgeving voor professionele producties.",
+    sections: [
+      { title: "EASA, EU Specific en ILT-workflow", body: "Professionele drone-shoots worden gepland binnen het EASA-framework. Als een vlucht niet binnen de Open category limieten past, opereert T.I.M. onder EASA Specific waar nodig, met de juiste operationele voorbereiding, risicoanalyse, crew-setup en ILT-route." },
+      { title: "EASA Specific operaties", body: "Wanneer een productie meer nodig heeft dan Open category toestaat, vliegt T.I.M. onder EASA Specific waar nodig. Dat betekent dat locatie, luchtruim, operationele beperkingen, documentatie en lokale toestemming vooraf worden gecontroleerd." },
+      { title: "Amsterdam en luchtverkeersafstemming", body: "In Amsterdam laat de huidige luchtverkeersafstemming maar één gecoördineerd drone-team of operator tegelijk in de lucht toe. Meerdere drones kunnen binnen één gecoördineerde operatie mogelijk zijn, maar niet meerdere losse operators of teams tegelijk." },
+    ],
+    insights: [
+      { label: "Checks", text: "EASA-categorie, ILT-route, luchtruim, lokale toestemming, crew-setup en operationele beperkingen." },
+      { label: "EASA Specific", text: "Wanneer een productie meer nodig heeft dan Open category toestaat, vliegt T.I.M. onder EASA Specific waar nodig." },
+      { label: "Waarde voor de klant", text: "Vroeg in pre-productie een duidelijker antwoord over wat kan, wat toestemming nodig heeft en hoe de operatie voorbereid moet worden." },
+    ],
+  },
+  "dronebedrijf-amsterdam": {
+    title: "EASA-bewust dronebedrijf",
+    intro: "T.I.M. Drone Company is gebouwd voor producties die technische zekerheid, cinematografisch beeld en praktische planning nodig hebben rondom EASA, ILT, luchtruim, crew-workflow en flexibele aerial oplossingen.",
+    serviceType: "Productie support",
+    focus: "Een dronepartner voor commercials, film, tv, branded content en custom builds.",
+    sections: [
+      { title: "Creatief, technisch en regelgevend in één", body: "Het werk zit tussen camera, luchtvaart en engineering. Een goed dronebedrijf moet daarom kunnen praten over beeld, veiligheid, beweging, apparatuur, EASA-categorieën, ILT-routes en praktische productielimieten." },
+      { title: "Schaalbare crew en gear", body: "Sommige shoots vragen om een kleine wendbare setup. Andere hebben FPV, dual-operator control, professionele monitoring, custom builds of zwaardere camera-workflows nodig. De setup volgt de briefing." },
+      { title: "Ontworpen voor echte productiedruk", body: "Draaidagen bewegen snel. De waarde zit in voorbereiding, heldere keuzes, back-upsystemen en een crew die aerial work compliant, rustig en uitvoerbaar houdt terwijl de rest van de set verandert." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Merken, agencies, producers, regisseurs en DOP's die een flexibele aerial productiepartner zoeken." },
+      { label: "Typische aanvragen", text: "Commercial drone work, FPV-routes, custom builds, CTR-checks, no-fly zone planning, Open/Specific checks, high-end camera workflows en locatiegerichte aerial coverage." },
+      { label: "Waarde voor de klant", text: "Eén plek voor creatief meedenken, technische setup en praktische uitvoering." },
+    ],
+  },
+  "luchtbeelden-amsterdam": {
+    title: "Luchtbeelden en locatierisico",
+    intro: "Sterke luchtbeelden beginnen met een realistische risicoanalyse van de locatie. T.I.M. beoordeelt grondrisico, luchtruim, mensen, wegen, water, gebouwen en productieomstandigheden, en kijkt welke mitigerende maatregelen het shot mogelijk kunnen maken.",
+    serviceType: "Locatierisico",
+    focus: "Risicoanalyse en mitigerende maatregelen voor professionele drone-shoots.",
+    sections: [
+      { title: "Locatierisico vóór de vlucht", body: "Voordat een drone-shot wordt bevestigd, wordt de locatie beoordeeld op EASA Open of EASA Specific fit, luchtruimbeperkingen, grondrisico, mensen in de omgeving, verkeer, water, gebouwen, events en privacygevoelige zones." },
+      { title: "Mitigerende maatregelen", body: "Een lastige locatie betekent niet altijd dat het shot onmogelijk is. Risico kan vaak worden verlaagd met gecontroleerde take-off en landing zones, spotters, aangepaste timing, lagere vlieghoogte, alternatieve routing, duidelijke crewcommunicatie en afstemming met locatie of autoriteiten." },
+      { title: "Vaak alsnog mogelijk", body: "Wanneer het risicoprofiel vroeg duidelijk is, kan het shot vaak worden aangepast in plaats van geschrapt. T.I.M. helpt productieteams een veilige en werkbare versie van het idee te vinden, inclusief EASA Specific voorbereiding waar nodig." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "City shoots, events, wegen, waterlocaties, industriegebieden, publieke locaties en producties waarbij het drone-shot sterk afhankelijk is van de locatie." },
+      { label: "Risicofactoren", text: "Mensen, verkeer, water, obstakels, privacy, luchtruim, noodtoegang, weer, take-off area en de geplande vliegroute." },
+      { label: "Waarde voor de klant", text: "Een praktische risicoanalyse met duidelijke maatregelen, zodat de productie weet of het shot veilig gevlogen kan worden en wat geregeld moet worden." },
+    ],
+  },
+  "amsterdam-drone-company": {
+    title: "Amsterdam, Nederland",
+    intro: "T.I.M. is gevestigd in Amsterdam en werkt voor productieteams in Nederland en daarbuiten, met lokale planning en internationale productiestandaarden.",
+    serviceType: "Basis",
+    focus: "Amsterdam-based drone work voor film, tv, commercials en branded content.",
+    summaryTitle: "Amsterdam, Nederland",
+    summaryText: "Beschikbaar voor producties in Amsterdam, door heel Nederland en internationaal.",
+    sections: [
+      { title: "Lokale basis, production-ready mindset", body: "Amsterdam is de thuisbasis. Daardoor is het praktisch om city shoots, Nederlandse producties en internationale teams die in Nederland filmen snel te ondersteunen." },
+      { title: "Gebouwd voor mobiel productiewerk", body: "De setup kan mee van compacte lokale shoots tot grotere producties met extra crew, monitoring, FPV of heavy-lift planning." },
+      { title: "Nuttig voor producers en agencies", body: "Een duidelijk lokaal aanspreekpunt helpt met vroeg locatiemeedenken, realistische planning en snelle communicatie voordat een drone-shoot wordt geboekt." },
+    ],
+    insights: [
+      { label: "Werkgebied", text: "Amsterdam, Nederland en internationale producties." },
+      { label: "Geschikt voor", text: "Producers, agencies en regisseurs die een Amsterdamse aerial partner zoeken." },
+      { label: "Productiewaarde", text: "Lokale beschikbaarheid met een workflow die verder kan opschalen dan de stad." },
+    ],
+  },
+  "easa-aware-aerial-work": {
+    title: "EASA-bewust aerial work",
+    intro: "Professioneel dronewerk begint met begrijpen wat een locatie, shot en productie vragen binnen het EASA-framework, Nederlandse ILT-eisen en lokale omstandigheden.",
+    serviceType: "Operaties",
+    focus: "Planning rondom Open category limieten, EU Specific operaties en praktische productiegrenzen.",
+    summaryTitle: "EASA-bewust aerial work",
+    summaryText: "Planning rondom Open category limieten, EU Specific operaties, ILT-routes, locatierisico en de praktische grenzen van elke productie.",
+    sections: [
+      { title: "Een praktische eerste check", body: "Voor een shoot wordt bevestigd, worden locatie, beweging, mensen in de omgeving en luchtruimcontext gecontroleerd zodat de productie weet wat realistisch is." },
+      { title: "Open of Specific", body: "Sommig dronewerk past binnen Open category. Als die limieten niet haalbaar zijn, valt de vlucht in Specific en zijn operationele voorbereiding, risicoanalyse en de juiste autorisatieroute nodig." },
+      { title: "T.I.M. voldoet aan de vereiste workflow", body: "T.I.M. Drone Company plant vluchten rondom de toepasselijke EASA-categorie, Nederlandse ILT-eisen, crewkwalificaties, apparatuur, luchtruimchecks, privacy en lokale toestemming. Er wordt alleen gevlogen wanneer de setup bij die eisen past." },
+      { title: "Creatieve keuzes volgen de realiteit", body: "Een goed aerial plan balanceert het gewenste beeld met wat veilig, legaal en efficiënt kan op de draaidag." },
+    ],
+    insights: [
+      { label: "Checks", text: "Categorie, locatie, mensen, luchtruim, timing, operationele limieten, toestemming en documentatie." },
+      { label: "Geschikt voor", text: "Shoots waarbij aerial work vroeg in pre-productie bevestigd moet worden." },
+      { label: "Waarde voor de klant", text: "Minder verrassingen op set en een duidelijkere route van idee naar uitvoerbaar shot." },
+    ],
+  },
+  "ctr-no-fly-zone-checks": {
+    title: "CTR- en no-fly zone checks",
+    intro: "Veel sterke drone-ideeën hangen af van de locatie. Binnen het EASA-framework kunnen CTR-gebieden, UAS geographical zones, restricties en publieke omgevingen allemaal invloed hebben op wat mogelijk is.",
+    serviceType: "Luchtruim",
+    focus: "Locaties worden gecheckt op EASA-categorie, gecontroleerd luchtruim, UAS geographical zones, restrictiegebieden en praktische shootrisico's.",
+    summaryTitle: "CTR- en no-fly zone checks",
+    summaryText: "Locaties worden gecheckt op EASA-fit, gecontroleerd luchtruim, UAS geographical zones, publieke ruimte, wegen, water, mensen, privacy en benodigde toestemming.",
+    sections: [
+      { title: "EASA-categorie en luchtruimcheck", body: "Een sterk shot heeft nog steeds een compliant vliegomgeving nodig. Elke locatie wordt getoetst aan EASA Open en EASA Specific, gecontroleerd luchtruim, CTR-restricties, UAS geographical zones, tijdelijke beperkingen en autorisatie-eisen." },
+      { title: "Grondrisico en omgeving", body: "Wegen, water, publiek, gebouwen, events en privacygevoelige plekken worden beoordeeld als onderdeel van het operationele risico. In drukke stedelijke locaties bepaalt dit of Open category kan of Specific voorbereiding nodig is." },
+      { title: "Toestemmingsroute vóór de planning", body: "Een map pin vooraf checken helpt het productieteam de toestemmingsroute vroeg te begrijpen. Timing, camerabeweging, crew setup of locatie kunnen dan nog worden aangepast." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "City shoots, eventlocaties, waterkanten, industriegebieden, CTR-gebieden en locaties in of nabij UAS geographical zones." },
+      { label: "Typische input", text: "Adres, Google Maps-pin, call sheet locatie, ruwe productiezone, gewenste vliegrichting en timing." },
+      { label: "Waarde voor de klant", text: "Een praktische EASA-bewuste check voordat het shot in de planning komt, inclusief of Open category past of een Specific workflow nodig is." },
+    ],
+  },
+  "drone-pre-production-workflow": {
+    title: "Van pre-productie tot set-uitvoering",
+    intro: "Dronewerk is het sterkst wanneer het als onderdeel van de productie wordt behandeld, niet als last-minute extra. Planning maakt aerial shots schoner, veiliger en bruikbaarder.",
+    serviceType: "Workflow",
+    focus: "Locatiechecks, shotplanning, veiligheid, back-upsystemen en communicatie met camera department.",
+    summaryTitle: "Van pre-productie tot set-uitvoering",
+    summaryText: "Locatiechecks, shotplanning, veiligheid, back-upsystemen en camera department communicatie.",
+    sections: [
+      { title: "Van idee naar shotlist", body: "De gewenste beweging, camerarichting, tijd van de dag, locatie en edit-behoefte worden vertaald naar een praktische aerial aanpak." },
+      { title: "Setcommunicatie telt", body: "Heldere communicatie met regisseurs, DOP's, AD's en producers houdt het dronewerk afgestemd op de rest van de productie." },
+      { title: "Back-updenken", body: "Redundantie, alternatieve shotopties en realistische timing beschermen de productie wanneer weer, luchtruim of locatiebeperkingen veranderen." },
+    ],
+    insights: [
+      { label: "Geschikt voor", text: "Commercials, tv, film en agency producties met een duidelijke planning." },
+      { label: "Typische output", text: "Een helder plan voor shot type, drone setup, locatie, timing en crewcommunicatie." },
+      { label: "Waarde voor de klant", text: "Minder improvisatie op de draaidag en meer beelden die passen in de edit." },
+    ],
+  },
+  "drone-production-experience": {
+    title: "Drone- en setervaring",
+    intro: "T.I.M. combineert 8 jaar ervaring in de drone-industrie met meer dan 20 jaar productie-ervaring en brengt praktische set-awareness mee naar aerial work.",
+    serviceType: "Ervaring",
+    focus: "Dronewerk ondersteund door productie-ervaring en geselecteerde 2nd AC/camera support op professionele sets.",
+    summaryTitle: "8 jaar professioneel vliegen met drones, 20+ jaar op set",
+    summaryText: "Dronewerk ondersteund door brede productie-ervaring, met geselecteerde 2nd AC en camera support op professionele sets.",
+    sections: [
+      { title: "Dronewerk met set-awareness", body: "Productie-ervaring helpt aerial work in het ritme van een echte shoot te passen, waar timing, communicatie en praktische keuzes belangrijk zijn." },
+      { title: "Ervaring met camera support", body: "Geselecteerde 2nd AC en camera support ervaring helpt bij het begrijpen van camerateams, monitoring, framingprioriteiten en de druk rondom productietiming." },
+      { title: "Praktische rust op draaidagen", body: "Aerial work gebeurt vaak wanneer de tijd strak is. Ervaring helpt het proces helder en realistisch te houden zonder de rest van de crew te vertragen." },
+    ],
+    insights: [
+      { label: "Drone-industrie", text: "8 jaar professioneel vliegen met drones." },
+      { label: "Setervaring", text: "20+ jaar rondom professionele producties." },
+      { label: "Waarde voor de klant", text: "Een dronepartner die meer begrijpt dan alleen vliegen." },
+    ],
+  },
+  "cinematic-drone-movement": {
+    title: "Cinematografische beweging met technische controle",
+    intro: "De beste drone-shots zijn niet alleen hoog. Ze zijn getimed, gemotiveerd en gecontroleerd, zodat de beweging het verhaal en de edit ondersteunt.",
+    serviceType: "Shots",
+    focus: "Establishing shots, tracking moves, crane-style rises, slider-like reveals, dolly-style pushes, fly-throughs en high-energy FPV.",
+    summaryTitle: "Cinematografische beweging met technische controle",
+    summaryText: "Dronebeweging kan crane-, slider- en dolly-style shots vervangen of uitbreiden wanneer de productie elegante beweging nodig heeft zonder een zware rig rondom de camera te bouwen.",
+    sections: [
+      { title: "Beweging met een reden", body: "Aerial movement moet informatie onthullen, actie volgen, locaties verbinden of sfeer creëren. Het shot moet zijn plek in de edit verdienen." },
+      { title: "Crane, slider en dolly energie", body: "Een drone kan een langzame crane-style rise, een strakke zijwaartse slider move of een dolly-style push door de ruimte maken zonder voor elk shot een volledige traditionele rig te bouwen." },
+      { title: "Technische controle ondersteunt creativiteit", body: "Vloeiende timing, herhaalbare bewegingen, veilige routes en de juiste drone setup geven het creatieve team ruimte om op het beeld te focussen." },
+    ],
+    insights: [
+      { label: "Typische shots", text: "Establishing, tracking, crane-style rises, slider-like reveals, dolly-style pushes, top-downs, fly-throughs en FPV passes." },
+      { label: "Geschikt voor", text: "Film, tv, commercials, music videos, campagnes en branded content." },
+      { label: "Waarde voor de klant", text: "Ontworpen camerabeweging zonder altijd de footprint, bouwtijd of crew size van een traditionele crane, slider of dolly setup nodig te hebben." },
+    ],
+  },
+};
+
+function getLocalizedPage(page, language) {
+  if (language !== "nl") return page;
+  const copy = nlPageCopy[page.slug];
+  if (!copy) return page;
+  return {
+    ...page,
+    ...copy,
+    sections: copy.sections || page.sections,
+    insights: copy.insights || page.insights,
+    terms: copy.terms || page.terms,
+  };
+}
+
 function ServicePage({ page, language, setLanguage }) {
   const isCompanyFactPage = companyFactPages.some((factPage) => factPage.slug === page.slug);
   const relatedPages = (isCompanyFactPage ? companyFactPages : servicePages).filter((relatedPage) => relatedPage.slug !== page.slug);
+  const pageCopy = getLocalizedPage(page, language);
+  const ui = serviceUiCopy[language] || serviceUiCopy.en;
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -204,30 +481,30 @@ function ServicePage({ page, language, setLanguage }) {
       <main className="service-page">
         <section className="service-hero">
           <p className="service-eyebrow">T.I.M. Drone Company · Amsterdam</p>
-          <h1 className="service-title">{page.title}</h1>
-          <p className="service-intro">{page.intro}</p>
+          <h1 className="service-title">{pageCopy.title}</h1>
+          <p className="service-intro">{pageCopy.intro}</p>
           <div className="service-cta-row">
-            <a href="/#booking" className="hero-cta-btn hero-cta-btn-primary">Book</a>
-            <a href="/#contact" className="hero-cta-btn hero-cta-btn-secondary">Contact</a>
-            <a href="/" className="hero-cta-btn hero-cta-btn-secondary">Home</a>
+            <a href="/#booking" className="hero-cta-btn hero-cta-btn-primary">{ui.book}</a>
+            <a href="/#contact" className="hero-cta-btn hero-cta-btn-secondary">{ui.contact}</a>
+            <a href="/" className="hero-cta-btn hero-cta-btn-secondary">{ui.home}</a>
           </div>
         </section>
 
         <section className="service-detail-section">
           <div className="service-detail-container">
             <aside className="service-summary">
-              <p className="service-summary-label">Service</p>
-              <h2>{page.serviceType}</h2>
-              <p>{page.focus}</p>
+              <p className="service-summary-label">{ui.service}</p>
+              <h2>{pageCopy.serviceType}</h2>
+              <p>{pageCopy.focus}</p>
               <div className="service-term-list">
-                {page.terms.map((term) => (
+                {pageCopy.terms.map((term) => (
                   <span key={term}>{term}</span>
                 ))}
               </div>
             </aside>
 
             <div className="service-copy-grid">
-              {page.sections.map((section) => (
+              {pageCopy.sections.map((section) => (
                 <article key={section.title} className="service-copy-item">
                   <h2>{section.title}</h2>
                   <p>{section.body}</p>
@@ -236,7 +513,7 @@ function ServicePage({ page, language, setLanguage }) {
             </div>
 
             <div className="service-insight-grid">
-              {page.insights.map((insight) => (
+              {pageCopy.insights.map((insight) => (
                 <article key={insight.label} className="service-insight-card">
                   <span>{insight.label}</span>
                   <p>{insight.text}</p>
@@ -248,12 +525,12 @@ function ServicePage({ page, language, setLanguage }) {
 
         <section className="service-related-section">
           <div className="service-related-container">
-            <p className="service-eyebrow">{isCompanyFactPage ? "Related pages" : "Related services"}</p>
-            <h2 className="service-related-title">{isCompanyFactPage ? "More company facts." : "More drone services in Amsterdam."}</h2>
+            <p className="service-eyebrow">{isCompanyFactPage ? ui.relatedPages : ui.relatedServices}</p>
+            <h2 className="service-related-title">{isCompanyFactPage ? ui.moreCompanyFacts : ui.moreDroneServices}</h2>
             <div className="company-capability-links service-related-links" aria-label="Related service pages">
               {relatedPages.map((servicePage) => (
                 <a key={servicePage.slug} href={servicePage.path}>
-                  {servicePage.serviceType}
+                  {getLocalizedPage(servicePage, language).serviceType}
                 </a>
               ))}
             </div>
@@ -265,7 +542,10 @@ function ServicePage({ page, language, setLanguage }) {
 }
 
 export default function TimDroneCompanyPortfolio({ path = "/" }) {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    if (typeof window === "undefined") return "en";
+    return window.localStorage.getItem("tim-language") || "en";
+  });
   const [activeFilter, setActiveFilter] = useState("All");
   const [portfolioExpanded, setPortfolioExpanded] = useState(false);
   const [initialPortfolioProjectCount, setInitialPortfolioProjectCount] = useState(15);
@@ -282,6 +562,12 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
     lng: "",
     mapUrl: "",
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("tim-language", language);
+    }
+  }, [language]);
 
   const copy = {
     en: {
@@ -327,6 +613,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       customDroneWorkflowText: "Testing, backups, monitoring and set integration are considered from the start, so custom equipment behaves predictably on shoot days.",
       selectedWork: "Selected Work",
       featuredProject: "Featured Project",
+      aboutNav: "About",
+      fleetNav: "Fleet",
+      workNav: "Work",
       portfolioLabel: "Projects",
       portfolioTitle: "A selection of our work.",
       portfolioSubtitle: "Aerial video, FPV, commercials, events and feature films.",
@@ -423,6 +712,9 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       customDroneWorkflowText: "Tests, back-ups, monitoring en integratie op set worden vanaf het begin meegenomen, zodat custom apparatuur voorspelbaar werkt op draaidagen.",
       selectedWork: "Geselecteerd werk",
       featuredProject: "Uitgelicht project",
+      aboutNav: "Over ons",
+      fleetNav: "Vloot",
+      workNav: "Werk",
       portfolioLabel: "Projecten",
       portfolioTitle: "Een selectie van ons werk.",
       portfolioSubtitle: "Luchtbeelden, FPV, commercials, events en bioscoopfilms.",
@@ -479,6 +771,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
   };
 
   const t = copy[language];
+  const serviceUi = serviceUiCopy[language] || serviceUiCopy.en;
   const servicePage = findServicePage(path);
   const whatsappUrl = `https://wa.me/31625083448?text=${encodeURIComponent(t.whatsappMessage)}`;
   const locationCheckWhatsAppUrl = `https://wa.me/31625083448?text=${encodeURIComponent("Hi T.I.M. Drone Company, I would like to check if a drone shoot is possible at this location: ")}`;
@@ -1601,10 +1894,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           </div>
           <p className="hero-hero-line">{t.heroLine}</p>
           <div className="hero-cta-group">
-            <a href="#about" className="hero-cta-btn hero-cta-btn-primary">About</a>
-            <a href="#fleet" className="hero-cta-btn hero-cta-btn-secondary">Fleet</a>
+            <a href="#about" className="hero-cta-btn hero-cta-btn-primary">{t.aboutNav}</a>
+            <a href="#fleet" className="hero-cta-btn hero-cta-btn-secondary">{t.fleetNav}</a>
             <a href="#booking" className="hero-cta-btn hero-cta-btn-secondary">{t.bookingNav}</a>
-            <a href="#work" className="hero-cta-btn hero-cta-btn-secondary">Work</a>
+            <a href="#work" className="hero-cta-btn hero-cta-btn-secondary">{t.workNav}</a>
             <a href="#contact" className="hero-cta-btn hero-cta-btn-secondary">{t.contact}</a>
           </div>
         </div>
@@ -1650,36 +1943,39 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
       <section className="service-directory-section">
         <div className="service-directory-container">
           <div className="service-directory-header">
-            <p className="service-directory-label">Company facts</p>
-            <h2 className="service-directory-title">Amsterdam-based drone company for film, TV and commercial productions.</h2>
+            <p className="service-directory-label">{serviceUi.companyFactsLabel}</p>
+            <h2 className="service-directory-title">{serviceUi.companyFactsTitle}</h2>
             <p className="service-directory-intro">
-              A compact overview for producers, agencies and directors who need to understand the crew, equipment and production workflow before booking aerial work.
+              {serviceUi.companyFactsIntro}
             </p>
           </div>
           <div className="company-facts-grid">
-            {companyFactPages.map((factPage) => (
-              <a key={factPage.slug} href={factPage.path} className="company-fact-card">
-                <span>{factPage.serviceType}</span>
-                <h3>{factPage.summaryTitle}</h3>
-                <p>{factPage.summaryText}</p>
-              </a>
-            ))}
+            {companyFactPages.map((factPage) => {
+              const factCopy = getLocalizedPage(factPage, language);
+              return (
+                <a key={factPage.slug} href={factPage.path} className="company-fact-card">
+                  <span>{factCopy.serviceType}</span>
+                  <h3>{factCopy.summaryTitle}</h3>
+                  <p>{factCopy.summaryText}</p>
+                </a>
+              );
+            })}
           </div>
           <div className="company-capability-links" aria-label="Dedicated service pages">
-            <span>Dedicated pages</span>
+            <span>{serviceUi.dedicatedPages}</span>
             {servicePages.map((servicePage) => (
               <a key={servicePage.slug} href={servicePage.path}>
-                {servicePage.serviceType}
+                {getLocalizedPage(servicePage, language).serviceType}
               </a>
             ))}
           </div>
           <div className="location-check-cta">
             <div>
-              <span>Location check</span>
-              <p>Not sure if the shoot location is possible? Send us the address or a map pin on WhatsApp and we will help you check the basics before you book.</p>
+              <span>{serviceUi.locationCheck}</span>
+              <p>{serviceUi.locationCheckText}</p>
             </div>
             <a href={locationCheckWhatsAppUrl} target="_blank" rel="noreferrer">
-              WhatsApp location
+              {serviceUi.locationCheckButton}
             </a>
           </div>
         </div>
