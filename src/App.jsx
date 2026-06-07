@@ -1346,7 +1346,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Bioscoop films"
           ],
           "videoUrl": "/videos/witte-flits-trailer.mp4",
-          "thumbnail": "/poster-frames/witte-flits.jpg"
+          "thumbnail": "/poster-frames/witte-flits-16x9.jpg"
       },
       {
           "title": "Expeditie Robinson 2021",
@@ -1629,35 +1629,6 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
         </div>
       </section>
 
-      <section id="custom-drones" className="custom-drone-section">
-        <div className="custom-drone-container">
-          <div className="custom-drone-header">
-            <div>
-              <p className="custom-drone-label">{t.customDroneLabel}</p>
-              <h2 className="custom-drone-title">{t.customDroneTitle}</h2>
-            </div>
-            <p className="custom-drone-intro">{t.customDroneIntro}</p>
-          </div>
-          <div className="custom-drone-grid">
-            <div className="custom-drone-item">
-              <p className="custom-drone-item-label">01</p>
-              <h3>{t.customDroneBuilds}</h3>
-              <p>{t.customDroneBuildsText}</p>
-            </div>
-            <div className="custom-drone-item">
-              <p className="custom-drone-item-label">02</p>
-              <h3>{t.customDronePayloads}</h3>
-              <p>{t.customDronePayloadsText}</p>
-            </div>
-            <div className="custom-drone-item">
-              <p className="custom-drone-item-label">03</p>
-              <h3>{t.customDroneWorkflow}</h3>
-              <p>{t.customDroneWorkflowText}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="service-directory-section">
         <div className="service-directory-container">
           <div className="service-directory-header">
@@ -1730,14 +1701,11 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
                 }}
                 aria-disabled={!project.videoUrl}
               >
-                <img src={project.thumbnail} alt={project.title} className="portfolio-card-image" />
+                <div className="portfolio-card-image-wrap">
+                  <img src={project.thumbnail} alt={project.title} className="portfolio-card-image" />
+                </div>
                 <div className="portfolio-card-body">
                   <h3 className="portfolio-card-title">{project.title}</h3>
-                  <div className="portfolio-card-categories">
-                    {project.categories.map((category) => (
-                      <span key={category} className="portfolio-card-category">{categoryLabels[language][category] || category}</span>
-                    ))}
-                  </div>
                 </div>
               </button>
             ))}

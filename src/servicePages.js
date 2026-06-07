@@ -1,5 +1,45 @@
 export const servicePages = [
   {
+    slug: "custom-drones",
+    path: "/custom-drones/",
+    title: "Custom Drones",
+    metaTitle: "Custom Drones | FPV, Heavy-Lift & Prop Drone Builds | T.I.M.",
+    metaDescription: "Custom drone solutions for film, commercials and technical productions, including FPV builds, heavy-lift configurations, prop drones and payload-specific camera platforms.",
+    keywords: "custom drones, custom FPV drone, heavy lift drone, prop drone, cinema drone build, drone camera payload, T.I.M. Drone Company",
+    intro: "When an existing platform does not fit the production, T.I.M. designs and builds custom drone solutions around the camera payload, safety demands, location and movement requirements.",
+    serviceType: "Custom drones",
+    focus: "Built around the shot, not the other way around.",
+    sections: [
+      {
+        title: "Custom FPV and heavy-lift builds",
+        body: "Tailored airframes, power setups, camera mounts and protection can be built for cinematic, commercial and technical production needs. T.I.M. also builds prop drones for scenes where the drone itself needs to appear on camera or perform a specific practical role."
+      },
+      {
+        title: "Payload-specific configuration",
+        body: "From lightweight action cameras to cinema cameras and specialist equipment, the platform is matched to the creative and technical brief instead of forcing the shot into a standard drone setup."
+      },
+      {
+        title: "Production-ready workflow",
+        body: "Testing, backups, monitoring and set integration are considered from the start, so custom equipment behaves predictably on shoot days and can be used within a professional production rhythm."
+      }
+    ],
+    insights: [
+      {
+        label: "Best for",
+        text: "Shots that need a specific camera, a practical prop drone, unusual movement, protective framing or a platform that does not exist off the shelf."
+      },
+      {
+        label: "Typical builds",
+        text: "Custom FPV platforms, heavy-lift configurations, prop drones, specialist camera mounts and payload-specific production rigs."
+      },
+      {
+        label: "Client value",
+        text: "A drone solution designed around the creative problem, tested before the shoot and integrated into the set workflow."
+      }
+    ],
+    terms: ["custom drones", "custom FPV", "heavy-lift builds", "prop drones", "payload-specific", "camera mounts", "production testing"]
+  },
+  {
     slug: "drone-operator-amsterdam",
     path: "/drone-operator-amsterdam/",
     title: "Production Drone Operations",
