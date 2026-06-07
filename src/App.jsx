@@ -1033,7 +1033,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "extraVideos": [
               {
                   "src": "/videos/het-gouden-uur-phone-delivery-bts-720p.mp4",
-                  "title": "Phone delivery scene BTS",
+                  "title": "FPV Drone chase and drone shot out of the sky scene",
                   "aspect": "compact"
               }
           ],
@@ -1041,7 +1041,7 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
           "extraImages": [
               {
                   "src": "/poster-frames/het-gouden-uur-phone-delivery-final.png",
-                  "title": "Drone landing before phone release"
+                  "title": "Before take off to drop the phone"
               }
           ],
           "extraLinks": [
@@ -1567,6 +1567,10 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               {
                   "title": "Insta360 12K cinelifter build",
                   "src": "/poster-frames/boss-amf1-insta360-stylish.jpg"
+              },
+              {
+                  "title": "Aston Martin Aramco garage BTS",
+                  "src": "/poster-frames/boss-amf1-aramco-garage-bts.jpg"
               }
           ],
           "videoUrl": "https://www.youtube.com/watch?v=pd-FxtLuyXI",
