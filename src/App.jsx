@@ -1346,6 +1346,24 @@ export default function TimDroneCompanyPortfolio({ path = "/" }) {
               "Bioscoop films"
           ],
           "videoUrl": "/videos/witte-flits-trailer.mp4",
+          "intro": {
+              "en": "For Witte Flits, T.I.M. created the balcony drone movement as a practical aerial shot. The dive was reversed in post-production, making it feel as if the drone is pulled back up toward the balcony.",
+              "nl": "Voor Witte Flits maakte T.I.M. de balkonbeweging als praktische drone-shot. De dive is in post-productie reversed, waardoor het lijkt alsof de drone weer omhoog wordt gezogen richting het balkon."
+          },
+          "extraVideos": [
+              {
+                  "src": "/videos/witte-flits-bts-reversed-dive-01.mp4",
+                  "title": "BTS reversed dive angle 1"
+              },
+              {
+                  "src": "/videos/witte-flits-bts-reversed-dive-02.mp4",
+                  "title": "BTS balcony setup"
+              },
+              {
+                  "src": "/videos/witte-flits-bts-reversed-dive-03.mp4",
+                  "title": "BTS reversed dive angle 2"
+              }
+          ],
           "thumbnail": "/poster-frames/witte-flits-16x9.jpg"
       },
       {
